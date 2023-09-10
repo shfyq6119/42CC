@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 13:23:15 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/09 13:31:54 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/09 13:44:42 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/09 13:48:29 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+int	ft_toupper(int c)
 {
-	while (*str)
-	{
-		if (*str == c)
-			return ((char *)str);
-		str++;
-	}
-	if (c == '\0')
-		return ((char *)str);
-	return (0);
+	if (ft_isalpha(c) == 2)
+		c -= 32;
+	return (c);
 }
-/*
-#include <stdio.h>
-int main(int argc, char **argv)
-{
-        if (argc != 1)
-                printf("%s\n", (ft_strchr(argv[1], 99)));
-        return (0);
-}*/

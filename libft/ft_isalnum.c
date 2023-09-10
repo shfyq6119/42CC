@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 13:23:15 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/09 13:31:54 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/09 13:21:09 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/09 13:26:43 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+int	ft_isalnum(int c)
 {
-	while (*str)
-	{
-		if (*str == c)
-			return ((char *)str);
-		str++;
-	}
-	if (c == '\0')
-		return ((char *)str);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int main(int argc, char **argv)
-{
-        if (argc != 1)
-                printf("%s\n", (ft_strchr(argv[1], 99)));
-        return (0);
-}*/
