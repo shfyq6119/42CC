@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 13:23:15 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/09 13:31:54 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/10 17:09:26 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/10 17:32:03 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+size_t	ft_strlcpy(char *dest, const char *src, size_t slimit)
 {
-	while (*str)
+	size_t	idx;
+	size_t 	schlongth;
+
+	idx = 0;
+	schlongth = ft_strlen(src);
+	if (slimit)
 	{
-		if (*str == c)
-			return ((char *)str);
-		str++;
+		while (*src && idx < slimit - 1)
+		{
+			dest[idx] = src[idx];
+			idx++;
+		}
+		dest[idx] = '\0';
 	}
-	if (c == '\0')
-		return ((char *)str);
-	return (0);
+	return (schlongth);
 }
-/*
-#include <stdio.h>
-int main(int argc, char **argv)
-{
-        if (argc != 1)
-                printf("%s\n", (ft_strchr(argv[1], 99)));
-        return (0);
-}*/
