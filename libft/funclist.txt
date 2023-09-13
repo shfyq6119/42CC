@@ -1,4 +1,4 @@
-SRCS					= ft_atoi.c \
+SRCS					= ft_atoi.c \X
 					  ft_bzero.c \
 					  ft_calloc.c \
 					  ft_isalnum.c \x
@@ -21,7 +21,7 @@ SRCS					= ft_atoi.c \
 					  ft_strdup.c \
 					  ft_strjoin.c \
 					  ft_strlcat.c \
-					  ft_strlcpy.c \
+					  ft_strlcpy.c \X
 					  ft_strlen.c \x
 					  ft_strmapi.c \
 					  ft_strncmp.c \

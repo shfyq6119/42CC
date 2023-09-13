@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 17:09:26 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/10 17:32:03 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/10 22:00:25 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/13 17:59:06 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-size_t	ft_strlcpy(char *desu, const char *src, size_t slimit)
+size_t	ft_strlcat(char *desu, const char *src, size_t slimit)
 {
-	size_t	idx;
-	size_t	schlongth;
+	size_t	schlong;
+	size_t	desudesu;
 
-	idx = 0;
-	schlongth = ft_strlen(src);
-	if (slimit)
+	desudesu = ft_strlen(desu);
+	schlong = slimit - desudesu;
+	if (ft_strlen(desu) >= slimit || slimit == 0)
+		return (ft_strlen(src) + slimit);
+	while (*src && schlong > 1)
 	{
-		while (src[idx] && idx < slimit - 1)
-		{
-			desu[idx] = src[idx];
-			idx++;
-		}
-		desu[idx] = '\0';
+		desu[desudesu] = *src;
+		src++;
+		desudesu++;
+		schlong--;
 	}
-	return (schlongth);
+	desu[desudesu] = '\0';
+	return (ft_strlen(src) + desudesu);
 }
