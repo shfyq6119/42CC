@@ -31,8 +31,8 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
-/*char		*ft_itoa(int n);
-void		*ft_memchr(const void *s, int a, size_t b);*/
+/*char		*ft_itoa(int n);*/
+void		*ft_memchr(const void *mem, int find, size_t bytes);
 int			ft_memcmp(const void *m1, const void *m2, size_t match);
 void		*ft_memcpy(void *desu, const void *sos, size_t load);
 /*void		*ft_memmove(void *dest, const void *src, size_t a);*/
@@ -48,8 +48,8 @@ char		*ft_strjoin(char const *s1, char const *s2);*/
 size_t		ft_strlcat(char *desu, const char *src, size_t slimit);
 size_t		ft_strlcpy(char *desu, const char *src, size_t slimit);
 size_t		ft_strlen(const char *str);
-/*char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int			ft_strncmp(const char *s1, const char *s, size_t n);*/
+/*char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));*/
+int			ft_strncmp(const char *s1, const char *s2, size_t i);
 char		*ft_strnstr(const char *big, const char *schmol, size_t schlong);
 /*char		*ft_strrchr(const char *s, int a);
 char		*ft_strtrim(char const *s1, char const *set);
