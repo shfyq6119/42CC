@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 17:09:26 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/10 17:32:03 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/13 15:38:53 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/13 23:26:11 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-size_t	ft_strlcpy(char *desu, const char *src, size_t slimit)
+void	*ft_memcpy(void *desu, const void *sos, size_t load)
 {
-	size_t	idx;
-	size_t	schlongth;
+	char		*desudesu;
+	const char	*soscode;
 
-	idx = 0;
-	schlongth = ft_strlen(src);
-	if (slimit)
-	{
-		while (src[idx] && idx < slimit - 1)
-		{
-			desu[idx] = src[idx];
-			idx++;
-		}
-		desu[idx] = '\0';
-	}
-	return (schlongth);
+	desudesu = desu;
+	soscode = sos;
+	while (load-- && (desu || sos))
+		*desudesu++ = *soscode++;
+	return (desu);
 }

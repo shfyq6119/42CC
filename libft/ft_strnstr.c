@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 17:09:26 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/10 17:32:03 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/13 22:35:43 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/13 23:04:38 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-size_t	ft_strlcpy(char *desu, const char *src, size_t slimit)
+char	*ft_strnstr(const char *big, const char *smol, size_t schlong)
 {
-	size_t	idx;
-	size_t	schlongth;
+	size_t	schmol;
 
-	idx = 0;
-	schlongth = ft_strlen(src);
-	if (slimit)
+	schmol = ft_strlen(smol);
+	if (!*big)
+		return (0);
+	if (!*smol)
+		return ((char *)big);
+	while (*big && schlong-- >= ft_strlen(smol))
 	{
-		while (src[idx] && idx < slimit - 1)
-		{
-			desu[idx] = src[idx];
-			idx++;
-		}
-		desu[idx] = '\0';
+		if (!ft_memcmp(big, smol, schmol) && *big == *smol)
+			return ((char *)big);
+		big++;
 	}
-	return (schlongth);
+	return (0);
 }
