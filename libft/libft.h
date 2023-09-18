@@ -44,7 +44,7 @@ void		ft_putstr_fd(char *s, int fd);*/
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *str, int c);
 char		*ft_strdup(const char *s);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *sep);
 size_t		ft_strlcat(char *desu, const char *src, size_t slimit);
 size_t		ft_strlcpy(char *desu, const char *src, size_t slimit);
 size_t		ft_strlen(const char *str);
