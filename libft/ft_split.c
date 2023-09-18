@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-static int	izit_cakeslicer(char cakeslice, char *cakeslicer)
+static int	izit_cakeslicer(char cakeslice, char cakeslicer)
 {
 	int	i;
 
 	i = 0;
 	while (cakeslicer[i])
-	{
-		if (cakeslice == cakeslicer[i])
+			if (cakeslice == cakeslicer])
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static int	count_cakes(char *cakes, char *cakeslicer)
+static int	count_cakes(char *cakes, char cakeslicer)
 {
 	int	ice;
 	int	count;
@@ -44,7 +43,7 @@ static int	count_cakes(char *cakes, char *cakeslicer)
 	return (count);
 }
 
-static int	ft_cakeload_slice(char *cake, char *cakeslicer)
+static int	ft_cakeload_slice(char *cake, char cakeslicer)
 {
 	int	yup;
 
@@ -54,7 +53,7 @@ static int	ft_cakeload_slice(char *cake, char *cakeslicer)
 	return (yup);
 }
 
-static char	*ft_cakeloader(char *cakes, char *cakeslicer)
+static char	*ft_cakeloader(char *cakes, char cakeslicer)
 {
 	int		cakeload;
 	int		yup;
@@ -72,25 +71,25 @@ static char	*ft_cakeloader(char *cakes, char *cakeslicer)
 	return (cake);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *str, char sep)
 {
 	char	**cakes;
 	int		ice;
 
 	ice = 0;
-	cakes = (char **)malloc(sizeof(char *) * (count_cakes(str, charset) + 1));
+	cakes = (char **)malloc(sizeof(char *) * (count_cakes(str, sep) + 1));
 	if (!cakes)
 		return (NULL);
 	while (*str != '\0')
 	{
-		while (*str != '\0' && izit_cakeslicer(*str, charset))
+		while (*str != '\0' && izit_cakeslicer(*str, sep))
 			str++;
 		if (*str != '\0')
 		{
-			cakes[ice] = ft_cakeloader(str, charset);
+			cakes[ice] = ft_cakeloader(str, sep);
 			ice++;
 		}
-		while (*str && !izit_cakeslicer(*str, charset))
+		while (*str && !izit_cakeslicer(*str, sep))
 			str++;
 	}
 	cakes[ice] = 0;
