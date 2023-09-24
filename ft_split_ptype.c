@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 01:02:10 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/20 13:51:50 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/19 17:14:33 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/19 17:29:45 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_calloc(size_t elem, size_t bytes)
+char	**ft_split(char const *splot, char sep)
 {
-	void	*mem;
+	char	**splat;
+	size_t	count;
 
-	if (bytes != 0 && elem > SIZE_MAX / bytes)
-		return (NULL);
-	mem = malloc(elem * bytes);
-	if (mem == NULL)
-		return (NULL);
-	ft_bzero(mem, elem * bytes);
-	return (mem);
+	splat = (char **)malloc(sizeof(char **) * (
 }
+

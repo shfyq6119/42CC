@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 05:42:09 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/19 05:42:13 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/22 18:22:14 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/22 19:07:15 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_memmove(void *desu, const void *sos, size_t nahh)
+char	*ft_strmapi(char const *give, char (*fn)(unsigned int, char))
 {
-	char		*desudesu;
-	const char	*sauce;
-	size_t		nambah;
+	char			*feed;
+	unsigned int	me;
 
-	desudesu = desu;
-	sauce = sos;
-	nambah = -1;
-	if (sauce == desudesu)
-		return (desudesu);
-	if (!sauce && !desudesu)
+	feed = malloc(sizeof(char) * ft_strlen(give) + 1);
+	if (!feed)
 		return (NULL);
-	if (sauce > desudesu)
-	{
-		while (++nambah < nahh)
-			desudesu[nambah] = sauce[nambah];
-	}
-	while (++nambah < nahh)
-		desudesu[nahh - nambah - 1] = sauce[nahh - nambah - 1];
-	return (desudesu);
+	me = -1;
+	while (give[++me])
+		feed[me] = fn(me, give[me]);
+	feed[me] = '\0';
+	return (feed);
 }

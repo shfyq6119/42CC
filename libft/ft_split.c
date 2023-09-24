@@ -5,93 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 03:39:39 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/07/12 05:02:09 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/21 14:34:41 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/24 02:02:31 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-static int	izit_cakeslicer(char cakeslice, char cakeslicer)
+static size_t	splotcount(char const *sploot, char splett)
 {
-	int	i;
-
-	i = 0;
-	while (cakeslicer[i])
-			if (cakeslice == cakeslicer])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	count_cakes(char *cakes, char cakeslicer)
-{
-	int	ice;
-	int	count;
+	size_t	count;
 
 	count = 0;
-	ice = 0;
-	while (cakes[ice])
+	while (*sploot)
 	{
-		while (cakes[ice] && izit_cakeslicer(cakes[ice], cakeslicer))
-			ice++;
-		if (cakes[ice])
+		if (*sploot != splett)
+		{
 			count++;
-		while (cakes[ice] && !izit_cakeslicer(cakes[ice], cakeslicer))
-			ice++;
+			while (*sploot && *sploot != splett)
+				sploot++;
+		}
+		else
+			sploot++;
 	}
 	return (count);
 }
 
-static int	ft_cakeload_slice(char *cake, char cakeslicer)
+static char	**ft_retrofree(char **splatfudge, size_t splitcount)
 {
-	int	yup;
-
-	yup = 0;
-	while (cake[yup] && !izit_cakeslicer(cake[yup], cakeslicer))
-		yup++;
-	return (yup);
+	while (splitcount-- && splatfudge[splitcount])
+		free (*(splatfudge + splitcount));
+	free (splatfudge);
+	return (NULL);
 }
 
-static char	*ft_cakeloader(char *cakes, char cakeslicer)
+char	**ft_split(char const *splot, char splet)
 {
-	int		cakeload;
-	int		yup;
-	char	*cake;
+	char		**splat;
+	char const	*split;
+	size_t		splut;
 
-	yup = 0;
-	cakeload = ft_cakeload_slice(cakes, cakeslicer);
-	cake = (char *)malloc(sizeof(char) * (cakeload + 1));
-	while (yup < cakeload)
-	{
-		cake[yup] = cakes[yup];
-		yup++;
-	}
-	cake[yup] = '\0';
-	return (cake);
-}
-
-char	**ft_split(char const *str, char sep)
-{
-	char	**cakes;
-	int		ice;
-
-	ice = 0;
-	cakes = (char **)malloc(sizeof(char *) * (count_cakes(str, sep) + 1));
-	if (!cakes)
+	splut = 0;
+	splat = (char **)malloc(sizeof(char *) * (splotcount(splot, splet) + 1));
+	if (!splat || !splot)
 		return (NULL);
-	while (*str != '\0')
+	while (*splot)
 	{
-		while (*str != '\0' && izit_cakeslicer(*str, sep))
-			str++;
-		if (*str != '\0')
+		if (*splot != splet)
 		{
-			cakes[ice] = ft_cakeloader(str, sep);
-			ice++;
+			split = splot;
+			while (*splot != splet && *splot)
+				splot++;
+			splat[splut++] = ft_substr(split, 0, splot - split);
+			if (!splat)
+				return (ft_retrofree(splat, splut));
 		}
-		while (*str && !izit_cakeslicer(*str, sep))
-			str++;
+		else
+			splot++;
 	}
-	cakes[ice] = 0;
-	return (cakes);
+	splat[splut] = NULL;
+	return (splat);
 }

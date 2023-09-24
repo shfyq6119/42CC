@@ -6,74 +6,37 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:01:08 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/07/09 19:59:29 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/09/20 22:57:37 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-static char	*ft_strcpy(char *str, char *desu)
+char	*ft_strjoin(char const *prefix, char const *suffix)
 {
-	while (*str)
-		*desu++ = *str++;
-	return (desu);
-}
-
-static char	*nullptr(void)
-{
-	char	*dest;
-
-	dest = malloc(1);
-	dest[0] = '\0';
-	return (dest);
-}
-
-static int	marshmalloc(int size, char **strs, char *sep)
-{
-	int	schlongth;
-	int	seplength;
-	int	tally;
-
-	schlongth = 0;
-	seplength = ft_strlen(sep);
-	tally = 0;
-	while (tally < size)
-	{
-		schlongth += ft_strlen(strs[tally]);
-		tally++;
-		schlongth += seplength;
-	}
-	schlongth -= seplength;
-	schlongth++;
-	return (schlongth);
-}
-
-char	*ft_strjoin(int size, char **strs, char *sep)
-{
-	int		i;
+	size_t	schlong;
 	char	*desu;
-	char	*desuto;
 
-	desu = (char *)malloc(marshmalloc(size, strs, sep) * sizeof(char));
-	if (size <= 0)
-		return (nullptr());
-	desuto = desu;
-	i = 0;
-	while (i < size)
+	schlong = ft_strlen(prefix) + ft_strlen(suffix) + 1;
+	desu = ft_calloc(schlong, sizeof(char));
+	if (!desu)
+		return (ft_calloc(1, 1));
+	if (prefix)
 	{
-		desu = ft_strcpy(strs[i], desu);
-		if (i + 1 < size)
-			desu = ft_strcpy(sep, desu);
-		i++;
+		ft_memcpy(desu, prefix, ft_strlen(prefix));
+		schlong = ft_strlen(desu);
 	}
-	*desu = '\0';
-	return (desuto);
+	if (suffix)
+		ft_memcpy(desu + schlong, suffix, ft_strlen(suffix));
+	schlong = ft_strlen(desu);
+	*(desu + schlong) = '\0';
+	return (desu);
 }
 /*
 int	main(void)
 {
-	char *sep = "1234";
-	char *strings[4] = {"Hello","World", "I'm", "Testing!"};
+	char *pre = "1234";
+	char *suf = "Hello";
 	
-	printf("%s\n", ft_strjoin(4, strings, sep));
+	printf("%s\n", ft_strjoin(pre, suf));
 	return (0);
 }*/

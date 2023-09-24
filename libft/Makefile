@@ -6,59 +6,80 @@
 #    By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 23:50:19 by mm-isa            #+#    #+#              #
-#    Updated: 2023/09/14 00:03:27 by mm-isa           ###   ########.fr        #
+#    Updated: 2023/09/23 18:17:42 by mm-isa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libft.a
+NAME	=	libft.a
 
-SRCS	= 	  ft_atoi.c \
-		  ft_bzero.c \
-		  ft_calloc.c \
-		  ft_isalnum.c \
-		  ft_isalpha.c \
-		  ft_isascii.c \
-		  ft_isdigit.c \
-		  ft_isprint.c \
-		  ft_memchr.c \
-		  ft_memcmp.c \
-		  ft_memcpy.c \
-		  ft_memmove.c \
-		  ft_memset.c \
-		  ft_split.c \
-		  ft_strchr.c \
-		  ft_strdup.c \
-		  ft_strlcat.c \
-		  ft_strlcpy.c \
-		  ft_strlen.c \
-		  ft_strjoin.c \
-		  ft_strncmp.c \
-		  ft_strnstr.c \
-		  ft_strrchr.c \
-		  ft_tolower.c \
-		  ft_toupper.c \
+SRCS	=	ft_atoi.c \
+		  	ft_bzero.c \
+		  	ft_calloc.c \
+		  	ft_isalnum.c \
+		  	ft_isalpha.c \
+		  	ft_isascii.c \
+		  	ft_isdigit.c \
+		  	ft_isprint.c \
+		  	ft_itoa.c \
+		  	ft_memchr.c \
+		  	ft_memcmp.c \
+		  	ft_memcpy.c \
+		  	ft_memmove.c \
+		  	ft_memset.c \
+		  	ft_putchar_fd.c \
+		  	ft_putendl_fd.c \
+			ft_putnbr_fd.c \
+			ft_putstr_fd.c \
+			ft_split.c \
+			ft_strchr.c \
+			ft_strdup.c \
+			ft_striteri.c	\
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlcpy.c \
+			ft_strlen.c \
+			ft_strmapi.c \
+			ft_strncmp.c \
+			ft_strnstr.c \
+			ft_strrchr.c \
+			ft_strtrim.c \
+			ft_substr.c \
+			ft_tolower.c \
+			ft_toupper.c \
+
+BONUS_LST	=	ft_lstadd_back_bonus.c \
+			ft_lstadd_front_bonus.c \
+			ft_lstclear_bonus.c \
+			ft_lstdelone_bonus.c \
+			ft_lstiter_bonus.c \
+			ft_lstlast_bonus.c \
+			ft_lstmap_bonus.c \
+			ft_lstnew_bonus.c \
+			ft_lstsize_bonus.c \
 
 
-OBJECTS					= $(SRCS:%.c=%.o)
+OBJECTS		= $(SRCS:%.c=%.o)
 
-FLAGS					= -Wall -Wextra -Werror
+BONUS		= $(BONUS_LST:%.c=%.o)
+
+FLAGS		= -Wall -Wextra -Werror
 
 $(NAME)		:	$(OBJECTS)
-			gcc $(FLAGS) -c $(SRCS) -I./
-			ar rc $(NAME) $(OBJECTS)
+				gcc $(FLAGS) -c $(SRCS) -I./
+				ar rc $(NAME) $(OBJECTS)
 
-all	:	$(NAME)
+all			:	$(NAME)
 
-/*bonus	:	$(NAME)
-		gcc $(FLAGS) -c $(BNS_SRCS) -I./
-		ar rc $(NAME) $(BNS_OBJS)*/
+bonus		:	$(NAME)
+				gcc $(FLAGS) -c $(BONUS_LST) -I./
+				ar rc $(NAME) $(BONUS)
 
-clean	:
-		rm -f $(OBJS) $(BNS_OBJS)
+clean		:
+				rm -f $(OBJECTS) $(BONUS)
 
-fclean	:	clean
-		rm -f $(NAME)
+fclean		:	clean
+				rm -f $(NAME)
 
-re	:	fclean all
+re			:	fclean all
 
-.PHONY	:	all clean fclean re
+.PHONY		:	all clean fclean re

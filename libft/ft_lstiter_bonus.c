@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 01:02:10 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/20 13:51:50 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/24 04:32:31 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/24 04:57:15 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_calloc(size_t elem, size_t bytes)
+void	ft_lstiter(t_list *list, void (*fn)(void *))
 {
-	void	*mem;
-
-	if (bytes != 0 && elem > SIZE_MAX / bytes)
-		return (NULL);
-	mem = malloc(elem * bytes);
-	if (mem == NULL)
-		return (NULL);
-	ft_bzero(mem, elem * bytes);
-	return (mem);
+	if (list)
+	{
+		while (list)
+		{
+			fn(list->content);
+			list = list->next;
+		}
+	}
+	else
+		return ;
 }
