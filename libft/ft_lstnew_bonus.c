@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 05:42:09 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/19 05:42:13 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/23 05:18:17 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/24 00:49:41 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_memmove(void *desu, const void *sos, size_t nahh)
+t_list	*ft_lstnew(void *content)
 {
-	char		*desudesu;
-	const char	*sauce;
-	size_t		nambah;
+	t_list	*start;
 
-	desudesu = desu;
-	sauce = sos;
-	nambah = -1;
-	if (sauce == desudesu)
-		return (desudesu);
-	if (!sauce && !desudesu)
+	start = malloc(sizeof(t_list));
+	if (!start)
 		return (NULL);
-	if (sauce > desudesu)
-	{
-		while (++nambah < nahh)
-			desudesu[nambah] = sauce[nambah];
-	}
-	while (++nambah < nahh)
-		desudesu[nahh - nambah - 1] = sauce[nahh - nambah - 1];
-	return (desudesu);
+	start->content = content;
+	start->next = NULL;
+	return (start);
 }

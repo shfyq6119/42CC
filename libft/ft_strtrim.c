@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 05:42:09 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/19 05:42:13 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/20 22:58:39 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/21 04:26:46 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_memmove(void *desu, const void *sos, size_t nahh)
+char	*ft_strtrim(char const *str, char const *trash)
 {
-	char		*desudesu;
-	const char	*sauce;
-	size_t		nambah;
+	size_t	bin;
 
-	desudesu = desu;
-	sauce = sos;
-	nambah = -1;
-	if (sauce == desudesu)
-		return (desudesu);
-	if (!sauce && !desudesu)
+	if (!str || !trash)
 		return (NULL);
-	if (sauce > desudesu)
-	{
-		while (++nambah < nahh)
-			desudesu[nambah] = sauce[nambah];
-	}
-	while (++nambah < nahh)
-		desudesu[nahh - nambah - 1] = sauce[nahh - nambah - 1];
-	return (desudesu);
+	while (*str && ft_strchr(trash, *str))
+		str++;
+	bin = ft_strlen(str);
+	while (bin && ft_strchr(trash, *(str + bin)))
+		bin--;
+	return (ft_substr(str, 0, bin + 1));
 }

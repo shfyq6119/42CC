@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 05:42:09 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/19 05:42:13 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/24 04:57:43 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/24 09:15:11 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	*ft_memmove(void *desu, const void *sos, size_t nahh)
+t_list	*ft_lstmap(t_list *list, void *(*fn)(void *), void (*del)(void *))
 {
-	char		*desudesu;
-	const char	*sauce;
-	size_t		nambah;
+	t_list	*newlist;
+	t_list	*refcpl;
 
-	desudesu = desu;
-	sauce = sos;
-	nambah = -1;
-	if (sauce == desudesu)
-		return (desudesu);
-	if (!sauce && !desudesu)
+	if (!list)
 		return (NULL);
-	if (sauce > desudesu)
+	newlist = ft_lstnew(fn(list->content));
+	refcpl = list->next;
+	while (refcpl)
 	{
-		while (++nambah < nahh)
-			desudesu[nambah] = sauce[nambah];
+		ft_lstadd_back(&newlist, ft_lstnew(fn(refcpl->content)));
+		refcpl = refcpl->next;
 	}
-	while (++nambah < nahh)
-		desudesu[nahh - nambah - 1] = sauce[nahh - nambah - 1];
-	return (desudesu);
+	while (refcpl)
+		ft_lstdelone(refcpl, del);
+	return (newlist);
 }
