@@ -1,21 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 17:14:33 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/09/19 17:29:45 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/27 02:40:34 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/27 02:47:11 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "libprintf.h"
 
-char	**ft_split(char const *splot, char sep)
-{
-	char	**splat;
-	size_t	count;
-
-	splat = (char **)malloc(sizeof(char **) * (
-}
-
+int	ft_printf(const char *format, ...)
