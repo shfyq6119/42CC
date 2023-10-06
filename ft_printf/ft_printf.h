@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libprintf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,8 +9,8 @@
 /*   Updated: 2023/10/06 15:32:44 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBPRINTF_H
-# define LIBPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # define HEXUP "0123456789ABCDEF"
 # define HEXLOW "0123456789abcdef"
 # include <stdarg.h>
