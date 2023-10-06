@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libprintf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 02:42:14 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/10/06 12:37:01 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/10/06 15:34:23 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBPRINTF_H
-# define LIBPRINTF_H
-# define HEXUP "0123456789ABCDEF"
-# define HEXLOW "0123456789abcdef"
-# include <stdarg.h>
-# include <unistd.h>
+#include "libprintf.h"
 
-int	ft_printf(const char *format, ...);
-int	ft_putchar_n(char c);
-int	ft_putstr_n(char *s);
-int	ft_putnbr_n(long i);
-int	ft_putaddr_n(unsigned long p);
-int	ft_puthex_n(unsigned long h, char *hexcase);
+int	ft_putnbr_n(long i)
+{
+	int	count;
 
-#endif
+	count = 0;
+	if (i < 0)
+	{
+		i = -i;
+		count += ft_putchar_n(45);
+	}
+	if (i > 9)
+	{
+		count += ft_putnbr_n(i / 10);
+		count += ft_putnbr_n(i % 10);
+	}
+	else
+		count += ft_putchar_n(i + 48);
+	return (count);
+}
