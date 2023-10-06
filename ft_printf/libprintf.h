@@ -16,9 +16,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 void	ft_putchar(char c);
-
+char	*ft_itoa(int c);
+void	ft_putnbr_base(int c);
+void	ft_hexcase(int c);
+void	ft_p
 
 
 #endif
