@@ -9,7 +9,7 @@
 /*   Updated: 2023/10/06 15:33:50 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libprintf.h"
+#include "ft_printf.h"
 
 int	ft_putchar_n(char c)
 {
