@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <limits.h>
+#include "ft_printf.h"
 int main() 
 {
     // Test cases for %c
@@ -115,6 +118,10 @@ ft_printf("ft_printf Hexadecimal (lowercase) 3: %x\n", hexNum3);
     ft_printf("ft_printf Hexadecimal (uppercase) 4: %X\n", hexNum4);
     printf("Printf Hexadecimal (uppercase) 5: %X\n", hexNum5);
     ft_printf("ft_printf Hexadecimal (uppercase) 5: %X\n", hexNum5);
+    printf("Printf Hexadecimal (uppercase) INT_MAX: %X\n", INT_MAX);
+    ft_printf("ft_printf Hexadecimal (uppercase) INT_MAX: %X\n", INT_MAX);
+    printf("Printf Hexadecimal (uppercase) LONG_MAX: %lX, spec: lX\n", LONG_MAX);
+    ft_printf("ft_printf Hexadecimal (uppercase) LONG_MAX: %X, spec: X\n", LONG_MAX);
 
     // Test case for %%
     printf("Printf Percentage Sign: %%\n");
