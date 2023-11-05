@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 12:30:29 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/10/07 12:12:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/10/07 15:01:56 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/10/29 04:51:09 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	ft_putstr_n(char *s)
-{
-	int	len;
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
 
-	len = 0;
-	if (!s)
-		return (ft_putstr_n("(null)"));
-	while (s[len])
-		len += ft_putchar_n(s[len]);
-	return (len);
-}
+# include <stdlib.h>
+# include <unistd.h>
+# include <syslimits.h>
+# include <stdio.h>
+//# include <fcntl.h>
+
+char	*get_next_line(int fd);
+
+
+#endif
