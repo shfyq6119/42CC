@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 02:40:34 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/10/06 16:20:14 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/10/06 17:14:09 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -27,9 +27,9 @@ static size_t	parse_print(char idx, va_list args)
 	else if (idx == 'p')
 		count = ft_putaddr_n(va_arg(args, unsigned long));
 	else if (idx == 'x')
-		count = ft_puthex_n((unsigned int)va_arg(args, unsigned int), HEXLOW);
+		count = ft_puthex_n(va_arg(args, unsigned int), HEXLOW);
 	else if (idx == 'X')
-		count = ft_puthex_n((unsigned int)va_arg(args, unsigned int), HEXUP);
+		count = ft_puthex_n(va_arg(args, unsigned int), HEXUP);
 	else if (idx == '%')
 		count = ft_putchar_n('%');
 	return (count);

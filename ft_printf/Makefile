@@ -6,7 +6,7 @@
 #    By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 13:05:10 by mm-isa            #+#    #+#              #
-#    Updated: 2023/10/06 15:05:45 by mm-isa           ###   ########.fr        #
+#    Updated: 2023/10/08 20:18:17 by mm-isa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME	=	libftprintf.a
@@ -24,21 +24,22 @@ SRC 	=	ft_printf.c \
 
 OBJS	=	$(SRC:%.c=%.o)
 
-all		=	$(NAME)
-
 $(NAME)	:	$(OBJS)
-			@echo "$(NAME) - i maketh the library..."
-			$(GCC) $(GFLAGS) -c $(SRC) -I./
+			@echo "$(NAME)- i maketh the library..."
+			gcc $(GFLAGS) -c $(SRC) -I./
 			ar rc $(NAME) $(OBJS)
 
+all		:	$(NAME)
+
 clean	:	
-			@echo "$(NAME) - i destroyeth the object files.."
+			@echo "$(NAME) - i destroyeth the objecteth files.."
 			rm -f $(OBJS)
 
 fclean	:	clean
-			@echo "$(NAME) - i annihilate everything!!! jk"
+			@echo "$(NAME) - i annihilateth everythingeth!!! jk"
+			rm -f $(NAME)
 
 re		:	fclean all
-			@echo "$(NAME) - i recreateh as i will! jk uWu"
+			@echo "$(NAME) - i recreateth as i willeth! jk uWu"
 
 .PHONY	:	all clean fclean re
