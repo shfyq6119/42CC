@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 15:01:56 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/11/06 17:39:19 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/11/06 17:03:58 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/11/06 18:59:35 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+int	ft_schlongth(char *schlong)
+{
+	int	i;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <limits.h>
-# include <stdio.h>
-# include <fcntl.h>
-
-char	*get_next_line(int fd);
-int		ft_schlongth(char *schlong);
-
-#endif
+	i = 0;
+	while (schlong && schlong[i])
+		i++;
+	return (i);
+}
