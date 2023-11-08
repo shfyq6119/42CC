@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:13:04 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/11/08 02:48:25 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/11/08 05:10:21 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*nl_chomper(char *mush, char *mash)
 {
@@ -60,7 +60,7 @@ static int	nl_scanner(char *swallow)
 
 char	*get_next_line(int fd)
 {
-	static char	bite[BUFFER_SIZE];
+	static char	bite[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*chew;
 	int			init;
 
@@ -68,31 +68,25 @@ char	*get_next_line(int fd)
 	init = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, bite, 0) < 0)
 	{
-		ft_bzero(bite, BUFFER_SIZE);
+		if (fd >= 0 && fd <= FOPEN_MAX)
+			ft_bzero(bite[fd], BUFFER_SIZE);
 		return (NULL);
 	}
 	while (init > 0)
 	{
-		if (!*bite)
-			init = read(fd, bite, BUFFER_SIZE);
+		if (!bite[fd][0])
+			init = read(fd, bite[fd], BUFFER_SIZE);
 		if (init > 0)
-			chew = nl_chomper(chew, bite);
-		if (nl_scanner(bite))
-			break ;
+		{
+			chew = nl_chomper(chew, bite[fd]);
+			if (nl_scanner(bite[fd]))
+				break ;
+		}
 	}
 	return (chew);
 }
 /*
 #include <fcntl.h>
-int	main(void)
-{
-	int fd = open("test2.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-}*/
-/*
 int	main(void)
 {
 	int fd = open("test2.txt", O_RDONLY);
