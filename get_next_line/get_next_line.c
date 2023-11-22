@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:13:04 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/11/08 02:48:25 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/11/15 07:38:04 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -38,7 +38,7 @@ static char	*nl_chomper(char *mush, char *mash)
 	return (nom);
 }
 
-static int	nl_scanner(char *swallow)
+static int	nl_memmove(char *swallow)
 {
 	int	nlflag;
 	int	nop;
@@ -47,6 +47,8 @@ static int	nl_scanner(char *swallow)
 	nlflag = 0;
 	nop = 0;
 	yes = 0;
+	if (!swallow)
+		return (0);
 	while (swallow[nop])
 	{
 		if (nlflag)
@@ -60,24 +62,26 @@ static int	nl_scanner(char *swallow)
 
 char	*get_next_line(int fd)
 {
-	static char	bite[BUFFER_SIZE];
+	static char	bite[BUFFER_SIZE + 1];
 	char		*chew;
 	int			init;
 
 	chew = NULL;
 	init = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, bite, 0) < 0)
-	{
-		ft_bzero(bite, BUFFER_SIZE);
-		return (NULL);
-	}
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
+		return (ft_bzero(fd, bite, BUFFER_SIZE + 1));
 	while (init > 0)
 	{
 		if (!*bite)
 			init = read(fd, bite, BUFFER_SIZE);
+		if (init < 0)
+		{
+			free(chew);
+			return (ft_bzero(fd, bite, BUFFER_SIZE + 1));
+		}
 		if (init > 0)
 			chew = nl_chomper(chew, bite);
-		if (nl_scanner(bite))
+		if (nl_memmove(bite))
 			break ;
 	}
 	return (chew);
@@ -93,12 +97,14 @@ int	main(void)
 	printf("%s", get_next_line(fd));
 }*/
 /*
+#include <stdio.h>
+#include <fcntl.h>
 int	main(void)
 {
 	int fd = open("test2.txt", O_RDONLY);
 	int i = 0;
 	char	*str;
-	while (i < 12)
+	while (i < 13)
 	{
 		str = get_next_line(fd);
 		printf("%s", str);
