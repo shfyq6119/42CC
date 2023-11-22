@@ -9,7 +9,7 @@
 /*   Updated: 2023/11/08 02:26:11 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_schlongth(char *schlong)
 {
@@ -21,24 +21,20 @@ int	ft_schlongth(char *schlong)
 	return (i);
 }
 
-char	*ft_strchr(char *str, int chr)
-{
-	while (*str && *str != (char)chr)
-		str++;
-	if (*str == (char)chr)
-		return (str);
-	return (0);
-}
-
-void	ft_bzero(void *buf, size_t bufsize)
+char	*ft_bzero(int fd, void *buf, size_t bufsize)
 {
 	unsigned char	*buffer;
 
 	buffer = buf;
-	while (bufsize)
+	if (fd >= 0 && fd <= FOPEN_MAX)
 	{
-		*buffer = 0;
-		bufsize--;
-		buffer++;
+		while (bufsize)
+		{
+			*buffer = 0;
+			bufsize--;
+			buffer++;
+		}
+		return (NULL);
 	}
+	return (NULL);
 }

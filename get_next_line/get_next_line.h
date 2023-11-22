@@ -20,8 +20,7 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*ft_strchr(char *str, int chr);
 int		ft_schlongth(char *schlong);
-void	ft_bzero(void *buf, size_t bufsize);
+char	*ft_bzero(int fd, void *buf, size_t bufsize);
 
 #endif

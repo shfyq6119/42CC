@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:13:04 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/11/08 05:10:21 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:27:32 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line_bonus.h"
@@ -38,7 +38,7 @@ static char	*nl_chomper(char *mush, char *mash)
 	return (nom);
 }
 
-static int	nl_scanner(char *swallow)
+static int	nl_memmove(char *swallow)
 {
 	int	nlflag;
 	int	nop;
@@ -47,6 +47,8 @@ static int	nl_scanner(char *swallow)
 	nlflag = 0;
 	nop = 0;
 	yes = 0;
+	if (!swallow)
+		return (0);
 	while (swallow[nop])
 	{
 		if (nlflag)
@@ -66,22 +68,21 @@ char	*get_next_line(int fd)
 
 	chew = NULL;
 	init = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, bite, 0) < 0)
-	{
-		if (fd >= 0 && fd <= FOPEN_MAX)
-			ft_bzero(bite[fd], BUFFER_SIZE);
-		return (NULL);
-	}
-	while (init > 0)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+		return (ft_bzero(fd, bite[fd], BUFFER_SIZE + 1));
+	while (init > 0 && fd >= 0 && fd <= FOPEN_MAX)
 	{
 		if (!bite[fd][0])
 			init = read(fd, bite[fd], BUFFER_SIZE);
-		if (init > 0)
+		if (init < 0)
 		{
-			chew = nl_chomper(chew, bite[fd]);
-			if (nl_scanner(bite[fd]))
-				break ;
+			free(chew);
+			return (ft_bzero(fd, bite[fd], BUFFER_SIZE + 1));
 		}
+		if (init > 0)
+			chew = nl_chomper(chew, bite[fd]);
+		if (nl_memmove(bite[fd]))
+			break ;
 	}
 	return (chew);
 }
@@ -89,15 +90,21 @@ char	*get_next_line(int fd)
 #include <fcntl.h>
 int	main(void)
 {
-	int fd = open("test2.txt", O_RDONLY);
-	int i = 0;
+	int fd[2];
 	char	*str;
-	while (i < 12)
+	int	i;
+	
+
+	i = 0;
+	fd[0] = open("test3.txt", O_RDONLY);
+	fd[1] = open("test2.txt", O_RDONLY);
+	while ((str = get_next_line(fd[i])))
 	{
-		str = get_next_line(fd);
 		printf("%s", str);
 		free(str);
-		i++;
+		i = (i+1) % 2;
 	}
-	return(0);
+	printf("FOPEN_MAX = %d", FOPEN_MAX);
+	close(fd[0]);
+	close(fd[1]);
 }*/

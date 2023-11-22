@@ -1,0 +1,19 @@
+Treat spaces as '\n'
+
+while(str[nop])
+012345678
+Hellon!?\0   nop=0 nlflag=0;
+0ellon!?\0   nop=1
+00llon!?\0   nop=2
+000lon!?\0   nop=3
+0000on!?\0   nop=4
+00000n!?\0   nop=5 nlflag=0;
+000000!?\0   nop=6 nlflag=1;
+000000!?\0 nop=7 yes=0(nop[6] = '!')
+!000000?\0 nop=8 yes=1(nop[7] = '?')
+!?0000000 (str[nop] == '\0') <bite>
+bite is not empty so;
+chew = !!;
+Line1 = Hello\n
+Line2 = !!
+
