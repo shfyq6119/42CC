@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_bits.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 21:52:54 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/12/13 02:59:26 by mm-isa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+unsigned char	reverse_bits(unsigned char octet)
+{
+	int i = 8;
+	unsigned char	bitres = 0;
+	while (i > 0)
+	{
+		bitres = bitres * 2 + (octet % 2); // mod 2 = only either 1 or 0
+		octet /= 2;
+		i--;
+	}
+	return (bitres);
+}
+/*
+unsigned char	reverse_bits(unsigned char octet)
+{
+	unsigned char	r = 0;
+	unsigned int	b = 8;
+	while (b--)
+	{
+		r = (r << 1) | (b & 1);
+		b >>= 1;
+	}
+	return (r);
+}
+*/
+
+/*
+unsigned char	reverse_bits(unsigned char octet)
+{
+	octet = (octet & 0xF0) >> 4 | (octet & 0x0F) << 4;
+	octet = (octet & 0xCC) >> 2 | (octet & 0x33) << 2;
+	octet = (octet & 0xAA) >> 1 | (octet & 0x55) << 1;i
+}
+*/
+
+#include <stdio.h>
+int	main()
+{
+	printf("%d", reverse_bits(unsigned char octet));
+}
