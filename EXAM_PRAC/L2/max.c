@@ -16,14 +16,14 @@ int	max(int* tab, unsigned int len)
 	int				r;
 
 	i = 0;
-	r = tab[i];
+	r = tab[i]; // get first number index
 	if (len == 0)
 		return (0);
 	while (i < len)
 	{
-		if (r < tab[i])
+		if (r < tab[i])  // for comparison against latest index after loop
 			r = tab[i];
-		i++;
+		i++; // move on to the next index in order to start triggering comparison
 	}
-	return (r);
+	return (r); // return latest comparisoin result.
 }

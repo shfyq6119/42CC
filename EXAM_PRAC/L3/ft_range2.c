@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   ft_range2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 04:06:00 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/12/09 04:27:18 by mm-isa           ###   ########.fr       */
+/*   Updated: 2023/12/20 13:01:13 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -33,12 +33,11 @@ int	*ft_range(int start, int end)
 	tab[i] = start;
 	return (tab);
 }
-/*
 #include <stdio.h>
 
 int	main()
 {
-	int	*tab = ft_range(4,2);
+	int	*tab = ft_range(2,4);
 	printf("%d, ", tab[0]);
 	printf("%d, ", tab[1]);
 	printf("%d, ", tab[2]);
@@ -46,5 +45,4 @@ int	main()
 	printf("%d\n", tab[4]);
 	printf("%d\n", tab[5]);
 	free(tab);
-}*/
-	
+}
