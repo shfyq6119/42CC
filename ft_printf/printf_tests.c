@@ -34,10 +34,10 @@ int main()
     ft_printf("ft_printf String 2: %s\n", str2);
     printf("Printf String 3: %s\n", str3);
     ft_printf("ft_printf String 3: %s\n", str3);
-    printf("Printf String 4: %s\n", str4);
-    ft_printf("ft_printf String 4: %s\n", str4);
-    printf("Printf String 5 (Empty): %s\n", str5);
-    ft_printf("ft_printf String 5 (Empty): %s\n", str5);
+    printf("1.Printf String 4: %s\n", str4);
+    ft_printf("2.ft_printf String 4: %s\n", str4);
+    printf("1. Hello %s\n");
+    ft_printf("2. Hello %s\n");
 
     // Test cases for %p
     void *ptr1 = &ch1;

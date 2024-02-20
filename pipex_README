@@ -1,0 +1,13 @@
+Pipex Core Funcs (4+1):
+
+1. <unistd.h> : pid_t fork(void);
+creates new process, this child process is the same exact copy of parent with different ID and values etc.
+2. <unistd.h> : int pipe(fildes[2]);
+
+3. <sys/wait.h> : pid_t wait(int *stat_loc);
+if you doing bonus
+4. <unistd.h> : int execve(const char *path, char *const argv[], char *const envp[]);
+get envp thru ft_split(char *envp[], ":")
+replace current process img with new 
+5. <fcntl.h> : int access(const char *path, int amode);
+int amode = access permissions:read/write/execute OK, (R_OK, W_OK, X_OK) || the existence test, (F_OK).

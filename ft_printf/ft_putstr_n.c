@@ -16,7 +16,7 @@ int	ft_putstr_n(char *s)
 	int	len;
 
 	len = 0;
-	if (!s)
+	if (!s || *s == '\0')
 		return (ft_putstr_n("(null)"));
 	while (s[len])
 		len += ft_putchar_n(s[len]);

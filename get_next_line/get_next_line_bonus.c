@@ -70,7 +70,7 @@ char	*get_next_line(int fd)
 	init = 1;
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (ft_bzero(fd, bite[fd], BUFFER_SIZE + 1));
-	while (init > 0 && fd >= 0 && fd <= FOPEN_MAX)
+	while (init > 0)
 	{
 		if (!bite[fd][0])
 			init = read(fd, bite[fd], BUFFER_SIZE);

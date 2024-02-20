@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 07:33:51 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/12/16 08:12:49 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/01/31 12:55:04 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	int	i = 1;
 	if (ac == 2)
 	{
-		int	m = ft_atoipos(av[1]);
+		int	m = ft_atoipos(av[1]); //convert non-neg arg to positive int 
 		if (m >= 0)
 		{
 			while (i <= 9)

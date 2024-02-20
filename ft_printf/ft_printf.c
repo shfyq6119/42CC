@@ -14,7 +14,7 @@
 static size_t	parse_print(char idx, va_list args)
 {
 	size_t	count;
-
+	
 	count = 0;
 	if (idx == 'c')
 		count = ft_putchar_n(va_arg(args, int));

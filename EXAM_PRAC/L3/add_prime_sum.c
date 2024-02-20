@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 06:03:01 by mm-isa            #+#    #+#             */
-/*   Updated: 2023/12/09 14:15:16 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/01/31 12:53:07 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -51,13 +51,15 @@ int main(int ac, char **av)
 	{
 		n = ft_atoi_pos(av[1]);
 		while (n > 0) // guarantees input only for positive number, else**
-		{
-			if (is_prime(n)) // check from largest to smallest prime number
-				i += n; // add if pass prime check
+		{					 //backtrack and adds up if prime
+			if (is_prime(n)) // check if prime number
+				i += n; // add if pass prime check (from largest to smallest)
 			n--; // decrement per loop for next prime check
 		}
-		ft_putnbrpos(i); // write recursively, defaults to i = "0" if number is -ve.
+		ft_putnbrpos(i); // **write recursively, ^defaults to i = "0" if number is -ve.
+		write(1, "\n", 1);
 	}
-	write(1, "\n", 1);
-	return (0); // 
+	else
+		write(1, "0\n", 2); //else, i.e. <= 0, writes "0\n".
+	return (0);
 }
