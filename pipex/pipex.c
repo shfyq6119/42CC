@@ -6,45 +6,57 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 19:37:09 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/01/25 07:08:01 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/03/11 04:21:12 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "pipex.h"
 
-static void proc_intake(int fd[2], char *file, char *cmd, char **envp)
+void	proc_out(int *file, char *filename2, char *cmd2, char **env)
 {
-	int 	fd_open;
-	int		execmd;
-	int		pid;
-	char	*path;
+	int	outfile;
 
-	pid = fork();
-	if (pid == -1)
-		perror("Fork failed BODOH");
-	else if (pid)
-	{
-		close(fd[0]); //close read end of pipe; i.e. close itself (fd[0]) so it does not wait to read from here.
-		fd_open = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd_open == -1)
-			perror("intake file failed BENGAP.");
-		dup2(fd[1], STDOUT_FILENO); // dup child's fd 
-		dup(fd_open, STDIN_FILENO);
-	}
+	outfile = open(filename2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (outfile == -1)
+		exit_error("bad file2");
+	dup2(file[0], STDIN_FILENO);
+	dup2(outfile, STDOUT_FILENO);
+	close(file[1]);
+	handle_cmd(cmd2, env);
+}
+
+void	proc_in(int *file, char *filename1, char *cmd1, char **env)
+{
+	int	infile;
+
+	infile = open(filename1, O_RDONLY, 0777);
+	if (infile == -1)
+		exit_error("bad file1");
+	dup2(file[1], STDOUT_FILENO);
+	dup2(infile, STDIN_FILENO);
+	close(file[0]);
+	handle_cmd(cmd1, env);
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	int fd[2];
+	int	files[2];
+	int	child;
 
 	if (ac != 5)
 	{
-		write(1, "argue no enough, more sauce, argue MORE, MORE!!\n", 48);
+		ft_putstr_fd("argue no enough, more sauce, argue more, MORE!!\n", 2);
 		return (0);
 	}
-	if (pipe(fds) == -1)
-		write(1, "Pipe Error siol\n", 11);
-	proc_intake(fd, av[1], av[2], envp);
-	wait(NULL);
-	process_out(fd, av[3], av[4], envp);
-	close(fd[0]);
-	close(fd[1]);
+	if (ac == 5)
+	{
+		if (pipe(files) == -1)
+			exit_error("Call the plumber pl00ze");
+		child = fork();
+		if (child == -1)
+			exit_error("Fork failed, there is no spoon");
+		proc_in(files, av[1], av[2], envp);
+		wait(NULL);
+		proc_out(files, av[4], av[3], envp);
+	}
 	return (0);
+}
