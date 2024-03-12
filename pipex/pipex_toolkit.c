@@ -6,12 +6,12 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 02:28:12 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/03/11 05:21:50 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/03/13 03:44:00 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
 
-void	handle_cmd(char *cmd_raw, char **env)
+void	handle_cmd(int original, char *cmd_raw, char **env)
 {
 	char	*cmd_path;
 	char	**cmd_array;
@@ -20,13 +20,11 @@ void	handle_cmd(char *cmd_raw, char **env)
 	cmd_path = pathfinder(cmd_array[0], env);
 	if (!cmd_path)
 	{
-		exit_error("cmd_path failure");
-		clean_cache(cmd_array);
+		exit_error(original, cmd_array, NULL, cmd_array[0]);
 	}
 	if (execve(cmd_path, cmd_array, env) == -1)
 	{
-		exit_error("execve failure");
-		clean_cache(&cmd_path);
+		exit_error(original, cmd_array, cmd_path, "execve failure");
 	}
 }
 
@@ -50,7 +48,7 @@ char	*pathfinder(char *cmd, char **envp)
 	idx = 0;
 	while (ft_strnstr(envp[idx], "PATH", 4) == 0)
 		idx++;
-	env_paths = ft_split(envp[idx + 5], ':');
+	env_paths = ft_split(envp[idx] + 5, ':');
 	idx = 0;
 	while (env_paths[idx])
 	{
@@ -59,7 +57,7 @@ char	*pathfinder(char *cmd, char **envp)
 		free(which_path);
 		if (access(match, F_OK) == 0)
 			return (match);
-		free (match);
+		free(match);
 		idx++;
 	}
 	clean_cache(env_paths);
@@ -70,6 +68,7 @@ char	*pathfinder(char *cmd, char **envp)
 /*line 82 is separated out as a final check of **junk*/
 
 void	clean_cache(char **junk)
+
 {
 	int	i;
 
@@ -88,8 +87,17 @@ void	clean_cache(char **junk)
 		return ;
 }
 
-void	exit_error(char *str)
+void	exit_error(int original, char **arr, char *str, char const *msg)
 {
-	perror(str);
+	if (original)
+		dup2(original, STDOUT_FILENO);
+	if (msg && !arr)
+		ft_printf("zsh: %s: %s\n", strerror(ENOENT), msg);
+	else if (msg && arr)
+		ft_printf("zsh: command not found: %s\n", msg);
+	if (arr)
+		clean_cache(arr);
+	if (str)
+		clean_cache(&str);
 	exit(EXIT_FAILURE);
 }
