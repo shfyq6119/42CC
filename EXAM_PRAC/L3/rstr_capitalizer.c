@@ -33,8 +33,9 @@ int	main(int ac, char **av)					//however many arguments, str_capitalize
 				if (is_alpha(av[i][j]) == 2) //if upper,
 					av[i][j] += 32;			// to lower
 				if (is_alpha(av[i][j]) == 1 && (av[i][j+1] == 32 || av[i][j+1] == 9 || av[i][j+1] == 0))
+//if upper AND next index is white or null (EOS), execute shift
 					av[i][j] -= 32;			// to_upper
-				write(1, &av[i][j++], 1);	// then write
+				write(1, &av[i][j++], 1);	// then write, EVERYTHING, regardless of white repeats and dupes etc.
 			}
 			write(1, "\n", 1);				// write newline at end of each arg.
 			i++;							// NEXT!

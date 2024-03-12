@@ -14,7 +14,7 @@ void	sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int	i = 0;
 	int				tmp;
-	while (i < size - 1)
+	while (i < size - 1) // size 6, last index = 5. therefore - 1.
 	{
 		if (tab[i] > tab[i + 1])
 		{

@@ -43,14 +43,14 @@ int		main(int argc, char *argv[])
 		k = i;									// assigns first word index (after accounting for whitespaces if any)
 		while (argv[1][i] && argv[1][i] != ' ' && argv[1][i] != '\t')
 			i++;								// skips first word
-		while (argv[1][i])
+		while (argv[1][i]) // master loop condition
 		{
 			if (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t') 	//start writing only when current character is NOT white AND before IS white
 				&& (argv[1][i - 1] == ' ' || argv[1][i - 1] == '\t')) 		//this encounters the first instance of a letter preceded by whites
-			{
-				while (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t')) // will stop when encountering whitespace.
-					write(1, &argv[1][i++], 1);				// this will only write nonwhites
-				write(1, " ", 1);					//fill in space manually, exits until it encounter next true IF condition
+			{ // this conditional start of inner loop ------
+				while (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t')) //  -- will stop when encountering whitespace.
+					write(1, &argv[1][i++], 1);				// this will only write nonwhites according to above conditions
+				write(1, " ", 1);					//fill in space manually, exits until it encounter next true IF condition (this will end the if shunt)
 			}
 			i++;	//implicit else skipping over spaces.
 		}
