@@ -6,7 +6,7 @@
 #    By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 23:50:19 by mm-isa            #+#    #+#              #
-#    Updated: 2023/09/23 18:17:42 by mm-isa           ###   ########.fr        #
+#    Updated: 2024/03/13 01:07:37 by mm-isa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,19 +20,19 @@ EXEC = pipex
 BONUS_EXEC = pipex_bonus
 INFILE = infile
 OUTFILE = outfile
-LIBDIR = libft
-LIB = libft.a
+LIBDIR = lib_ft
+LIB = lib_ft.a
 
 all: $(INFILE) $(OUTFILE) $(LIBDIR)/$(LIB) $(EXEC)
 
 bonus: $(INFILE) $(OUTFILE) $(LIBDIR)/$(LIB) $(BONUS_OBJ)
-	$(CC) $(CFLAGS) -o $(BONUS_EXEC) $(BONUS_OBJ) -L$(LIBDIR)/libft -lft
+	$(CC) $(CFLAGS) -o $(BONUS_EXEC) $(BONUS_OBJ) -L$(LIBDIR) -l_ft
 
 $(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ) -L$(LIBDIR)/ -lft
+	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ) -L$(LIBDIR) -l_ft
 
 $(BONUS_EXEC): $(BONUS_OBJ)
-	$(CC) $(CFLAGS) -o $(BONUS_EXEC) $(BONUS_OBJ) -L$(LIBDIR)/libft -lft
+	$(CC) $(CFLAGS) -o $(BONUS_EXEC) $(BONUS_OBJ) -L$(LIBDIR) -l_ft
 
 %.o: %.c pipex.h
 	$(CC) $(CFLAGS) -c $< -o $@
