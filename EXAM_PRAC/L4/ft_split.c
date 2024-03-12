@@ -47,7 +47,7 @@ char	**ft_split(char *str)
 			i++; 							// same logic as above;
 		j = i; 								//give j index i as start index for next step to find end of word;
 		while (str[i] && (str[i] != 32 && str[i] != 10 && str[i] != 9))
-			i++; 							// count characters until next space, tab.
+			i++; 							// count characters until next spacetab; will end at a spacetab.
 		if (i > j) 							// there should be a difference btwn i-end index and j-start index;
 		{
 			split[k] = malloc(i - j + 1); 	// index-wise malloc k = 0++ with end-start idx + null index;

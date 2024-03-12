@@ -13,26 +13,29 @@
 
 int	main(int ac, char **av)
 {
-	int	i = 0;
-	int	flag = 0;
+	int	i = 0; //the fucking indexer
+	int	flag = 0; //call this firstwordflag or whatever, it's just a flag
 	if (ac == 2)
 	{
 		while (av[1][i])
+/*master loop set to terminate all actions within upon NULL*/
 		{
 			while (av[1][i] && (av[1][i] == 32 || av[1][i] == 9))
-				i++;
+				i++; //exclude all whites
 			if (flag && (av[1][i] && (av[1][i-1] == 32 || av[1][i-1] == 9)))
+/*this condition checks if space should be written: character is not null and before is a whitespace*/
 			{
-				write(1, " ", 1);
-				flag = 0;
+				write(1, " ", 1); //hardcoded singlespace
+				flag = 0; //flag DOWN after every space written.
 			}
+/*this loop writes only non-null whitespace and flags after every final nonwhite*/
 			while (av[1][i] && (av[1][i] != 32 && av[1][i] != 9))
 			{
-				write(1, &av[1][i++], 1);
-				flag = 1;
+				write(1, &av[1][i++], 1); // write all nonwhites
+				flag = 1;  // flag up after every nonwhite, will necessarily exit with flag up
 			}
 		}
 	}
-	write(1, "\n", 1);
+	write(1, "\n", 1); // implied ELSE
 	return (0);
 }
