@@ -16,9 +16,9 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 	if (begin_list == NULL || *begin_list == NULL)
 		return ;							// no need while loop, just check contents.
 	t_list	*current = *begin_list; 		// create pointer to retain head node reference
-	if (cmp(current->data, data_ref) == 0)  // if there is current node's data is the same as reference data
+	if (cmp(current->data, data_ref) == 0)  // compare current data to data_ref!! not the whole fucking list LOLa
 	{								 		// remove by
-		*begin_list = current->next;	 	// move begin_list pointer to next node (replace new head);
+		*begin_list = current->next;	 	// move begin_list pointer to next node (replace new head if head needs removal);
 		free(current);				 		// free current node (reference is still head @ one address before)
 		ft_list_remove_if(begin_list, data_ref, cmp); // recursive starting from latest node , or back to beginning? (via bl = cur->next)
 	}

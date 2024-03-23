@@ -11,57 +11,57 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-static size_t	splotcount(char const *sploot, char splett)
+static size_t	splotcount(char const *str, char septum)
 {
 	size_t	count;
 
 	count = 0;
-	while (*sploot)
+	while (*str)
 	{
-		if (*sploot != splett)
+		if (*str != septum)
 		{
 			count++;
-			while (*sploot && *sploot != splett)
-				sploot++;
+			while (*str && *str != septum)
+				str++;
 		}
 		else
-			sploot++;
+			str++;
 	}
 	return (count);
 }
 
-static char	**ft_retrofree(char **splatfudge, size_t splitcount)
+static char	**ft_retrofree(char **array, size_t splitcount)
 {
-	while (splitcount-- && splatfudge[splitcount])
-		free (*(splatfudge + splitcount));
-	free (splatfudge);
+	while (splitcount-- && array[splitcount])
+		free(*(array + splitcount));
+	free (array);
 	return (NULL);
 }
 
-char	**ft_split(char const *splot, char splet)
+char	**ft_split(char const *str, char sept)
 {
-	char		**splat;
+	char		**set;
 	char const	*split;
-	size_t		splut;
+	size_t		idx;
 
-	splut = 0;
-	splat = (char **)malloc(sizeof(char *) * (splotcount(splot, splet) + 1));
-	if (!splat || !splot)
+	idx = 0;
+	set = (char **)malloc(sizeof(char *) * (splotcount(str, sept) + 1));
+	if (!set || !str)
 		return (NULL);
-	while (*splot)
+	while (*str)
 	{
-		if (*splot != splet)
+		if (*str != sept)
 		{
-			split = splot;
-			while (*splot != splet && *splot)
-				splot++;
-			splat[splut++] = ft_substr(split, 0, splot - split);
-			if (!splat)
-				return (ft_retrofree(splat, splut));
+			split = str;
+			while (*str && *str != sept)
+				str++;
+			set[idx++] = ft_substr(str, 0, str - split);
+			if (!set)
+				return (ft_retrofree(set, idx));
 		}
 		else
-			splot++;
+			str++;
 	}
-	splat[splut] = NULL;
-	return (splat);
+	set[idx] = NULL;
+	return (set);
 }

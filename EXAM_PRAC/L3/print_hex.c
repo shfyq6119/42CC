@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include <unistd.h>
 
-int	ft_atoipos(char *str)
+int	ft_atoipos(char *str) //simplified ATOI for positive ints only
 {
 	int	r = 0;
 	int	i = 0;
 	while (str[i])
 	{
-		r = r * 10 + (str[i] - '0');	// raise order of magnitude at every turn to add to ones place.
+		r = r * 10 + (str[i] - 48);	// raise one order of magnitude at every turn; to add to ones place. first loop r results in 0 anyway.
 		i++;							// each loop *= 10 with every index toward the end of string. 4 digits
 	}									// 10^4 = 1,000. to write first digit: n =  0 * 10 + digit. next round, 
 	return (r);							// n * 10 + one digit converted into dec int.
@@ -34,10 +34,11 @@ void	print_hex(int n)				//arrayidx=|16|17|18|19|20|21|22|23|24|25|26|27|28|29|3
 									//!!this will be the last recursive copy since n = 15 i.e. <= 16!!
 									// no new print_hex will be created. therefore only two writes will be done.
 									// 255 % 16 = f, 15 % 16 = f.
-int	main(int ac, char **av)
+
+int	main(int ac, char **av) // do NOT expect negs
 {
 	if (ac == 2)
-		print_hex(ft_atoipos(av[1]));
+		print_hex(ft_atoipos(av[1])); // give a number to your printhexer (make your own damn ATOI)
 	write(1, "\n", 1);
 	return (0);
 }

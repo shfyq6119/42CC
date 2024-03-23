@@ -25,9 +25,9 @@ int	main(int ac, char **av)					//however many arguments, str_capitalize
 	int j = 0;								//start index of each arg string
 	if (ac > 1)
 	{
-		while (i < ac)
+		while (i < ac) // master loop condition = not final argument, continue
 		{
-			j = 0;							//reset start index of each arg str)
+			j = 0;							//reset start index of each arg str[i][j])
 			if (is_alpha(av[i][j]) == 1)	// if lowercase alphabird at the very beginning
 				av[i][j] -= 32;				// to_upper
 			write(1, &av[i][j], 1);			// then write (implicit else, executes regardless of condition met)
