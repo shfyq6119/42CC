@@ -58,7 +58,7 @@ char	*pathfinder(char *cmd, char **envp)
 	idx = 0;
 	while (env_paths[idx])
 	{
-		which_path = ft_strjoin (env_paths[idx], "/");
+		which_path = ft_strjoin(env_paths[idx], "/");
 		match = ft_strjoin(which_path, cmd);
 		free(which_path);
 		if (access(match, F_OK) == 0)
