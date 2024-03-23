@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 02:28:12 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/03/13 03:44:00 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/03/24 03:55:38 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -24,7 +24,13 @@ void	handle_cmd(int original, char *cmd_raw, char **env)
 	}
 	if (execve(cmd_path, cmd_array, env) == -1)
 	{
-		exit_error(original, cmd_array, cmd_path, "execve failure");
+		exit_error(original, cmd_array, cmd_path, strerror(errno));
+	}
+	else
+	{
+		clean_cache(cmd_array);
+		clean_cache(&cmd_path);
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -46,7 +52,7 @@ char	*pathfinder(char *cmd, char **envp)
 	int		idx;
 
 	idx = 0;
-	while (ft_strnstr(envp[idx], "PATH", 4) == 0)
+	while (ft_strnstr(envp[idx], "PATH=", 5) == 0)
 		idx++;
 	env_paths = ft_split(envp[idx] + 5, ':');
 	idx = 0;
@@ -56,7 +62,10 @@ char	*pathfinder(char *cmd, char **envp)
 		match = ft_strjoin(which_path, cmd);
 		free(which_path);
 		if (access(match, F_OK) == 0)
+		{
+			clean_cache(env_paths);
 			return (match);
+		}
 		free(match);
 		idx++;
 	}
@@ -65,7 +74,7 @@ char	*pathfinder(char *cmd, char **envp)
 }
 
 /*in case *str is passed into clean_cache as an address*/
-/*line 82 is separated out as a final check of **junk*/
+/*line 92 is separated out as a final check of **junk*/
 
 void	clean_cache(char **junk)
 
@@ -87,17 +96,15 @@ void	clean_cache(char **junk)
 		return ;
 }
 
-void	exit_error(int original, char **arr, char *str, char const *msg)
+void	exit_error(int original, char **arr, char *cmd_str, char const *msg)
 {
 	if (original)
 		dup2(original, STDOUT_FILENO);
-	if (msg && !arr)
-		ft_printf("zsh: %s: %s\n", strerror(ENOENT), msg);
-	else if (msg && arr)
-		ft_printf("zsh: command not found: %s\n", msg);
+	if (msg && arr)
+		ft_printf("%s: command not found\n", msg);
 	if (arr)
 		clean_cache(arr);
-	if (str)
-		clean_cache(&str);
+	if (cmd_str)
+		clean_cache(&cmd_str);
 	exit(EXIT_FAILURE);
 }

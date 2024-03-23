@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 21:29:03 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/01/12 21:37:35 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/03/24 03:05:01 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -20,7 +20,6 @@
 # include <errno.h>
 # include <string.h>
 # include <locale.h>
-# include <errno.h>
 
 # include "lib_ft/libft/libft.h"
 # include "lib_ft/ft_printf/ft_printf.h"
@@ -32,5 +31,6 @@ void	clean_cache(char **junk);
 void	exit_error(int original, char **arr, char *str, char const *msg);
 char	**cmd_parse(char *cmd_raw);
 char	*pathfinder(char *cmd, char **envp);
+int		fork_check(int child);
 
 #endif
