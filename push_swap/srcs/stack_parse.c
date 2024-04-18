@@ -21,7 +21,7 @@ int	ft_stoll_nbrk(char *str)
 	}
 	while (*str)
 	{
-		if (!ft_chknum(*str))
+		if (!ft_isdigit(*str))
 			handle_error();
 		i = i * 10 + (*str - 48);
 		str++;
