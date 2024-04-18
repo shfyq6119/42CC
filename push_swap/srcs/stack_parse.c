@@ -1,6 +1,9 @@
+/* ****************************:StdheaderWidth******************************* */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int	ft_atoi_nbrk(char *str)
+int	ft_stoll_nbrk(char *str)
 {
 	int			pol;
 	long long	res;
@@ -30,7 +33,32 @@ int	ft_atoi_nbrk(char *str)
 
 t_stack	*ft_stacksplitter(char **str)
 {
+	char	**parse;
+	t_stack *a;
+	int		i;
+	int		j;
 	
+	a = NULL;
+	parse = ft_split(*str[i], ' ');
+	i = -1;
+	while (parse[++i])
+	{
+		j = ft_stoll_nbrk(parse[i]);
+		ft_stk_add_back(&a, ft_stk_new(j));
+	}
+	free_array(parse);
+	return(a);
+}
+
+
+void	check_args(int count)
+{
+	if (count < 2)
+		handle_error();
+	if (count == 2)
+		ft_stacksplitter(av);
+	else
+		return ();
 }
 
 t_stack *stackparse(int ac, char **av)
@@ -39,20 +67,14 @@ t_stack *stackparse(int ac, char **av)
 	int		idx;
 	t_stack	*a;
 
-	i = 1;
+	i = 0;
 	a = NULL;
-	if (ac < 2)
-		handle_error();
-	if (ac == 2)
-		ft_stacksplitter(av);
-	else
+	check_args(ac);
+	while (++i < ac)
 	{
-		while (i < ac)
-		{
-			idx = ft_atoi_nbrk(av[i]);
-			ft_add_last(&a, ft_stack_new[j]);
-			i++;
-		}
+		idx = ft_stoll_nbrk(av[i]);
+		ft_stk_add_back(&a, ft_stack_new(idx);
 	}
 	return (a);
 }
+/* ************************************************************************** */
