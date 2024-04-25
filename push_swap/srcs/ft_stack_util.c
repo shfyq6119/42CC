@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stackcheck.c                                       :+:      :+:    :+:   */
+/*   ft_stack_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 17:40:57 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/18 19:16:10 by mm-isa           ###   ########.fr       */
+/*   Created: 2024/04/20 20:12:09 by mm-isa            #+#    #+#             */
+/*   Updated: 2024/04/20 20:20:20 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-int	ft_sortchk(t_stack *a)
+t_stack	*ft_stack_new(int content)
 {
-	int	i;
+	t_stack	*a;
 
-	i = stk_a->nb;
-	while (stk_a)
-	{
-		if (i > stk_a->nb)
-			return (0);
-		i = stk_a->nb;
-		stk_a = stk_a->next;
-	}
-	return (1);
+	a = malloc(sizeof(t_list));
+	if (!a)
+		return (NULL);
+	a->nb = content;
+	a->next = NULL;
+	return (a);
 }
 
-int	dupchk(t_stack *stk_a)
+void	ft_stk_add_last(t_stack **a, t_stack add)
 {
-	t_stack	*chk;
-
-	chk = stk_a->next;
-	while (stk_a)
-	{
-		while (chk)
-		{
-			if (stk_a->nb == chk->nb)
-				return (1);
-			chk = chk->next;
-		}
-		stk_a = stk_a->next;
-	}
-	return (0);
+	if (!a || !add)
+		return ;
+	if (!*add)
+		*a = add;
+	else
+		(ft_lstlast(*stack))->next = add;
 }
