@@ -20,7 +20,6 @@
 # include <limits.h>
 # include "libft/libft.h"
 /*this pathing must always be from where the header file lives*/
-
 typedef	enum
 {
 	A,
