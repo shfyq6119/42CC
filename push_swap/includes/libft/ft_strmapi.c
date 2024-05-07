@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/22 18:22:14 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/22 19:07:15 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strmapi(char const *give, char (*fn)(unsigned int, char))
 {
-	t_metastack	heap;
+	char			*feed;
+	unsigned int	me;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
-	{
-		free_load(heap);
-		handle_error();
-	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	feed = malloc(sizeof(char) * ft_strlen(give) + 1);
+	if (!feed)
+		return (NULL);
+	me = -1;
+	while (give[++me])
+		feed[me] = fn(me, give[me]);
+	feed[me] = '\0';
+	return (feed);
 }

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/13 23:28:34 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/13 23:57:55 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_bzero(void *schitt, size_t is_nasty)
 {
-	t_metastack	heap;
+	unsigned char	*schiette;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	schiette = schitt;
+	while (is_nasty)
 	{
-		free_load(heap);
-		handle_error();
+		*schiette = 0;
+		is_nasty--;
+		schiette++;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
 }

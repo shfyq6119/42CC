@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/20 22:58:39 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/21 04:26:46 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strtrim(char const *str, char const *trash)
 {
-	t_metastack	heap;
+	size_t	bin;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
-	{
-		free_load(heap);
-		handle_error();
-	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	if (!str || !trash)
+		return (NULL);
+	while (*str && ft_strchr(trash, *str))
+		str++;
+	bin = ft_strlen(str);
+	while (bin && ft_strchr(trash, *(str + bin)))
+		bin--;
+	return (ft_substr(str, 0, bin + 1));
 }

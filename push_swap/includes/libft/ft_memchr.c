@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/14 02:04:09 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/14 03:01:04 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memchr(const void *mem, int find, size_t bytes)
 {
-	t_metastack	heap;
+	size_t	i;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	i = 0;
+	while (i < bytes)
 	{
-		free_load(heap);
-		handle_error();
+		if (*((const unsigned char *)mem + i) == (unsigned char)find)
+			return ((void *)mem + i);
+		i++;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	return (NULL);
 }

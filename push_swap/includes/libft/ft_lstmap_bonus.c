@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/24 04:57:43 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/24 09:15:11 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+t_list	*ft_lstmap(t_list *list, void *(*fn)(void *), void (*del)(void *))
 {
-	t_metastack	heap;
+	t_list	*newlist;
+	t_list	*refcpl;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	if (!list)
+		return (NULL);
+	newlist = ft_lstnew(fn(list->content));
+	refcpl = list->next;
+	while (refcpl)
 	{
-		free_load(heap);
-		handle_error();
+		ft_lstadd_back(&newlist, ft_lstnew(fn(refcpl->content)));
+		refcpl = refcpl->next;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	while (refcpl)
+		ft_lstdelone(refcpl, del);
+	return (newlist);
 }

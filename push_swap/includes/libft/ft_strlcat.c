@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/10 22:00:25 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/13 17:59:06 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlcat(char *desu, const char *src, size_t slimit)
 {
-	t_metastack	heap;
+	size_t	schlong;
+	size_t	desudesu;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	desudesu = ft_strlen(desu);
+	schlong = slimit - desudesu;
+	if (ft_strlen(desu) >= slimit || slimit == 0)
+		return (ft_strlen(src) + slimit);
+	while (*src && schlong > 1)
 	{
-		free_load(heap);
-		handle_error();
+		desu[desudesu] = *src;
+		src++;
+		desudesu++;
+		schlong--;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	desu[desudesu] = '\0';
+	return (ft_strlen(src) + desudesu);
 }

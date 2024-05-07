@@ -15,20 +15,21 @@ t_stack	*ft_stack_new(int content)
 {
 	t_stack	*a;
 
-	a = malloc(sizeof(t_list));
+	a = malloc(sizeof(t_stack));
 	if (!a)
-		return (NULL);
+		ft_error();
 	a->nb = content;
+	a->id = A;
 	a->next = NULL;
 	return (a);
 }
 
-void	ft_stk_add_last(t_stack **a, t_stack add)
+void	ft_stk_add_last(t_stack **a, t_stack *add)
 {
 	if (!a || !add)
 		return ;
-	if (!*add)
+	if (!*a)
 		*a = add;
 	else
-		(ft_lstlast(*stack))->next = add;
+		(ft_lstlast(*a))->next = add;
 }

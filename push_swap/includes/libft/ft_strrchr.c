@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 16:31:41 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/20 16:31:44 by mm-isa           ###   ########.fr       */
+/*   Created: 2023/09/19 05:40:34 by mm-isa            #+#    #+#             */
+/*   Updated: 2023/09/23 03:24:54 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/push_swap.h"
 
-int	main(int ac, char **av)
+#include "libft.h"
+
+char	*ft_strrchr(const char *search, int c)
 {
-	t_metastack	heap;
+	size_t			check;
+	unsigned int	ctrchk;
 
-	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	check = ft_strlen(search) + 1;
+	ctrchk = 0;
+	while (check-- && ctrchk <= ft_strlen(search))
 	{
-		free_load(heap);
-		handle_error();
+		if (search[check] == (char)c)
+			return ((char *)(search + check));
+		ctrchk++;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
-	return (0);
+	return (NULL);
 }
