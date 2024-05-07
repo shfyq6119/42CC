@@ -31,7 +31,7 @@ int	ft_atoi_nbrk(char *str)
 	{
 		if (!ft_isdigit(*str))
 			handle_error();
-		i = i * 10 + (*str - 48);
+		res = res * 10 + (*str - 48);
 		str++;
 	}
 	if ((pol * res) > INT_MAX || (pol * res) < INT_MIN - 1)
@@ -58,27 +58,31 @@ t_stack	*ft_stacksplitter(char **str)
 	return (a);
 }
 
-void	check_args(int count)
+int	check_args(int count)
 {
 	if (count < 2)
 		handle_error();
 	if (count == 2)
-		ft_stacksplitter(av);
+		return (2);
 }
 
 t_stack	*stackparse(int ac, char **av)
 {
-	int		i;
-	int		idx;
-	t_stack	*a;
+	int			i;
+	int			idx;
+	t_metastack	stack;
 
 	i = 0;
-	a = NULL;
-	check_args(ac);
-	while (++i < ac)
+	stack.head_a = NULL;
+	if (check_args(ac) == 2)
+		stack.head_a = ft_stacksplitter(av);
+	else
 	{
-		idx = ft_atoi_nbrk(av[i]);
-		ft_stk_add_last(&a, ft_stack_new(idx));
+		while (++i < ac)
+		{
+			idx = ft_atoi_nbrk(av[i]);
+			ft_stk_add_last(&stack.head_a, ft_stack_new(idx));
+		}
 	}
-	return (a);
+	return (stack.head_a);
 }

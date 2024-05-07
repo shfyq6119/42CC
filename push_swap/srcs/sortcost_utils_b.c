@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 04:44:12 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/26 05:08:11 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/04/29 20:43:04 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
@@ -15,13 +15,14 @@ int	ft_check_rab(t_stack *a, t_stack *b, int c)
 {
 	int	i;
 
-	i = ft_find_bindex(b, c);
+	if (b->id == B)
+		i = ft_find_bindex(b, c);
 	if (i < ft_findex(a, c))
 		i = ft_findex(a, c);
 	return (i);
 }
 
-int	ft_check_rrab(t_stack *a, t_stack *b. int c)
+int	ft_check_rrab(t_stack *a, t_stack *b, int c)
 {
 	int i;
 
@@ -33,7 +34,7 @@ int	ft_check_rrab(t_stack *a, t_stack *b. int c)
 	return (i);
 }
 
-int ft_check rarrb(t_stack *a, t_stack *b, int c)
+int ft_check_rarrb(t_stack *a, t_stack *b, int c)
 {
 	int	i;
 

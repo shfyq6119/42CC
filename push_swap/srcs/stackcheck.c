@@ -15,13 +15,13 @@ int	ft_sortchk(t_stack *a)
 {
 	int	i;
 
-	i = stk_a->nb;
-	while (stk_a)
+	i = a->nb;
+	while (a)
 	{
-		if (i > stk_a->nb)
+		if (i > a->nb)
 			return (0);
-		i = stk_a->nb;
-		stk_a = stk_a->next;
+		i = a->nb;
+		a = a->next;
 	}
 	return (1);
 }
