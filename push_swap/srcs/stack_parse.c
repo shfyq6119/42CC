@@ -34,7 +34,7 @@ int	ft_atoi_nbrk(char *str)
 		res = res * 10 + (*str - 48);
 		str++;
 	}
-	if ((pol * res) > INT_MAX || (pol * res) < INT_MIN - 1)
+	if ((pol * res) > INT_MAX || (pol * res) < INT_MIN)
 		handle_error();
 	return (pol * res);
 }
@@ -47,12 +47,12 @@ t_stack	*ft_stacksplitter(char **str)
 	int		j;
 
 	a = NULL;
-	parse = ft_split(*str[i], ' ');
+	parse = ft_split(str[i], ' ');
 	i = -1;
 	while (parse[++i])
 	{
 		j = ft_atoi_nbrk(parse[i]);
-		ft_stk_add_last(&a, ft_stk_new(j));
+		ft_stk_add_last(a, ft_stack_new(j));
 	}
 	free_array(parse);
 	return (a);
@@ -68,21 +68,21 @@ int	check_args(int count)
 
 t_stack	*stackparse(int ac, char **av)
 {
-	int			i;
-	int			idx;
-	t_metastack	stack;
+	int		i;
+	int		idx;
+	t_stack	*stack_a;
 
 	i = 0;
-	stack.head_a = NULL;
+	stack_a = NULL;
 	if (check_args(ac) == 2)
-		stack.head_a = ft_stacksplitter(av);
+		stack_a = ft_stacksplitter(av);
 	else
 	{
 		while (++i < ac)
 		{
 			idx = ft_atoi_nbrk(av[i]);
-			ft_stk_add_last(&stack.head_a, ft_stack_new(idx));
+			ft_stk_add_last(stack_a, ft_stack_new(idx));
 		}
 	}
-	return (stack.head_a);
+	return (stack_a);
 }
