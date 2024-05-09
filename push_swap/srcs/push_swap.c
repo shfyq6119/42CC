@@ -18,11 +18,11 @@ int	main(int ac, char **av)
 	heap.head_a = stackparse(ac, av);
 	if (!heap.head_a || dupchk(heap.head_a))
 	{
-		free_load(heap);
+		free_load(&heap);
 		handle_error();
 	}
 	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(heap.head_a);
-	free_load(heap);
+		ft_sortstack(&heap);
+	free_load(&heap);
 	return (0);
 }

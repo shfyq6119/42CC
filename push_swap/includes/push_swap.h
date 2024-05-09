@@ -20,6 +20,7 @@
 # include <limits.h>
 # include "libft/libft.h"
 /*this pathing must always be from where the header file lives*/
+
 typedef	enum
 {
 	A,
@@ -66,12 +67,12 @@ typedef struct t_cost
 	int				rrr;
 }	t_cost;
 
-typedef struct s_stack
+typedef struct t_stack
 {
 	long			nb;
 	long			idx;
-	struct s_stack	*prev;
-	struct s_stack	*next;
+	struct t_stack	*prev;
+	struct t_stack	*next;
 	e_id			id;
 }	t_stack;
 
@@ -81,12 +82,11 @@ typedef struct t_metastack
 	struct t_stack	*head_b;
 	struct t_meta	*limits;
 	struct t_cmd	*moves;
-	struct t_cost	*cmd;
+	struct t_cost	*cost;
 }	t_metastack;
 
 /*******************************intake processing******************************/
 int		dupchk(t_stack *a);
-void	free_load(t_metastack a);
 /********************************error  handling*******************************/
 void	handle_error();
 int		check_args(int count);
@@ -96,10 +96,12 @@ t_stack	*ft_stacksplitter(char **str);
 int		ft_chknum(char *str);
 int		ft_atoi_nbrk(char *str);
 /*********************************stack presort********************************/
-void	ft_sortstack(t_stack **a);
-int		ft_sortchk(t_stack **a);
+void	ft_sortstack(t_metastack *motha);
+int		ft_sortchk(t_stack *a);
 /*********************************stack assembly*******************************/
 t_stack	*ft_stack_new(int idx);
 void	ft_stk_add_last(t_stack *a, t_stack *add);
-
+/***********************************cleanup************************************/
+void	free_array(char **str);
+void	free_load(t_metastack *a);
 #endif

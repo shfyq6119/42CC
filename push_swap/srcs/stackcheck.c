@@ -18,7 +18,7 @@ int	ft_sortchk(t_stack *a)
 	i = a->nb;
 	while (a)
 	{
-		if (i > a->nb)
+		if (i > (*a).nb)
 			return (0);
 		i = a->nb;
 		a = a->next;

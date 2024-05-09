@@ -19,7 +19,6 @@ void	pushsort_b3(t_stack **a, t_stack **b)
 	while (ft_lstsize(*a) > 3 && !ft_sortcheck(*a))
 	{
 		buf = *a;
-		
 		i = ft_rotcost(*a, *b);
 		while (i >= 0)
 		{
@@ -44,11 +43,7 @@ t_stack	*swapsort_b(t_stack **stk_a)
 
 	b_two = 3;
 	stk_b = NULL;
-	while (--b_two > 0)
-	{	
-		if (ft_lstsize(*stk_a) > 3 && !ft_sortchk(*stk_a))
-			push_b(stk_a, &stk_b, 0);
-	}
+
 	if (ft_lstsize(*stk_a) > 3 && !ft_sortchk(*stk_a))
 		pushsort_b3(stk_a, &stk_b);
 	if (!ft_sortchk(*stk_a))
@@ -56,36 +51,33 @@ t_stack	*swapsort_b(t_stack **stk_a)
 	return (stk_b);
 }
 
-t_stack *swapsort_a(t_stack **stk_a, t_stack **stk_b)
+t_stack	*swapsort_a(t_stack **stk_a, t_stack **stk_b)
 {
 	t_stack	*tmp;
 	int		i;
-
-	
 }
 
-void	ft_sortstack(t_stack **a)
+void	ft_sortstack(t_metastack *motha)
 {
 	t_stack	*b;
+	t_cmd	*mv;
+	t_cost	*chp2gd2;
 	int		idx;
 
 	b = NULL;
-	if (ft_lstsize(*a) == 2)
-		swap_a(a, 0);
+	if (ft_lstsize(motha) == 2)
+		swapsort2(motha);
+	else if (ft_lstsize(motha) == 3)
+		swapsort3(motha);
+	else if (ft_lstsize(motha) == 4)
+		swapsort4(motha);
 	else
 	{
-		b = swapsort_b(a);
-		a = swapsort_a(a, &b);
-		idx = ft_stack_index(*a, find_min(*a));
-		if (idx < ft_lstsize(*a) - idx)
-		{
-			while ((*a)->nb != find_min(*a))
-				rot1_stk_a(a, 0);
-		}
-		else
-		{
-			while ((*a)-> nb != find_min(*a))
-				rev1_stk_a(a, 0);
-		}
+		mv = ft_calloc(1, sizeof(t_cmd));
+		motha->moves = mv;
+		chp2gd2 = ft_calloc(1, sizeof(t_cost));
+		motha->cost = chp2gd2;
+		b = swapsort(motha);
+		motha = swapsort(b);
 	}
 }
