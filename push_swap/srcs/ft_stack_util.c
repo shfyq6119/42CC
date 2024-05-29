@@ -17,19 +17,30 @@ t_stack	*ft_stack_new(int content)
 
 	a = malloc(sizeof(t_stack));
 	if (!a)
-		ft_error();
+		handle_error();
 	a->nb = content;
 	a->id = A;
 	a->next = NULL;
 	return (a);
 }
+t_stack	*ft_stklast(t_stack *a)
+{
+	if (!a)
+		return (NULL);
+	while (a->next)
+		a = a->next;
+	return (a);
+}
 
 void	ft_stk_add_last(t_stack **a, t_stack *add)
 {
+	t_stack	*node;
+
+	node = *a;
 	if (!a || !add)
 		return ;
 	if (!*a)
 		*a = add;
 	else
-		(ft_lstlast(*a))->next = add;
+		(ft_stklast(node))->next = add;
 }
