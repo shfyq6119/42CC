@@ -36,16 +36,14 @@ void	pushsort_b3(t_stack **a, t_stack **b)
 	}
 }
 
-t_stack	*swapsort_b(t_stack **stk_a)
+t_stack	*swapsort(t_metastack motherstack)
 {
 	t_stack	*stk_b;
-	int		b_two;
+	int		b;
 
-	b_two = 3;
-	stk_b = NULL;
-
-	if (ft_lstsize(*stk_a) > 3 && !ft_sortchk(*stk_a))
-		pushsort_b3(stk_a, &stk_b);
+	b = 2;
+	if (ft_lstsize(motherstack.head_a) > 3)
+		pushsort_b3(motherstack.head_a, &stk_b);
 	if (!ft_sortchk(*stk_a))
 		sortstack_a3(stk_a);
 	return (stk_b);
@@ -65,12 +63,12 @@ void	ft_sortstack(t_metastack *motha)
 	int		idx;
 
 	b = NULL;
-	if (ft_lstsize(motha) == 2)
-		swapsort2(motha);
-	else if (ft_lstsize(motha) == 3)
-		swapsort3(motha);
-	else if (ft_lstsize(motha) == 4)
-		swapsort4(motha);
+	if (ft_lstsize(motha->head_a) == 2)
+		swapsort2(motha->head_a);
+	else if (ft_lstsize(motha->head_a) == 3)
+		swapsort3(motha->head_a);
+	else if (ft_lstsize(motha->head_a) == 4)
+		swapsort4(motha->head_a);
 	else
 	{
 		mv = ft_calloc(1, sizeof(t_cmd));
@@ -78,6 +76,5 @@ void	ft_sortstack(t_metastack *motha)
 		chp2gd2 = ft_calloc(1, sizeof(t_cost));
 		motha->cost = chp2gd2;
 		b = swapsort(motha);
-		motha = swapsort(b);
 	}
 }
