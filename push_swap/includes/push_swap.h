@@ -76,6 +76,10 @@ typedef struct t_stack
 	e_id			id;
 }	t_stack;
 
+/***to reconsider metadata structure for util trimming; map out boolean flows**/
+/**flowchart? control flow logic takes boolean (A or B) nature; utils don't  **/
+/****need duplicates if all they do is the same action on two diff elements****/
+
 typedef struct t_metastack
 {
 	struct t_stack	*head_a;
