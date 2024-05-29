@@ -23,17 +23,17 @@
 
 typedef	enum
 {
-	A,
-	B
+	A = 65,
+	B = 66
 }	e_id;
 
-typedef struct t_meta
+typedef struct t_limits
 {
 	int				min_a;
 	int				min_b;
 	int				max_a;
 	int				max_b;
-}	t_meta;
+}	t_limits;
 
 typedef struct t_cmd
 {
@@ -70,38 +70,37 @@ typedef struct t_cost
 typedef struct t_stack
 {
 	long			nb;
-	long			idx;
-	struct t_stack	*prev;
-	struct t_stack	*next;
 	e_id			id;
+	struct t_stack	*next;
 }	t_stack;
 
-typedef struct t_metastack
+typedef struct t_meta
 {
-	struct t_stack	*head_a;
-	struct t_stack	*head_b;
-	struct t_meta	*limits;
-	struct t_cmd	*moves;
-	struct t_cost	*cost;
-}	t_metastack;
+	t_stack			*head_a;
+	t_stack			*head_b;
+	t_cmd			*moves;
+	t_cost			*cost;
+	t_limits		*limits;
+}	t_meta;
 
 /*******************************intake processing******************************/
-int		dupchk(t_stack *a);
-/********************************error  handling*******************************/
-void	handle_error();
-int		check_args(int count);
-/*********************************stack parsing********************************/
-t_stack	*stackparse(int ac, char **av);
-t_stack	*ft_stacksplitter(char **str);
-int		ft_chknum(char *str);
-int		ft_atoi_nbrk(char *str);
-/*********************************stack presort********************************/
-void	ft_sortstack(t_metastack *motha);
-int		ft_sortchk(t_stack *a);
-/*********************************stack assembly*******************************/
-t_stack	*ft_stack_new(int idx);
-void	ft_stk_add_last(t_stack *a, t_stack *add);
-/***********************************cleanup************************************/
-void	free_array(char **str);
-void	free_load(t_metastack *a);
+void		dupchk(t_stack *head);
+void		inting_check(int ac, char **av);
+void		argcheck(int ac, char **av);
+void		handle_error(void);
+/*********************************stack parsing******************************/
+t_stack		*stackparse(int ac, char **av);
+t_stack		*ft_stack_new(int content);
+t_stack		*ft_stklast(t_stack *a);
+//t_stack		*stackparse_b(int ac, char **av);
+//t_stack		*ft_stack_new_b(int content);
+void		ft_stk_add_last(t_stack **a, t_stack *add);
+//void		ft_free_stack(t_stack stk_a, t_stack stk_b);
+int			ft_atoi_lbrk(char *str);
+/*********************************stack presort********************************
+void		ft_sortstack(t_meta *motha);
+int			ft_sortchk(t_meta *a);
+***********************************cleanup***********************************
+void		free_array(char **str);
+void		free_load(t_meta *a);*/
 #endif

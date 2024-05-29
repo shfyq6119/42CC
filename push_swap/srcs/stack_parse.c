@@ -11,78 +11,29 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-int	ft_atoi_nbrk(char *str)
+/*t_stack	*ft_stackload(int ac, char **av)
 {
-	int			pol;
-	long long	res;
-
-	pol = 1;
-	res = 0;
-	while (*str == 9 || *str == 10 || *str == 11 || *str == 12
-		|| *str == 13 || *str == 32)
-		str++;
-	if (*str == 45 || *str == 43)
-	{
-		if (*str == 45)
-			pol = -pol;
-		str++;
-	}
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			handle_error();
-		res = res * 10 + (*str - 48);
-		str++;
-	}
-	if ((pol * res) > INT_MAX || (pol * res) < INT_MIN)
-		handle_error();
-	return (pol * res);
-}
-
-t_stack	*ft_stacksplitter(char **str)
-{
-	char	**parse;
 	t_stack	*a;
-	int		i;
-	int		j;
 
-	a = NULL;
-	parse = ft_split(str[i], ' ');
-	i = -1;
-	while (parse[++i])
-	{
-		j = ft_atoi_nbrk(parse[i]);
-		ft_stk_add_last(a, ft_stack_new(j));
-	}
-	free_array(parse);
-	return (a);
-}
+}*/
 
-int	check_args(int count)
+void	handle_error(void)
 {
-	if (count < 2)
-		handle_error();
-	if (count == 2)
-		return (2);
+	perror("Error");
+	return ;
 }
 
 t_stack	*stackparse(int ac, char **av)
 {
+	t_stack	*a;
 	int		i;
-	int		idx;
-	t_stack	*stack_a;
 
-	i = 0;
-	stack_a = NULL;
-	if (check_args(ac) == 2)
-		stack_a = ft_stacksplitter(av);
-	else
+	i = 1;
+	argcheck(ac, av);
+	a = ft_stack_new(ft_atoi_lbrk(av[i]));
+	while (++i < ac) //i = 2, ac = 6, i = 5
 	{
-		while (++i < ac)
-		{
-			idx = ft_atoi_nbrk(av[i]);
-			ft_stk_add_last(stack_a, ft_stack_new(idx));
-		}
+		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(av[i])));
 	}
-	return (stack_a);
+	return (a);
 }
