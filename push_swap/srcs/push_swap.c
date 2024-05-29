@@ -11,18 +11,34 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
+void	ff(t_stack *node)
+{
+	t_stack	*ptr;
+
+	if (node)
+	{
+		while (node)
+		{
+			ptr = node;
+			node = node->next;
+			free(ptr);
+		}
+	}
+}
+
 int	main(int ac, char **av)
 {
-	t_metastack	heap;
+	t_meta	heap;
+	t_stack	*print;
 
 	heap.head_a = stackparse(ac, av);
-	if (!heap.head_a || dupchk(heap.head_a))
+	print = heap.head_a;
+	while (print)
 	{
-		free_load(&heap);
-		handle_error();
+		printf("%ld\n", print->nb);
+		printf("%d\n", print->id);
+		print = print->next;
 	}
-	if (!ft_sortchk(heap.head_a))
-		ft_sortstack(&heap);
-	free_load(&heap);
+	ff(heap.head_a);
 	return (0);
 }
