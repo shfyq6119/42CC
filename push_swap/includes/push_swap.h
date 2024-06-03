@@ -88,19 +88,29 @@ void		dupchk(t_stack *head);
 void		inting_check(int ac, char **av);
 void		argcheck(int ac, char **av);
 void		handle_error(void);
-/*********************************stack parsing******************************/
+/*********************************stack parsing********************************/
 t_stack		*stackparse(int ac, char **av);
 t_stack		*ft_stack_new(int content);
 t_stack		*ft_stklast(t_stack *a);
-//t_stack		*stackparse_b(int ac, char **av);
-//t_stack		*ft_stack_new_b(int content);
 void		ft_stk_add_last(t_stack **a, t_stack *add);
-//void		ft_free_stack(t_stack stk_a, t_stack stk_b);
+int			ft_stk_size(t_stack	*head);
 int			ft_atoi_lbrk(char *str);
-/*********************************stack presort********************************
-void		ft_sortstack(t_meta *motha);
-int			ft_sortchk(t_meta *a);
-***********************************cleanup***********************************
-void		free_array(char **str);
-void		free_load(t_meta *a);*/
+/*********************************stack presorts*******************************/
+void		sortstack(t_meta *motherstack);
+void		chp2gd2(t_meta *motherstack);
+void		limit_stackcheck(t_meta *motha);
+void		limit_check_a(t_meta *motha, t_stack *a);
+void		limit_check_b(t_meta *motha, t_stack *b);
+int			sortcheck(t_meta *motherstack);
+/***********************************stacksorts*********************************/
+void		rot(t_meta *motha);
+void		revrot(t_meta *motha);
+void		push(t_meta *motha);
+void		swap(t_stack *header);
+void		sort3(t_meta *motherstack);
+void		sort4(t_meta *motherstack);
+void		restore_sorted(t_meta *motherstack);
+
+/***********************************cleanup************************************/
+void		ff_gg(t_meta *motha);
 #endif

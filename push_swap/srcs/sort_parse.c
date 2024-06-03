@@ -11,58 +11,48 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-void	pushsort_b3(t_stack **a, t_stack **b)
+int	sortcheck(t_meta *motherstack)
 {
+	t_stack	*a;
+	int		check;
 	int		i;
-	t_stack	*buf;
 
-	while (ft_lstsize(*a) > 3 && !ft_sortcheck(*a))
+	a = (*motherstack).head_a;
+	check = (*a).nb;
+	i = 0;
+	while (++i < ft_stk_size((*motherstack).head_a))
 	{
-		buf = *a;
-		i = ft_rotcost(*a, *b);
-		while (i >= 0)
+		a = (*a).next;
+		if (check > (*a).nb)
+			return (0);
+		check = (*a).nb;
+	}
+	ff_gg(motherstack);
+	exit(EXIT_SUCCESS);
+}
+
+void	sortstack(t_meta *motherstack)
+{
+	int	checksize;
+
+	checksize = ft_stk_size((*motherstack).head_a);
+	if (!sortcheck(motherstack))
+	{
+		if (checksize == 2)
+			swap((*motherstack).head_a);
+		else if (checksize == 3)
+			sort3(motherstack);
+		else if (checksize == 4)
+			sort4(motherstack);
+		else
 		{
-			if (i == check_rab(*a, *b, buf))
-				i = ft_rab(a, b, buf);
-			else if (i == check_rrab(*a, *b, buf))
-				i = ft_rrab(a, b, buf);
-			else if (i == check_rarrb(*a, *b, buf))
-				i = ft_rarrb(a, b, buf);
-			else if (i == check_rrarb(*a, *b, buf))
-				i = ft_rrarb(a, b, buf);
-			else
-				buf = buf->next;
+			while (ft_stk_size((*motherstack).head_b) <= 2)
+			{
+				ft_push(motherstack); //this will check through a series of preconditions for push. if empty, typecast
+				limit_check_b(motherstack, (*motherstack).head_b);
+			}
+			chp2gd2(motherstack);
+			restore_sorted(motherstack);
 		}
 	}
-}
-
-t_stack	*pushsort_ab(t_metastack *motherstack)
-{
-	t_stack	*stk_b;
-	int		b_two;
-
-	b_two = 3;
-	stk_b = NULL;
-
-	if (ft_lstsize(*) > 3 && !ft_sortchk(*stk_a))
-		pushsort_b3(stk_a, &stk_b);
-	if (!ft_sortchk(*stk_a))
-		sortstack_a3(stk_a);
-	return (stk_b);
-}
-
-t_stack	*return_to_a(t_stack **stk_a, t_stack **stk_b)
-{
-	t_stack	*tmp;
-	int		i;
-}
-
-void	ft_sortstack(t_metastack *motherstack)
-{
-	t_stack	*b;
-	t_cmd	*mv;
-	t_cost	*chp2gd2;
-	int		idx;
-
-	
 }

@@ -11,18 +11,6 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-/*t_stack	*ft_stackload(int ac, char **av)
-{
-	t_stack	*a;
-
-}*/
-
-void	handle_error(void)
-{
-	perror("Error");
-	return ;
-}
-
 t_stack	*stackparse(int ac, char **av)
 {
 	t_stack	*a;
@@ -31,9 +19,7 @@ t_stack	*stackparse(int ac, char **av)
 	i = 1;
 	argcheck(ac, av);
 	a = ft_stack_new(ft_atoi_lbrk(av[i]));
-	while (++i < ac) //i = 2, ac = 6, i = 5
-	{
+	while (++i < ac)
 		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(av[i])));
-	}
 	return (a);
 }

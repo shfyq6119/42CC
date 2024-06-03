@@ -30,16 +30,16 @@ int	dupchk(t_stack *stk_a)
 {
 	t_stack	*chk;
 
-	chk = stk_a->next;
+	chk = (*stk_a).next;
 	while (stk_a)
 	{
 		while (chk)
 		{
-			if (stk_a->nb == chk->nb)
+			if ((*stk_a).nb == chk->nb)
 				return (1);
 			chk = chk->next;
 		}
-		stk_a = stk_a->next;
+		stk_a = (*stk_a).next;
 	}
 	return (0);
 }

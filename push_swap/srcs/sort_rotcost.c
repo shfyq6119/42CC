@@ -11,72 +11,66 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-int	ft_rotcost(t_stack *a, t_stack *b)
+void	chp2gd2(t_meta *motha)
 {
-	int		i;
-	int		num;
-	t_stack	*buff;
+	t_cmd		*move;
+	t_cost		*lowest;
+	t_limits	*range;
 
-	if (a->id == A)
-		buff = a;
-	else if (b->id == B)
-		buff = b;
-	i = ft_check_rrab(a, b, buff->nb);
-	while (buff)
+	move = ft_calloc(1, sizeof(t_cmd));
+	lowest = ft_calloc(1, sizeof(t_cost));
+	range = ft_calloc(1, sizeof(t_limits));
+	(*motha).moves = move;
+	(*motha).cost = lowest;
+	(*motha).limits = range;
+	while (ft_stk_size((*motha).head_a) > 3)
 	{
-		num = buff->nb;
-		if (i > check_rab(a, b, num))
-			i = check_rab(a, b, num);
-		if (i > check_rrab(a, b, num))
-			i = check_rrab(a, b, num);
-		if (i > check_rarrb(a, b, num))
-			i = check_rarrb(a, b, num);
-		if (i > check_rrarb(a, b, num))
-			i = check_rrarb(a, b, num);
-		buff = buff->next;
+		limit_stackcheck(motha);
+		check_cmds(motha);
+		stackcheapest(motha);
 	}
-	return (i);
+	sort3(motha);
 }
 
-t_stack	**ft_chknsort(t_stack **a, t_stack **b, t_stack *buf)
+void	limit_stackcheck(t_meta *motha)
 {
-	int i;
+	t_stack	*a;
+	t_stack	*b;
+
+	a = (*motha).head_a;
+	b = NULL;
+	if ((*motha).head_b != NULL)
+		b = (*motha).head_b;
+	if ((*motha).head_a->id == A)
+	{
+		(*motha).limits->min_a = (*motha).head_a->nb; //point of contention
+		(*motha).limits->max_a = (*motha).head_a->nb;
+		limit_check_a(motha, a);
+	}
+	if (b && (*motha).head_b->id == B)
+	{
+		(*motha).limits->min_b = (*motha).head_b->nb;
+		(*motha).limits->max_b = (*motha).head_b->nb;
+		limit_check_b(motha, b);
+	}
+}
+
+void	check_cmds(t_meta *motha)
+{
+	t_stack	*a;
+	int		i;
+	int		size;
+
+	a = (*motha).head_a;
+	i = 0;
+	size = ft_stk_size(a);
+	while (i < size)
+	{
+
+	}
+}
+
+void	stackcheapest(t_meta *motha)
+{
 	
-	while (i >= 0)
-	{
-		if (i == check_rab(*a, *b, buf->nb))
-			i = ft_rab(a, b, buf->nb, 'a');
-		else if (i == check_rrab(*a, *b, buf->nb))
-			i = ft_rrab(a, b, buf->nb, 'a');
-		else if (i == check_rarrb(*a, *b, buf->nb))
-			i = ft_rarrb(a, b, buf->nb, 'a');
-		else if (i == check_rrarb(*a, *b, buf->nb))
-			i = ft_rrarb(a, b, buf->nb, 'a');
-		else
-			buf = buf->next;
-	}
 }
-/*
-int	ft_rotcost_ba(t_stack *a, t_stack *b)
-{
-	int		i;
-	int		num;
-	t_stack	*buff;
-
-	buff = a;
-	i = ft_check_rrab_a(a, b, buff->nb);
-	while (buff)
-	{
-		num = buff->nb;
-		if (i > check_rab_a(a, b, num))
-			i = check_rab_a(a, b, num);
-		if (i > check_rrab_a(a, b, num))
-			i = check_rrab_a(a, b, num);
-		if (i > check_rarrb_a(a, b, num))
-			i = check_rarrb_a(a, b, num);
-		if (i > check_rrarb_a(a, b, num))
-			i = check_rrarb_a(a, b, num);
-		buff = buff->next;
-	}
-	return (i);
-}*/
