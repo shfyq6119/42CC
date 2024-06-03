@@ -45,8 +45,8 @@ int	ft_atoi_lbrk(char *str)
 
 	pol = 1;
 	res = 0;
-	while (*str == 9 || *str == 10 || *str == 11 || *str == 12
-		|| *str == 13 || *str == 32)
+	while (*str == 9 || *str == 10 || *str == 11 || *str == 12 || *str == 13
+		|| *str == 32)
 		str++;
 	if (*str == 45 || *str == 43)
 	{
@@ -64,11 +64,11 @@ int	ft_atoi_lbrk(char *str)
 	return (pol * res);
 }
 
-void dupcheck(int ac, char **av)
+void	dupcheck(int ac, char **av)
 {
 	int	i;
 	int	j;
-	
+
 	i = 1;
 	while (i < ac)
 	{

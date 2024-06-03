@@ -11,19 +11,25 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-void	ff(t_stack *node)
+void	ff_gg(t_meta *motha)
 {
 	t_stack	*ptr;
 
-	if (node)
+	if ((*motha).head_a)
 	{
-		while (node)
+		while ((*motha).head_a)
 		{
-			ptr = node;
-			node = node->next;
+			ptr = (*motha).head_a;
+			(*motha).head_a = (*motha).head_a->next;
 			free(ptr);
 		}
 	}
+}
+
+void	handle_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int ac, char **av)
@@ -32,13 +38,16 @@ int	main(int ac, char **av)
 	t_stack	*print;
 
 	heap.head_a = stackparse(ac, av);
+	heap.head_b = NULL;
+	/*sortstack(&heap);
 	print = heap.head_a;
 	while (print)
 	{
 		printf("%ld\n", print->nb);
-		printf("%d\n", print->id);
 		print = print->next;
 	}
-	ff(heap.head_a);
-	return (0);
+	printf("%d\n", heap.limits->min_a);
+	printf("%d\n", heap.limits->max_a);*/
+	ff_gg(&heap);
+	exit (EXIT_SUCCESS);
 }

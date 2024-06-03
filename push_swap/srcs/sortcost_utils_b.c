@@ -24,17 +24,17 @@ int	ft_check_rab(t_stack *a, t_stack *b, int c)
 
 int	ft_check_rrab(t_stack *a, t_stack *b, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_find_bindex(b, c))
 		i = ft_lstsize(b) - ft_find_bindex(b, c);
-	if ((i < (ft_lstsize(a) - ft_findex(a, c))) && ft_findex(a ,c))
+	if ((i < (ft_lstsize(a) - ft_findex(a, c))) && ft_findex(a, c))
 		i = ft_lstsize(a) - ft_findex(a, c);
 	return (i);
 }
 
-int ft_check_rarrb(t_stack *a, t_stack *b, int c)
+int	ft_check_rarrb(t_stack *a, t_stack *b, int c)
 {
 	int	i;
 
