@@ -39,8 +39,8 @@ int	main(int ac, char **av)
 
 	heap.head_a = stackparse(ac, av);
 	heap.head_b = NULL;
-	/*sortstack(&heap);
-	print = heap.head_a;
+	sortstack(&heap);
+	/*print = heap.head_a;
 	while (print)
 	{
 		printf("%ld\n", print->nb);

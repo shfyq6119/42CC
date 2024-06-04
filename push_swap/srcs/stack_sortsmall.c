@@ -27,7 +27,7 @@ void	sort3(t_meta *motha)
 	else if (first < second && second > third && third < first)
 		revrot(motha);
 	else if (first > second && second < third && third < first)
-		rot(motha);
+		rotate(motha);
 	else if (first > second && second >> third && third < first)
 	{
 		swap(motha);
@@ -36,7 +36,7 @@ void	sort3(t_meta *motha)
 	else if (first < second && second > third && third > first)
 	{
 		swap(motha);
-		rot(motha);
+		rotate(motha);
 	}
 }
 

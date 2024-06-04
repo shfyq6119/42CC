@@ -96,14 +96,23 @@ void		ft_stk_add_last(t_stack **a, t_stack *add);
 int			ft_stk_size(t_stack	*head);
 int			ft_atoi_lbrk(char *str);
 /*********************************stack presorts*******************************/
-void		sortstack(t_meta *motherstack);
 void		chp2gd2(t_meta *motherstack);
+void		cheapest_check(t_cmd *lowest, t_cmd *moveset, int flag);
+void		check_cmds(t_meta *motherstack);
+void		init_limits(t_meta *motha, t_limits *range);
 void		limit_stackcheck(t_meta *motha);
 void		limit_check_a(t_meta *motha, t_stack *a);
 void		limit_check_b(t_meta *motha, t_stack *b);
+void		median_rotcost(int *revrot, int *rottate, int size, int idx);
+void		pushcost_rotcalc(t_meta *motha, t_stack *a, int idx);
+void		pushsort_calc(t_meta *motha, int num);
+void		rotab_dupcheck(t_cmd *moves);
+void		rotcost_calc(t_stack *node, t_cmd *moveset, int size, int idx);
+void		stackcheapest(t_meta *motherstack);
+void		sortstack(t_meta *motherstack);
 int			sortcheck(t_meta *motherstack);
 /***********************************stacksorts*********************************/
-void		rot(t_meta *motha);
+void		rotate(t_meta *motha);
 void		revrot(t_meta *motha);
 void		push(t_meta *motha);
 void		swap(t_stack *header);

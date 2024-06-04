@@ -31,6 +31,8 @@ int	sortcheck(t_meta *motherstack)
 	exit(EXIT_SUCCESS);
 }
 
+/*line 50: this will check through a series of preconditions for push.
+if empty, reassign address of top two node_a to new stack pointer*/
 void	sortstack(t_meta *motherstack)
 {
 	int	checksize;
@@ -46,11 +48,8 @@ void	sortstack(t_meta *motherstack)
 			sort4(motherstack);
 		else
 		{
-			while (ft_stk_size((*motherstack).head_b) <= 2)
-			{
-				ft_push(motherstack); //this will check through a series of preconditions for push. if empty, typecast
-				limit_check_b(motherstack, (*motherstack).head_b);
-			}
+			while (ft_stk_size((*motherstack).head_b) < 2)
+				ft_push(motherstack);
 			chp2gd2(motherstack);
 			restore_sorted(motherstack);
 		}
