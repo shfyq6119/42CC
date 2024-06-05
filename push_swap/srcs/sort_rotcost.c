@@ -29,6 +29,7 @@ void	chp2gd2(t_meta *motha)
 	{
 		limit_stackcheck(motha);
 		check_cmds(motha);
+		target_acquisition((*motha).cost, (*motha).head_a);
 		stackcheapest(motha);
 	}
 	sort3(motha);
@@ -78,6 +79,7 @@ void	check_cmds(t_meta *motha)
 		a = a->next;
 		idx++;
 	}
+
 }
 
 /*find a way to optimise this*/

@@ -13,7 +13,7 @@
 
 void	ff_gg(t_meta *motha)
 {
-	t_stack	*ptr;
+	void	*ptr;
 
 	if ((*motha).head_a)
 	{
@@ -24,6 +24,18 @@ void	ff_gg(t_meta *motha)
 			free(ptr);
 		}
 	}
+	if ((*motha).head_b)
+	{
+		while ((*motha).head_b)
+		{
+				ptr = (*motha).head_b;
+				(*motha).head_b = (*motha).head_b->next;
+				free(ptr);
+		}
+	}
+	free((*motha).cost);
+	free((*motha).limits);
+	free((*motha).moves);
 }
 
 void	handle_error(void)
@@ -35,19 +47,26 @@ void	handle_error(void)
 int	main(int ac, char **av)
 {
 	t_meta	heap;
-	t_stack	*print;
+	t_stack	*print_a;
+	t_stack	*print_b;
 
 	heap.head_a = stackparse(ac, av);
 	heap.head_b = NULL;
 	sortstack(&heap);
-	/*print = heap.head_a;
-	while (print)
+	print_a = heap.head_a;
+	print_b = heap.head_b;
+	while (print_a)
 	{
-		printf("%ld\n", print->nb);
-		print = print->next;
+		printf("a: %ld\n", print_a->nb);
+		print_a = print_a->next;
+	}
+	while (print_b)
+	{
+		printf("b: %ld\n", print_b->nb);
+		print_b = print_b->next;
 	}
 	printf("%d\n", heap.limits->min_a);
-	printf("%d\n", heap.limits->max_a);*/
+	printf("%d\n", heap.limits->max_a);
 	ff_gg(&heap);
 	exit (EXIT_SUCCESS);
 }

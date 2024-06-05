@@ -53,6 +53,8 @@ int	ft_stk_size(t_stack	*head)
 
 	i = 0;
 	tmp = head;
+	if (!head)
+		return (0);
 	while (head)
 	{
 		head = (*head).next;

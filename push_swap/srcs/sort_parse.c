@@ -11,6 +11,20 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
+void	prelude(t_stack *a)
+{
+	t_stack	*node;
+	int		i;
+
+	node = a;
+	i = 2;
+	while (i--)
+	{
+		a->id = B;
+		a = a->next;
+	}
+	a = node;
+}
 int	sortcheck(t_meta *motherstack)
 {
 	t_stack	*a;
@@ -35,7 +49,7 @@ int	sortcheck(t_meta *motherstack)
 if empty, reassign address of top two node_a to new stack pointer*/
 void	sortstack(t_meta *motherstack)
 {
-	int	checksize;
+	/*int	checksize;
 
 	checksize = ft_stk_size((*motherstack).head_a);
 	if (!sortcheck(motherstack))
@@ -46,12 +60,13 @@ void	sortstack(t_meta *motherstack)
 			sort3(motherstack);
 		else if (checksize == 4)
 			sort4(motherstack);
-		else
+		else*/
 		{
+			prelude((*motherstack).head_a);
 			while (ft_stk_size((*motherstack).head_b) < 2)
-				ft_push(motherstack);
-			chp2gd2(motherstack);
-			restore_sorted(motherstack);
+				push_module(motherstack);
+			//chp2gd2(motherstack);
+			//restore_sorted(motherstack);
 		}
-	}
+	//}
 }
