@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
+/*remove A+B rotations and replaces with one R/RR*/
 void	rotab_dupcheck(t_cmd *moveset)
 {
 	moveset->rr = 0;
@@ -28,12 +29,12 @@ void	rotab_dupcheck(t_cmd *moveset)
 		moveset->rrr++;
 	}
 }
-
+/*check on every iteration. if cost is more than calculated for next iteration,
+replace cost with cheaper, final iteration cheapest in the loop will be stored*/
 void	cheapest_check(t_cost *lowest, t_cmd *moveset, int flag)
 {
-	moveset->count = moveset->pb + moveset->ra
-		+ moveset->rb + moveset->rr + moveset->rra
-		+ moveset->rrb + moveset->rrr;
+	moveset->count = moveset->pb + moveset->ra + moveset->rb + moveset->rr
+		+ moveset->rra + moveset->rrb + moveset->rrr;
 	if (flag == 1 || (lowest->cost > moveset->count))
 	{
 		lowest->cost = moveset->count;
@@ -45,4 +46,20 @@ void	cheapest_check(t_cost *lowest, t_cmd *moveset, int flag)
 		lowest->rrb = moveset->rrb;
 		lowest->rrr = moveset->rrr;
 	}
+}
+
+void	target_acquisition(t_cmd *lowest, t_stack *node)
+{
+	t_cmd *lowest_r;
+	t_cmd *lowest_rr;
+	int *push_b;
+	int *push_a;
+
+	lowest_r = lowest;
+	lowest_rr = lowest;
+	push_b = &((*lowest).pb);
+	push_a = &((*lowest).pa);
+
+	rot_target(lowest_r, node);
+	revrot_target(lowest_rr, node);
 }

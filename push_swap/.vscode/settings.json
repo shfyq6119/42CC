@@ -1,0 +1,12 @@
+{
+    "[c]":
+    {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    },
+    "editor.insertSpaces": false,
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 4,
+    "files.associations": {
+        "push_swap.h": "c"
+    },
+}

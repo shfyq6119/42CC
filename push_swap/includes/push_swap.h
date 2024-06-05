@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "../includes/libft/libft.h"
 /*this pathing must always be from where the header file lives*/
 
 typedef	enum
@@ -108,13 +108,17 @@ void		pushcost_rotcalc(t_meta *motha, t_stack *a, int idx);
 void		pushsort_calc(t_meta *motha, int num);
 void		rotab_dupcheck(t_cmd *moves);
 void		rotcost_calc(t_stack *node, t_cmd *moveset, int size, int idx);
+void		rot_target(t_cmd *lowest, t_stack *node);
 void		stackcheapest(t_meta *motherstack);
 void		sortstack(t_meta *motherstack);
+void		target_acquisition(t_cmd *motha, t_stack *node);
 int			sortcheck(t_meta *motherstack);
 /***********************************stacksorts*********************************/
 void		rotate(t_meta *motha);
 void		revrot(t_meta *motha);
-void		push(t_meta *motha);
+void		push_module(t_meta *motha);
+void		first_push(t_stack **ptr1, t_stack **ptr2);
+void		push(t_stack **ptr1, t_stack **ptr2);
 void		swap(t_stack *header);
 void		sort3(t_meta *motherstack);
 void		sort4(t_meta *motherstack);
