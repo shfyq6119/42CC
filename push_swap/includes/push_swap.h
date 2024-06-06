@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define FLAG_A 0x01
+# define FLAG_B 0x02
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <limits.h>
 # include "../includes/libft/libft.h"
 /*this pathing must always be from where the header file lives*/
 
@@ -97,26 +100,32 @@ int			ft_stk_size(t_stack	*head);
 int			ft_atoi_lbrk(char *str);
 /*********************************stack presorts*******************************/
 void		chp2gd2(t_meta *motherstack);
-void		cheapest_check(t_cmd *lowest, t_cmd *moveset, int flag);
+void		cheapest_check(t_cost *lowest, t_cmd *moveset, int flag);
 void		check_cmds(t_meta *motherstack);
 void		init_limits(t_meta *motha, t_limits *range);
 void		limit_stackcheck(t_meta *motha);
 void		limit_check_a(t_meta *motha, t_stack *a);
 void		limit_check_b(t_meta *motha, t_stack *b);
 void		median_rotcost(int *revrot, int *rottate, int size, int idx);
+void		mark_nodes(t_stack *stack, int flag, int *count);
+void		push_preprocessor(t_meta *motha);
 void		pushcost_rotcalc(t_meta *motha, t_stack *a, int idx);
-void		pushsort_calc(t_meta *motha, int num);
+void		pushsort_calc(t_meta *motha, int *num);
+void		rot_preprocessor(t_meta *motha);
 void		rotab_dupcheck(t_cmd *moves);
 void		rotcost_calc(t_stack *node, t_cmd *moveset, int size, int idx);
 void		rot_target(t_cmd *lowest, t_stack *node);
 void		stackcheapest(t_meta *motherstack);
 void		sortstack(t_meta *motherstack);
 void		target_acquisition(t_cmd *motha, t_stack *node);
+int			findex_stack_b(t_meta *motha, int max);
+int			find_nextnum_b(t_meta *motha, int num);
 int			sortcheck(t_meta *motherstack);
 /***********************************stacksorts*********************************/
-void		rotate(t_meta *motha);
-void		revrot(t_meta *motha);
+void		ft_rotate(t_stack **head1, t_stack **head2);
+void		ft_revrot(t_meta *motha);
 void		push_module(t_meta *motha);
+void		rot_module(t_meta *motha);
 void		first_push(t_stack **ptr1, t_stack **ptr2);
 void		push(t_stack **ptr1, t_stack **ptr2);
 void		swap(t_stack *header);
@@ -124,6 +133,7 @@ void		sort3(t_meta *motherstack);
 void		sort4(t_meta *motherstack);
 void		restore_sorted(t_meta *motherstack);
 
-/***********************************cleanup************************************/
+/********************************postsort & cleanup****************************/
+void		flagdrop(t_stack *node1, t_stack *node2, int flag1, int flag2);
 void		ff_gg(t_meta *motha);
 #endif

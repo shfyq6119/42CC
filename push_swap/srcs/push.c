@@ -11,44 +11,61 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-void    first_push(t_stack **ptr1, t_stack **ptr2)
+void	push_preprocessor(t_meta *motha)
 {
-    *ptr2 = *ptr1;
-    *ptr1 = (*ptr1)->next;
-    (*ptr2)->next = NULL;
-    ft_putendl_fd("pb", 1);
+	if ((*motha).moves->pb > 0)
+		(*motha).head_a->id = B;
+	else if ((*motha).moves->pa > 0)
+		(*motha).head_b->id = A;
 }
-void    push(t_stack **ptr1, t_stack **ptr2)
-{
-    t_stack *node;
 
-    node = *ptr2;
-    *ptr2 = *ptr1;
-    *ptr1 = (*ptr1)->next;
-    (*ptr2)->next = node;
-    if ((*ptr2)->id == B)
-        ft_putendl_fd("pb", 1);
-    else if ((*ptr2)->id == A)
-        ft_putendl_fd("pa", 1);
+void	first_push(t_stack **ptr1, t_stack **ptr2)
+{
+	*ptr2 = *ptr1;
+	*ptr1 = (*ptr1)->next;
+	(*ptr2)->next = NULL;
+	ft_putendl_fd("pb", 1);
+}
+void	push(t_stack **ptr1, t_stack **ptr2)
+{
+	t_stack	*node;
+
+	node = *ptr2;
+	*ptr2 = *ptr1;
+	*ptr1 = (*ptr1)->next;
+	(*ptr2)->next = node;
+	if ((*ptr2)->id == B)
+		ft_putendl_fd("pb", 1);
+	else if ((*ptr2)->id == A)
+		ft_putendl_fd("pa", 1);
+}
+
+void	last_push(t_stack **ptr1, t_stack **ptr2)
+{
+	t_stack	*node;
+
+	node = *ptr1;
+	*ptr1 = *ptr2;
+	(*ptr2)->next = node;
+	*ptr1 = NULL;
+	ft_putendl_fd("pa", 1);
 }
 void	push_module(t_meta *motha)
 {
 	if ((*motha).head_a->id == B)
 	{
 		if ((*motha).head_b == NULL)
-            first_push(&((*motha).head_a), &((*motha).head_b));
+			first_push(&((*motha).head_a), &((*motha).head_b));
 		else
-            push(&((*motha).head_a), &((*motha).head_b));
+			push(&((*motha).head_a), &((*motha).head_b));
 	}
 	else if ((*motha).head_b->id == A)
 	{
 		if ((*motha).head_b == NULL)
 			return ;
-        if ((*motha).head_b->next == NULL)
-            last_push((&(*motha).head_b), &((*motha).head_a));
-        else
-            push(&((*motha).head_b), &((*motha).head_a));
+		if ((*motha).head_b->next == NULL)
+			last_push((&(*motha).head_b), &((*motha).head_a));
+		else
+			push(&((*motha).head_b), &((*motha).head_a));
 	}
 }
-
- 

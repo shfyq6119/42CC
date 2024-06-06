@@ -3,6 +3,7 @@
     {
         "editor.defaultFormatter": "keyhr.42-c-format"
     },
+    "editor.detectIndentation": false,
     "editor.insertSpaces": false,
     "editor.indentSize": "tabSize",
     "editor.tabSize": 4,

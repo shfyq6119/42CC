@@ -52,8 +52,15 @@ int	main(int ac, char **av)
 
 	heap.head_a = stackparse(ac, av);
 	heap.head_b = NULL;
-	sortstack(&heap);
 	print_a = heap.head_a;
+	while (print_a)
+	{
+		printf("a: %ld\n", print_a->nb);
+		print_a = print_a->next;
+	}
+	printf("sorting\n");
+	sortstack(&heap);
+
 	print_b = heap.head_b;
 	while (print_a)
 	{
@@ -67,6 +74,8 @@ int	main(int ac, char **av)
 	}
 	printf("%d\n", heap.limits->min_a);
 	printf("%d\n", heap.limits->max_a);
+	printf("%d\n", heap.limits->min_b);
+	printf("%d\n", heap.limits->max_b);
 	ff_gg(&heap);
 	exit (EXIT_SUCCESS);
 }

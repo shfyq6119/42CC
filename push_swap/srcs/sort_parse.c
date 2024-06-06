@@ -17,7 +17,7 @@ void	prelude(t_stack *a)
 	int		i;
 
 	node = a;
-	i = 2;
+	i = 3;
 	while (i--)
 	{
 		a->id = B;
@@ -25,6 +25,7 @@ void	prelude(t_stack *a)
 	}
 	a = node;
 }
+
 int	sortcheck(t_meta *motherstack)
 {
 	t_stack	*a;
@@ -63,9 +64,9 @@ void	sortstack(t_meta *motherstack)
 		else*/
 		{
 			prelude((*motherstack).head_a);
-			while (ft_stk_size((*motherstack).head_b) < 2)
+			while (ft_stk_size((*motherstack).head_b) < 3)
 				push_module(motherstack);
-			//chp2gd2(motherstack);
+			chp2gd2(motherstack);
 			//restore_sorted(motherstack);
 		}
 	//}
