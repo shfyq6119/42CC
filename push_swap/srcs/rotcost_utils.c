@@ -30,7 +30,7 @@ void	rotcost_calc(t_stack *node, t_cmd *moveset, int size, int idx)
 {
 	if (node->id == A)
 		median_rotcost(&moveset->rra, &moveset->ra, size, idx);
-	else
+	else if (node->id == B)
 		median_rotcost(&moveset->rrb, &moveset->rb, size, idx);
 }
 
@@ -53,7 +53,7 @@ void	median_rotcost(int *revrot, int *rotate, int size, int idx)
 }
 
 /* before pushing A to B, check A->nb's landing target number and index */
-void	pushsort_calc(t_meta *motha, int num)
+void	pushsort_calc(t_meta *motha, int *num)
 {
 	int	i;
 	int	size;
@@ -67,7 +67,7 @@ void	pushsort_calc(t_meta *motha, int num)
 		i = findex_stack_b(motha, motha->limits->max_b);
 	else
 	{
-		nbr = find_nextnum_b(motha, num);
+		nbr = find_nextnum_b(motha, *num);
 		if ((*motha).head_b->nb == nbr)
 			return ;
 		i = findex_stack_b(motha, nbr);

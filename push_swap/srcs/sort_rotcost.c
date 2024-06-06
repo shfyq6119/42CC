@@ -29,10 +29,9 @@ void	chp2gd2(t_meta *motha)
 	{
 		limit_stackcheck(motha);
 		check_cmds(motha);
-		target_acquisition((*motha).cost, (*motha).head_a);
 		stackcheapest(motha);
 	}
-	sort3(motha);
+	//sort3(motha);
 }
 
 /*check max/min limit in each stack*/
@@ -51,7 +50,7 @@ void	limit_stackcheck(t_meta *motha)
 		limit_check_b(motha, b);
 }
 
-/*calculate and check cmd list for cheapest push 
+/*calculate and check cmd list for cheapest push
 to the top of B against max,min, or in-between.
 if number is going to be a new max or new min,
 use the number directly from metadata. else find
@@ -73,28 +72,25 @@ void	check_cmds(t_meta *motha)
 		if (a->nb > (*motha).limits->max_b || a->nb < (*motha).limits->min_b)
 			pushsort_calc(motha, NULL);
 		else
-			pushsort_calc(motha, num);
+			pushsort_calc(motha, &num);
 		rotab_dupcheck((*motha).moves);
 		cheapest_check((*motha).cost, (*motha).moves, idx);
 		a = a->next;
 		idx++;
 	}
-
 }
 
-/*find a way to optimise this*/
 void	stackcheapest(t_meta *motha)
 {
-	while ((*motha).cost->rr-- != 0)
-		rotate(motha);
-	while ((*motha).cost->ra-- != 0)
-		rotate(motha);
-	while ((*motha).cost->rb-- != 0)
-		rotate(motha);
-	while ((*motha).cost->rrr-- != 0)
-		revrot(motha);
-	while ((*motha).cost->rra-- != 0)
-		revrot(motha);
-	while ((*motha).cost->rrb-- != 0)
-		revrot(motha);
+	rot_preprocessor(motha);
+	while (((*motha).head_a && (*motha).head_a->id & FLAG_A) || ((*motha).head_b
+			&& (*motha).head_b->id & FLAG_B))
+		rot_module(motha);
+	while ((*motha).cost->pb != 0)
+	{
+		push_preprocessor(motha);
+		push_module(motha);
+		(*motha).cost->pb--;
+	}
 }
+
