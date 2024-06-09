@@ -36,14 +36,19 @@ t_stack	*ft_stklast(t_stack *a)
 void	ft_stk_add_last(t_stack **a, t_stack *add)
 {
 	t_stack	*node;
+	t_stack	*last;
 
 	node = *a;
+	last = NULL;
 	if (!a || !add)
 		return ;
 	if (!*a)
 		*a = add;
 	else
-		(ft_stklast(node))->next = add;
+	{
+		last = ft_stklast(node);
+		last->next = add;
+	}
 }
 
 int	ft_stk_size(t_stack	*head)
@@ -62,4 +67,13 @@ int	ft_stk_size(t_stack	*head)
 	}
 	head = tmp;
 	return (i);
+}
+
+t_stack	*ft_stkpenultimate(t_stack *head)
+{
+	if (!head || !head->next)
+		return (NULL);
+	while (head->next->next)
+		head = head->next;
+	return (head);
 }

@@ -11,19 +11,27 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-void	prelude(t_stack *a)
+void	prelude(t_meta *motha)
 {
-	t_stack	*node;
-	int		i;
+	t_stack		*node;
+	t_cmd		*move;
+	t_cost		*lowest;
+	t_limits	*range;
+	int			i;
 
-	node = a;
-	i = 3;
+	node = (*motha).head_a;
+	move = ft_calloc(1, sizeof(t_cmd));
+	lowest = ft_calloc(1, sizeof(t_cost));
+	range = ft_calloc(1, sizeof(t_limits));
+	(*motha).moves = move;
+	(*motha).cost = lowest;
+	(*motha).limits = range;
+	i = 2;
 	while (i--)
 	{
-		a->id = B;
-		a = a->next;
+		node->id = B;
+		node = node->next;
 	}
-	a = node;
 }
 
 int	sortcheck(t_meta *motherstack)
@@ -42,7 +50,6 @@ int	sortcheck(t_meta *motherstack)
 			return (0);
 		check = (*a).nb;
 	}
-	ff_gg(motherstack);
 	exit(EXIT_SUCCESS);
 }
 
@@ -50,24 +57,28 @@ int	sortcheck(t_meta *motherstack)
 if empty, reassign address of top two node_a to new stack pointer*/
 void	sortstack(t_meta *motherstack)
 {
-	/*int	checksize;
+	int	checksize;
 
 	checksize = ft_stk_size((*motherstack).head_a);
 	if (!sortcheck(motherstack))
 	{
 		if (checksize == 2)
-			swap((*motherstack).head_a);
+		{
+			swap(&(*motherstack).head_a);
+			exit(EXIT_SUCCESS);
+		}
 		else if (checksize == 3)
 			sort3(motherstack);
 		else if (checksize == 4)
 			sort4(motherstack);
-		else*/
+		else
 		{
-			prelude((*motherstack).head_a);
-			while (ft_stk_size((*motherstack).head_b) < 3)
+			prelude(motherstack);
+			while (ft_stk_size((*motherstack).head_b) < 2)
 				push_module(motherstack);
 			chp2gd2(motherstack);
-			//restore_sorted(motherstack);
+			restore_sorted(motherstack);
+			finish(motherstack);
 		}
-	//}
+	}
 }
