@@ -11,47 +11,47 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-
-int	find_nextnum_b(t_meta *motha, int num)
+int	find_nextnum(t_stack *head, long num)
 {
-	t_stack		*head_b;
-	int			size;
-	int			flag;
-	int			i;
+	t_stack	*tmp;
+	int		size;
+	int		flag;
+	int		i;
 
 	i = 0;
 	flag = 0;
-	head_b = (*motha).head_b;
-	size = ft_stk_size((*motha).head_b);
+	size = ft_stk_size(head);
+	tmp = head;
 	while (flag == 0)
 	{
 		i = 0;
-		num--;
-		head_b = (*motha).head_b;
+		if (head->id == A)
+			num++;
+		else if (head->id == B)
+			num--;
+		tmp = head;
 		while (i++ < size)
 		{
-			if (head_b->nb == num)
+			if (tmp->nb == num)
 				flag = 1;
-			head_b = head_b->next;
+			tmp = tmp->next;
 		}
 	}
 	return (num);
 }
 
-int	findex_stack_b(t_meta *motha, int max)
+int	findex(t_stack *head, long num)
 {
-	t_stack		*head_b;
 	int			size;
 	int			i;
 
 	i = 0;
-	head_b = (*motha).head_b;
-	size = ft_stk_size((*motha).head_b);
+	size = ft_stk_size(head);
 	while (i < size)
 	{
-		if (head_b->nb == max)
+		if (head->nb == num)
 			break ;
-		head_b = head_b->next;
+		head = head->next;
 		i++;
 	}
 	return (i);
@@ -77,12 +77,12 @@ void	rotab_dupcheck(t_cmd *moveset)
 }
 
 /*check on every iteration. if cost is more than calculated for next iteration,
-replace cost with cheaper, final iteration cheapest in the loop will be stored*/
+replace cost with cheaper, final round cheapest in the loop will be stored*/
 void	cheapest_check(t_cost *lowest, t_cmd *moveset, int flag)
 {
 	moveset->count = moveset->pb + moveset->ra + moveset->rb + moveset->rr
 		+ moveset->rra + moveset->rrb + moveset->rrr;
-	if (flag == 1 || (lowest->cost > moveset->count))
+	if (flag == 0 || (lowest->cost > moveset->count))
 	{
 		lowest->cost = moveset->count;
 		lowest->pb = moveset->pb;

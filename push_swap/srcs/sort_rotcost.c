@@ -14,40 +14,19 @@
 /* find de cheap2 good2 */
 void	chp2gd2(t_meta *motha)
 {
-	t_cmd		*move;
-	t_cost		*lowest;
-	t_limits	*range;
+	t_stack	*b;
 
-	move = ft_calloc(1, sizeof(t_cmd));
-	lowest = ft_calloc(1, sizeof(t_cost));
-	range = ft_calloc(1, sizeof(t_limits));
-	(*motha).moves = move;
-	(*motha).cost = lowest;
-	(*motha).limits = range;
+	b = (*motha).head_b;
 	init_limits(motha, (*motha).limits);
 	while (ft_stk_size((*motha).head_a) != 3)
 	{
-		limit_stackcheck(motha);
+		b = (*motha).head_b;
+		limit_check(&(*motha).limits->min_b, &(*motha).limits->max_b, b);
 		check_cmds(motha);
 		stackcheapest(motha);
 	}
-	//sort3(motha);
-}
-
-/*check max/min limit in each stack*/
-void	limit_stackcheck(t_meta *motha)
-{
-	t_stack	*a;
-	t_stack	*b;
-
-	a = (*motha).head_a;
-	b = NULL;
-	if ((*motha).head_b != NULL)
-		b = (*motha).head_b;
-	if ((*motha).head_a->id == A)
-		limit_check_a(motha, a);
-	if (b && (*motha).head_b->id == B)
-		limit_check_b(motha, b);
+	sort3(motha);
+	clean_costs(motha);
 }
 
 /*calculate and check cmd list for cheapest push
@@ -60,19 +39,17 @@ void	check_cmds(t_meta *motha)
 	t_stack	*a;
 	int		idx;
 	int		size;
-	int		num;
 
 	a = (*motha).head_a;
 	idx = 0;
 	size = ft_stk_size(a);
-	num = (*motha).head_a->nb;
 	while (idx <= size - 1)
 	{
 		pushcost_rotcalc(motha, a, idx);
 		if (a->nb > (*motha).limits->max_b || a->nb < (*motha).limits->min_b)
-			pushsort_calc(motha, NULL);
+			pushsort_calc_a(motha, NULL);
 		else
-			pushsort_calc(motha, &num);
+			pushsort_calc_a(motha, &a->nb);
 		rotab_dupcheck((*motha).moves);
 		cheapest_check((*motha).cost, (*motha).moves, idx);
 		a = a->next;
@@ -82,15 +59,60 @@ void	check_cmds(t_meta *motha)
 
 void	stackcheapest(t_meta *motha)
 {
+	t_stack	*last_a;
+	t_stack	*last_b;
+
 	rot_preprocessor(motha);
-	while (((*motha).head_a && (*motha).head_a->id & FLAG_A) || ((*motha).head_b
-			&& (*motha).head_b->id & FLAG_B))
-		rot_module(motha);
+	while (true)
+	{
+		last_a = ft_stklast((*motha).head_a);
+		last_b = ft_stklast((*motha).head_b);
+		if (((*motha).head_a && ((*motha).head_a->id & FLAG_A)
+				&& !((*motha).head_a->id & FLAG_RR)) || ((*motha).head_b
+				&& ((*motha).head_b->id & FLAG_B)
+				&& !((*motha).head_b->id & FLAG_RR)) || (last_a
+				&& (last_a->id & FLAG_RR)) || (last_b
+				&& (last_b->id & FLAG_RR)))
+			rot_module(motha);
+		else
+			break ;
+	}
 	while ((*motha).cost->pb != 0)
 	{
-		push_preprocessor(motha);
 		push_module(motha);
 		(*motha).cost->pb--;
 	}
 }
 
+void	init_limits(t_meta *motha, t_limits *range)
+{
+	if ((*motha).head_b->nb > (*motha).head_b->next->nb)
+	{
+		range->max_b = (*motha).head_b->nb;
+		range->min_b = (*motha).head_b->next->nb;
+	}
+	else
+	{
+		range->min_b = (*motha).head_b->nb;
+		range->max_b = (*motha).head_b->next->nb;
+	}
+	range->min_a = INT_MAX;
+	range->max_a = INT_MIN;
+}
+
+void	limit_check(int *min, int *max, t_stack *head)
+{
+	t_stack	*tmp;
+
+	*min = head->nb;
+	*max = head->nb;
+	tmp = head->next;
+	while (tmp)
+	{
+		if (tmp->nb < *min)
+			*min = tmp->nb;
+		if (*max < tmp->nb)
+			*max = tmp->nb;
+		tmp = tmp->next;
+	}
+}

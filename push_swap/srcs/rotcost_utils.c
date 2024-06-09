@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotcost_utils_1.c                                  :+:      :+:    :+:   */
+/*   rotcost_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,15 +25,6 @@ void	pushcost_rotcalc(t_meta *motha, t_stack *a, int i)
 	median_rotcost(&(*motha).moves->rra, &(*motha).moves->ra, size, i);
 }
 
-/* this looks good*/
-void	rotcost_calc(t_stack *node, t_cmd *moveset, int size, int idx)
-{
-	if (node->id == A)
-		median_rotcost(&moveset->rra, &moveset->ra, size, idx);
-	else if (node->id == B)
-		median_rotcost(&moveset->rrb, &moveset->rb, size, idx);
-}
-
 void	median_rotcost(int *revrot, int *rotate, int size, int idx)
 {
 	if (size % 2 == 0)
@@ -53,24 +44,45 @@ void	median_rotcost(int *revrot, int *rotate, int size, int idx)
 }
 
 /* before pushing A to B, check A->nb's landing target number and index */
-void	pushsort_calc(t_meta *motha, int *num)
+void	pushsort_calc_a(t_meta *motha, long *num)
 {
 	int	i;
 	int	size;
-	int	nbr;
 
 	motha->moves->rb = 0;
 	motha->moves->rrb = 0;
 	size = ft_stk_size((*motha).head_b);
 	i = 0;
+	if ((*motha).head_b->nb == (*motha).limits->max_b)
+		return ;
 	if (!num)
-		i = findex_stack_b(motha, motha->limits->max_b);
-	else
+		i = findex((*motha).head_b, motha->limits->max_b);
+	else if (num)
 	{
-		nbr = find_nextnum_b(motha, *num);
-		if ((*motha).head_b->nb == nbr)
+		if ((*motha).head_b->nb == find_nextnum((*motha).head_b, *num))
 			return ;
-		i = findex_stack_b(motha, nbr);
+		i = findex((*motha).head_b, find_nextnum((*motha).head_b, *num));
 	}
-	rotcost_calc((*motha).head_b, (*motha).moves, size, i);
+	median_rotcost(&(*motha).moves->rrb, &(*motha).moves->rb, size, i);
+}
+
+void	clean_costs(t_meta *motha)
+{
+	(*motha).cost->pa = 0;
+	(*motha).cost->pb = 0;
+	(*motha).cost->ra = 0;
+	(*motha).cost->rb = 0;
+	(*motha).cost->rr = 0;
+	(*motha).cost->pa = 0;
+	(*motha).cost->rra = 0;
+	(*motha).cost->rrb = 0;
+	(*motha).cost->rrr = 0;
+	(*motha).moves->pa = 0;
+	(*motha).moves->pb = 0;
+	(*motha).moves->ra = 0;
+	(*motha).moves->rb = 0;
+	(*motha).moves->rr = 0;
+	(*motha).moves->rra = 0;
+	(*motha).moves->rrb = 0;
+	(*motha).moves->rrr = 0;
 }
