@@ -31,7 +31,7 @@ void	flag_nodes(t_stack *stack, int flag, int *count)
 			current = prev;
 		}
 	}
-	while (stack && (*count)-- > 0)
+	while (!(flag & FLAG_RR) && stack && (*count)-- > 0)
 	{
 		if (!(stack->id & flag))
 			stack->id |= flag;

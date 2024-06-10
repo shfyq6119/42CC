@@ -42,8 +42,8 @@ void	check_cmds(t_meta *motha)
 
 	a = (*motha).head_a;
 	idx = 0;
-	size = ft_stk_size(a);
-	while (idx <= size - 1)
+	size = ft_stk_size((*motha).head_a);
+	while (idx < size)
 	{
 		pushcost_rotcalc(motha, a, idx);
 		if (a->nb > (*motha).limits->max_b || a->nb < (*motha).limits->min_b)
@@ -100,7 +100,7 @@ void	init_limits(t_meta *motha, t_limits *range)
 	range->max_a = INT_MIN;
 }
 
-void	limit_check(int *min, int *max, t_stack *head)
+void	limit_check(long *min, long *max, t_stack *head)
 {
 	t_stack	*tmp;
 

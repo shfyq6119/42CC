@@ -44,20 +44,22 @@ void	rot_module(t_meta *motha)
 
 	last_a = ft_stklast((*motha).head_a);
 	last_b = ft_stklast((*motha).head_b);
-	if (((motha->head_a && (motha->head_a->id & FLAG_A)) || (last_a
+	if (((motha->head_a && (motha->head_a->id & FLAG_A)
+				&& !(motha->head_a->id & FLAG_RR)) || (last_a
 				&& (last_a->id & FLAG_RR))) && ((motha->head_b
-				&& (motha->head_b->id & FLAG_B)) || (last_b
+				&& (motha->head_b->id & FLAG_B)
+				&& !(motha->head_b->id & FLAG_RR)) || (last_b
 				&& (last_b->id & FLAG_RR))))
 		sub_rot(&motha->head_a, &motha->head_b, motha->head_a, motha->head_b);
 	else
 	{
-		if (motha->head_a && (((motha->head_a->id & FLAG_A)
-					&& !(motha->head_a->id & FLAG_RR)) || (last_a
-					&& (last_a->id & FLAG_RR))))
+		if ((motha->head_a && (motha->head_a->id & FLAG_A)
+				&& !(motha->head_a->id & FLAG_RR)) || (last_a
+				&& (last_a->id & FLAG_RR)))
 			sub_rot(&(*motha).head_a, NULL, motha->head_a, NULL);
-		if (motha->head_b && (((motha->head_b->id & FLAG_B)
-					&& !(motha->head_b->id & FLAG_RR)) || (last_b
-					&& (last_b->id & FLAG_RR))))
+		if ((motha->head_b && (motha->head_b->id & FLAG_B)
+				&& !(motha->head_b->id & FLAG_RR)) || ((last_b
+				&& (last_b->id & FLAG_RR))))
 			sub_rot(&(*motha).head_b, NULL, motha->head_b, NULL);
 	}
 }
@@ -66,9 +68,9 @@ void	sub_rot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2)
 {
 	ptr1 = ft_stklast(ptr1);
 	ptr2 = ft_stklast(ptr2);
-	if ((head1 && *head1 && (*head1)->id & FLAG_A) && !((*head1)->id & FLAG_RR)
-		&& head2 && *head2 && ((*head2)->id & FLAG_B)
-		&& !((*head2)->id & FLAG_RR))
+	if ((head1 && *head1 && (*head1)->id & FLAG_A && !((*head1)->id & FLAG_RR))
+		&& (head2 && *head2 && ((*head2)->id & FLAG_B)
+			&& !((*head2)->id & FLAG_RR)))
 		rotate(head1, head2);
 	else if ((ptr1 && (ptr1->id & FLAG_RR)) && (ptr2 && (ptr2->id & FLAG_RR)))
 		revrot(head1, head2, ptr1, ptr2);
@@ -86,7 +88,7 @@ void	rotate(t_stack **head1, t_stack **head2)
 {
 	t_stack	*tmp;
 
-	if (head1 && *head1 && (((*head1)->id & FLAG_A) || ((*head1)->id & FLAG_B))
+	if (head1 && *head1 && ((*head1)->id & (FLAG_A | FLAG_B))
 		&& !((*head1)->id & FLAG_RR))
 	{
 		tmp = *head1;
@@ -114,7 +116,7 @@ void	revrot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2)
 {
 	t_stack	*tmp;
 
-	if (head1 && *head1 && ((ptr1->id & FLAG_A) || (ptr1->id & FLAG_B))
+	if (head1 && *head1 && (ptr1->id & (FLAG_A | FLAG_B))
 		&& (ptr1->id & FLAG_RR))
 	{
 		tmp = ft_stkpenultimate(*head1);

@@ -30,6 +30,7 @@ void	sort4(t_meta *motha)
 		sort3(motha);
 		restore_sorted(motha);
 		ff_gg(motha);
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -38,52 +39,46 @@ void	sort3(t_meta *motha)
 	int		first;
 	int		second;
 	int		third;
-	t_stack	*tmp;
 
 	first = (*motha).head_a->nb;
 	second = (*motha).head_a->next->nb;
 	third = (*motha).head_a->next->next->nb;
-	tmp = (*motha).head_a;
 	if (!sortcheck(motha))
 	{
-		if (first > second && third > first)
+		if (first > second && second < third && third > first)
 			swap(&(*motha).head_a);
 		else
 			tinysortflag(motha, first, second, third);
 	}
-	while (tmp)
-	{
-		deflag(tmp);
-		tmp = tmp->next;
-	}
-	exit(EXIT_SUCCESS);
+	if ((*motha).head_b == NULL)
+		ffs(motha);
 }
 
 void	tinysortflag(t_meta *motha, int first, int second, int third)
 {
 	t_stack	*a;
 
-	a = (*motha).head_a;
+	a = ft_stklast((*motha).head_a);
 	if (first > second && second > third)
 	{
 		swap(&(*motha).head_a);
-		ft_stklast(a)->id |= (FLAG_A | FLAG_RR);
-		revrot(&(*motha).head_a, NULL, ft_stklast(a), NULL);
+		a->id |= (FLAG_A | FLAG_RR);
+		revrot(&(*motha).head_a, NULL, a, NULL);
 	}
-	else if (first < third && second > third)
+	else if (first < second && second > third && third > first)
 	{
 		swap(&(*motha).head_a);
-		a->id |= FLAG_A;
+		(*motha).head_a->id |= FLAG_A;
 		rotate(&(*motha).head_a, NULL);
 	}
 	else if (first < second && second > third)
 	{
-		ft_stklast(a)->id |= (FLAG_A | FLAG_RR);
-		revrot(&(*motha).head_a, NULL, ft_stklast(a), NULL);
+		a->id |= (FLAG_A | FLAG_RR);
+		revrot(&(*motha).head_a, NULL, a, NULL);
 	}
 	else if (first > second && second < third)
 	{
-		a->id |= FLAG_A;
+		(*motha).head_a->id |= FLAG_A;
 		rotate(&(*motha).head_a, NULL);
 	}
 }

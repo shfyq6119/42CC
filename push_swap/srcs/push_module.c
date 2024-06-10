@@ -11,6 +11,30 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
+void	push_module(t_meta *motha)
+{
+	if ((*motha).cost->pb > 0)
+		(*motha).head_a->id = B;
+	else if ((*motha).moves->pa > 0)
+		(*motha).head_b->id = A;
+	if ((*motha).head_a->id == B)
+	{
+		if ((*motha).head_b == NULL)
+			first_push(&((*motha).head_a), &((*motha).head_b));
+		else
+			push(&((*motha).head_a), &((*motha).head_b));
+	}
+	else if ((*motha).head_b->id == A)
+	{
+		if ((*motha).head_b == NULL)
+			return ;
+		if ((*motha).head_b->next == NULL)
+			last_push(&(*motha).head_a, &(*motha).head_b);
+		else
+			push(&((*motha).head_b), &((*motha).head_a));
+	}
+}
+
 void	first_push(t_stack **ptr1, t_stack **ptr2)
 {
 	*ptr2 = *ptr1;
@@ -43,28 +67,4 @@ void	last_push(t_stack **ptr1, t_stack **ptr2)
 	*ptr1 = node;
 	ft_putendl_fd("pa", 1);
 	return ;
-}
-
-void	push_module(t_meta *motha)
-{
-	if ((*motha).cost->pb > 0)
-		(*motha).head_a->id = B;
-	else if ((*motha).moves->pa > 0)
-		(*motha).head_b->id = A;
-	if ((*motha).head_a->id == B)
-	{
-		if ((*motha).head_b == NULL)
-			first_push(&((*motha).head_a), &((*motha).head_b));
-		else
-			push(&((*motha).head_a), &((*motha).head_b));
-	}
-	else if ((*motha).head_b->id == A)
-	{
-		if ((*motha).head_b == NULL)
-			return ;
-		if ((*motha).head_b->next == NULL)
-			last_push(&(*motha).head_a, &(*motha).head_b);
-		else
-			push(&((*motha).head_b), &((*motha).head_a));
-	}
 }

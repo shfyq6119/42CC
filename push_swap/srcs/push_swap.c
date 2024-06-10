@@ -23,15 +23,14 @@ void	ffs(t_meta *motha)
 			(*motha).head_a = (*motha).head_a->next;
 			free(ptr);
 		}
+		if ((*motha).head_b == NULL)
+			exit(EXIT_SUCCESS);
 	}
-	if ((*motha).head_b)
+	while ((*motha).head_b)
 	{
-		while ((*motha).head_b)
-		{
-			ptr = (*motha).head_b;
-			(*motha).head_b = (*motha).head_b->next;
-			free(ptr);
-		}
+		ptr = (*motha).head_b;
+		(*motha).head_b = (*motha).head_b->next;
+		free(ptr);
 	}
 }
 void	ff_gg(t_meta *motha)
@@ -60,5 +59,4 @@ int	main(int ac, char **av)
 		ff_gg(&heap);
 	}
 	ffs(&heap);
-	exit (EXIT_SUCCESS);
 }
