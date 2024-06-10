@@ -50,7 +50,7 @@ int	sortcheck(t_meta *motherstack)
 			return (0);
 		check = (*a).nb;
 	}
-	exit(EXIT_SUCCESS);
+	return (1);
 }
 
 /*line 50: this will check through a series of preconditions for push.
@@ -65,6 +65,7 @@ void	sortstack(t_meta *motherstack)
 		if (checksize == 2)
 		{
 			swap(&(*motherstack).head_a);
+			ffs(motherstack);
 			exit(EXIT_SUCCESS);
 		}
 		else if (checksize == 3)
