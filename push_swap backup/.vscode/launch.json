@@ -1,0 +1,21 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/srcs/a.out",
+			"args": [3, 1, 2, 9, 7, 10, 41, 91, 30, 42, 71, 100, -10, 1000, 10928, -1234, 1234, 1990, 1991, 212],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}/srcs",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		}
+
+	]
+}
