@@ -41,7 +41,7 @@ void	deflag(t_stack *node)
 	if (node && (node->id & FLAG_B))
 		node->id = node->id & ~FLAG_B;
 	if (node && (node->id & FLAG_RR))
-		node->id = node->id & ~FLAG_RR;	
+		node->id = node->id & ~FLAG_RR;
 }
 
 void	flagforward(t_stack *stack, int flag, int *count)

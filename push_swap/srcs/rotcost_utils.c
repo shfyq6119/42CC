@@ -55,7 +55,7 @@ void	pushsort_calc_a(t_meta *motha, long *num)
 	i = 0;
 	if (!num && (*motha).head_b->nb == (*motha).limits->max_b)
 		return ;
-	else if (!num && (*motha).head_b->nb != (*motha).limits->max_b )
+	else if (!num && (*motha).head_b->nb != (*motha).limits->max_b)
 		i = findex((*motha).head_b, motha->limits->max_b);
 	else if (num)
 	{

@@ -15,10 +15,9 @@ void	restore_sorted(t_meta *motha)
 {
 	long		*min_a;
 	long		*max_a;
+
 	min_a = &(*motha).limits->min_a;
 	max_a = &(*motha).limits->max_a;
-	// printf("restore sorted\n");
-	// sleep(5);
 	while ((*motha).head_b)
 	{
 		limit_check(min_a, max_a, (*motha).head_a);
