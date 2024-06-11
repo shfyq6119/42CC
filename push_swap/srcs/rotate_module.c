@@ -48,7 +48,7 @@ void	rotate_module(t_meta *motha)
 	{
 		if ((sentry & FLAG_A) && !(sentry & FLAG_RR))
 			rotate(&(*motha).head_a, NULL);
-		if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
+		else if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
 			rotate(&(*motha).head_b, NULL);
 	}
 }
