@@ -57,6 +57,16 @@ int	main(int ac, char **av)
 	if (!sortcheck(&heap))
 	{
 		sortstack(&heap);
+		// t_stack *print = NULL;;
+		// int	i = 1;
+		// if (sortcheck(&heap))
+		// 	print = heap.head_a;
+		// while (print)
+		// {
+		// 	printf("a%d: %ld\n", i, print->nb);
+		// 	print = print->next;
+		// 	i++;
+		// }
 		ff_gg(&heap);
 	}
 	ffs(&heap);

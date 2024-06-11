@@ -15,17 +15,18 @@ void	revrot_module(t_meta *motha)
 {
 	t_stack	*last_a;
 	t_stack	*last_b;
+	int		sentry;
 
 	last_a = ft_stklast((*motha).head_a);
 	last_b = ft_stklast((*motha).head_b);
-	if (last_a && (last_a->id & FLAG_A) && (last_a->id & FLAG_RR)
-		&& last_b && (last_b->id & FLAG_B) && (last_b->id & FLAG_RR))
+	sentry = sentinel(motha);
+	if ((sentry & (FLAG_A | FLAG_RR)) && (sentry & (FLAG_B | FLAG_RR)))
 		revrot(&motha->head_a, &motha->head_b, last_a, last_b);
 	else
 	{
-		if (last_a && (last_a->id & FLAG_A) && (last_a->id & FLAG_RR))
+		if (sentry & (FLAG_A | FLAG_RR))
 			revrot(&motha->head_a, NULL, last_a, NULL);
-		if (last_b && (last_b->id & FLAG_B) && (last_b->id & FLAG_RR))
+		else if (sentry & (FLAG_A | FLAG_RR))
 			revrot(&motha->head_b, NULL, last_b, NULL);
 	}
 }

@@ -39,17 +39,16 @@ void	rot_preprocessor(t_meta *motha)
 
 void	rotate_module(t_meta *motha)
 {
-	if (motha->head_a && (motha->head_a->id & FLAG_A)
-		&& !(motha->head_a->id & FLAG_RR) && (motha->head_b
-			&& (motha->head_b->id & FLAG_B) && !(motha->head_b->id & FLAG_RR)))
+	int	sentry;
+
+	sentry = sentinel(motha);
+	if ((sentry & FLAG_A) && (sentry & FLAG_B) && !(sentry & FLAG_RR))
 		rotate(&motha->head_a, &motha->head_b);
 	else
 	{
-		if (motha->head_a && (motha->head_a->id & FLAG_A)
-			&& !(motha->head_a->id & FLAG_RR))
+		if ((sentry & FLAG_A) && !(sentry & FLAG_RR))
 			rotate(&(*motha).head_a, NULL);
-		if (motha->head_b && (motha->head_b->id & FLAG_B)
-			&& !(motha->head_b->id & FLAG_RR))
+		if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
 			rotate(&(*motha).head_b, NULL);
 	}
 }
@@ -59,7 +58,7 @@ void	rotate(t_stack **head1, t_stack **head2)
 	t_stack	*tmp;
 
 	if (head1 && *head1 && (((*head1)->id & (FLAG_A))
-			|| ((*head1)->id & FLAG_B)) && !((*head1)->id & FLAG_RR))
+		|| ((*head1)->id & FLAG_B)) && !((*head1)->id & FLAG_RR))
 	{
 		tmp = *head1;
 		*head1 = (*head1)->next;
