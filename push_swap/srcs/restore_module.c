@@ -62,22 +62,22 @@ void	pushsort_calc_b(t_meta *motha, long *num)
 
 void	rot_postprocessor(t_meta *motha)
 {
-	t_stack	*last_a;
+	int		sent;
 
+	sent = sentinel(motha);
 	if ((*motha).moves->rra > 0)
 		flag_rev((*motha).head_a, FLAG_A, FLAG_RR, &(*motha).moves->rra);
 	if ((*motha).moves->ra > 0)
 		flagforward((*motha).head_a, FLAG_A, &(*motha).moves->ra);
 	while (true)
 	{
-		last_a = ft_stklast((*motha).head_a);
-		if ((*motha).head_a && ((*motha).head_a->id & FLAG_A)
-			&& !((*motha).head_a->id & FLAG_RR))
+		sent = sentinel(motha);
+		if (!sent)
+			break;
+		if ((sent & FLAG_A) && !(sent & FLAG_RR))
 			rotate_module(motha);
-		else if (last_a && (last_a->id & FLAG_A) && (last_a->id & FLAG_RR))
+		else if (sent & (FLAG_A | FLAG_RR))
 			revrot_module(motha);
-		else
-			break ;
 	}
 }
 
