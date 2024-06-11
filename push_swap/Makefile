@@ -30,7 +30,6 @@ FILES = push_swap.c \
 		rotcost_utils_2.c \
 		sort_parse.c \
 		sort_rotcost.c \
-		stackcheck.c \
 		tiny.c
 
 OBJ_DIR = objects
