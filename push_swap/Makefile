@@ -1,19 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Makefil		                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 21:46:39 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/06/11 16:18:14 by mm-isa           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mm-isa <marvin@42.fr> 			            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/11 10:33:46 by mm-isa            #+#    #+#              #
+#    Updated: 2023/06/11 19:14:06 by mm-isa    	      ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 NAME = push_swap
 CC = cc
 
-DLFLAGS = -O3 -g3 -L -lft
+DLFLAGS = -O3 -g3 -L
 CFLAGS = -Wall -Wextra -Werror -g
 
 LIBFT = ./includes/libft
@@ -32,7 +31,6 @@ FILES = push_swap.c \
 		sort_parse.c \
 		sort_rotcost.c \
 		stackcheck.c \
-		stack_sortsmall.c \
 		tiny.c
 
 OBJ_DIR = objects
@@ -51,7 +49,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ)
 	make -C $(LIBFT)
-	$(CC) $(OBJ) $(CFLAGS) $(DLFLAGS) $(LIBFT)/libft.a  -lft -o $(NAME)
+	$(CC) $(OBJ) $(CFLAGS) $(DLFLAGS) $(LIBFT)/ -lft -o $(NAME)
 
 clean:
 	make clean -C $(LIBFT)
