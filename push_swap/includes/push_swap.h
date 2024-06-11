@@ -58,7 +58,7 @@ typedef struct t_cmd
 
 typedef struct t_cost
 {
-	int				cost;
+	int				tally;
 	int				pa;
 	int				pb;
 	int				sa;
@@ -105,7 +105,8 @@ int			ft_atoi_lbrk(char *str);
 void	chp2gd2(t_meta *motherstack);
 void	cheapest_check(t_cost *lowest, t_cmd *moveset, int flag);
 void	check_cmds(t_meta *motherstack);
-void	flag_nodes(t_stack *stack, int flag, int *count);
+void	flag_rev(t_stack *stack, int flag, int flagrev, int *count);
+void	flagforward(t_stack *stack, int flag, int *count);
 void	init_limits(t_meta *motha, t_limits *range);
 void	limit_check(long *min, long *max, t_stack *head);
 void	median_rotcost(int *revrot, int *rottate, int size, int idx);
@@ -122,11 +123,11 @@ int		findex(t_stack *head, long num);
 int		find_nextnum(t_stack *head, long num);
 int		sortcheck(t_meta *motherstack);
 /***********************************stacksorts*********************************/
-void	sub_rot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2);
 void	rotate(t_stack **head1, t_stack **head2);
 void	revrot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2);
 void	push_module(t_meta *motha);
-void	rot_module(t_meta *motha);
+void	rotate_module(t_meta *motha);
+void	revrot_module(t_meta *motha);
 void	first_push(t_stack **ptr1, t_stack **ptr2);
 void	push(t_stack **ptr1, t_stack **ptr2);
 void	last_push(t_stack **ptr1, t_stack **ptr2);
