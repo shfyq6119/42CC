@@ -17,6 +17,8 @@ void	restore_sorted(t_meta *motha)
 	long		*max_a;
 	min_a = &(*motha).limits->min_a;
 	max_a = &(*motha).limits->max_a;
+	// printf("restore sorted\n");
+	// sleep(5);
 	while ((*motha).head_b)
 	{
 		limit_check(min_a, max_a, (*motha).head_a);
@@ -64,16 +66,17 @@ void	rot_postprocessor(t_meta *motha)
 	t_stack	*last_a;
 
 	if ((*motha).moves->rra > 0)
-		flag_nodes((*motha).head_a, FLAG_A | FLAG_RR, &(*motha).moves->rra);
+		flag_rev((*motha).head_a, FLAG_A, FLAG_RR, &(*motha).moves->rra);
 	if ((*motha).moves->ra > 0)
-		flag_nodes((*motha).head_a, FLAG_A, &(*motha).moves->ra);
+		flagforward((*motha).head_a, FLAG_A, &(*motha).moves->ra);
 	while (true)
 	{
 		last_a = ft_stklast((*motha).head_a);
-		if (((*motha).head_a && ((*motha).head_a->id & FLAG_A)
-				&& !((*motha).head_a->id & FLAG_RR)) || (last_a
-				&& (last_a->id & (FLAG_A | FLAG_RR))))
-			rot_module(motha);
+		if ((*motha).head_a && ((*motha).head_a->id & FLAG_A)
+			&& !((*motha).head_a->id & FLAG_RR))
+			rotate_module(motha);
+		else if (last_a && (last_a->id & FLAG_A) && (last_a->id & FLAG_RR))
+			revrot_module(motha);
 		else
 			break ;
 	}
@@ -114,16 +117,4 @@ void	finish(t_meta *mother)
 		median_rotcost(&(*mother).moves->rra, &(*mother).moves->ra, size, i);
 		rot_postprocessor(mother);
 	}
-	// t_stack	*print_a;
-	// int		num;
-
-	// num = 1;
-	// print_a = (*mother).head_a;
-	// while (print_a)
-	// {
-	// 	printf("a%d: %ld\n", num, print_a->nb);
-	// 	print_a = print_a->next;
-	// 	num++;
-	// }
-	// num = 1;
 }

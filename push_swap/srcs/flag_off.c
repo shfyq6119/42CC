@@ -11,40 +11,48 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
-void	flag_nodes(t_stack *stack, int flag, int *count)
+void	flag_rev(t_stack *stack, int flag, int flagrev, int *count)
 {
 	t_stack	*current;
 	t_stack	*prev;
 
 	current = stack;
-	if (flag & FLAG_RR)
+	while (current && current->next)
+		current = current->next;
+	while (current && (*count) > 0)
 	{
-		while (current && current->next)
-			current = current->next;
-		while (current && (*count)-- > 0)
+		if (!(current->id & flag) && !(current->id & flagrev))
 		{
-			if (!(current->id & flag))
-				current->id |= flag;
-			prev = stack;
-			while (prev && prev->next != current)
-				prev = prev->next;
-			current = prev;
+			current->id |= flag;
+			current->id |= flagrev;
+			(*count)--;
 		}
-	}
-	while (!(flag & FLAG_RR) && stack && (*count)-- > 0)
-	{
-		if (!(stack->id & flag))
-			stack->id |= flag;
-		stack = stack->next;
+		prev = stack;
+		while (prev && prev->next != current)
+			prev = prev->next;
+		current = prev;
 	}
 }
 
 void	deflag(t_stack *node)
 {
 	if (node && (node->id & FLAG_A))
-		node->id &= ~FLAG_A;
+		node->id = node->id & ~FLAG_A;
 	if (node && (node->id & FLAG_B))
-		node->id &= ~FLAG_B;
+		node->id = node->id & ~FLAG_B;
 	if (node && (node->id & FLAG_RR))
-		node->id &= ~FLAG_RR;
+		node->id = node->id & ~FLAG_RR;	
+}
+
+void	flagforward(t_stack *stack, int flag, int *count)
+{
+	while (stack && *count > 0)
+	{
+		if (!(stack->id & flag))
+		{
+			stack->id |= flag;
+			(*count)--;
+		}
+		stack = stack->next;
+	}
 }

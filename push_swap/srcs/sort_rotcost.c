@@ -63,19 +63,20 @@ void	stackcheapest(t_meta *motha)
 	t_stack	*last_b;
 
 	rot_preprocessor(motha);
-	while (true)
+	last_a = ft_stklast((*motha).head_a);
+	last_b = ft_stklast((*motha).head_b);
+	while ((*motha).cost->tally-- > 1)
 	{
 		last_a = ft_stklast((*motha).head_a);
 		last_b = ft_stklast((*motha).head_b);
+		if ((last_a && (last_a->id & FLAG_A) && (last_a->id & FLAG_RR)) || (last_b
+			&& (last_b->id & FLAG_B) | (last_b->id & FLAG_RR)))
+			revrot_module(motha);
 		if (((*motha).head_a && ((*motha).head_a->id & FLAG_A)
-				&& !((*motha).head_a->id & FLAG_RR)) || ((*motha).head_b
-				&& ((*motha).head_b->id & FLAG_B)
-				&& !((*motha).head_b->id & FLAG_RR)) || (last_a
-				&& (last_a->id & FLAG_RR)) || (last_b
-				&& (last_b->id & FLAG_RR)))
-			rot_module(motha);
-		else
-			break ;
+			&& !((*motha).head_a->id & FLAG_RR)) || ((*motha).head_b
+			&& ((*motha).head_b->id & FLAG_B)
+			&& !((*motha).head_b->id & FLAG_RR)))
+			rotate_module(motha);
 	}
 	while ((*motha).cost->pb != 0)
 	{

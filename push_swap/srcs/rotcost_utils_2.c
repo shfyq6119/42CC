@@ -62,13 +62,13 @@ void	rotab_dupcheck(t_cmd *moveset)
 {
 	moveset->rr = 0;
 	moveset->rrr = 0;
-	while (moveset->ra && moveset->rb)
+	while (moveset->ra != 0 && moveset->rb != 0)
 	{
 		moveset->ra--;
 		moveset->rb--;
 		moveset->rr++;
 	}
-	while (moveset->rra && moveset->rrb)
+	while (moveset->rra != 0 && moveset->rrb != 0)
 	{
 		moveset->rra--;
 		moveset->rrb--;
@@ -82,9 +82,9 @@ void	cheapest_check(t_cost *lowest, t_cmd *moveset, int flag)
 {
 	moveset->count = moveset->pb + moveset->ra + moveset->rb + moveset->rr
 		+ moveset->rra + moveset->rrb + moveset->rrr;
-	if (flag == 0 || (lowest->cost > moveset->count))
+	if (flag == 0 || (lowest->tally > moveset->count))
 	{
-		lowest->cost = moveset->count;
+		lowest->tally = moveset->count;
 		lowest->pb = moveset->pb;
 		lowest->ra = moveset->ra;
 		lowest->rb = moveset->rb;
