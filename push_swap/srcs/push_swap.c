@@ -33,6 +33,7 @@ void	ffs(t_meta *motha)
 		free(ptr);
 	}
 }
+
 void	ff_gg(t_meta *motha)
 {
 	ffs(motha);

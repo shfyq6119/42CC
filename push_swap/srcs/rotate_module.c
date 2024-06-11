@@ -58,8 +58,8 @@ void	rotate(t_stack **head1, t_stack **head2)
 {
 	t_stack	*tmp;
 
-	if (head1 && *head1 && (((*head1)->id & (FLAG_A)) || ((*head1)->id & FLAG_B))
-		&& !((*head1)->id & FLAG_RR))
+	if (head1 && *head1 && (((*head1)->id & (FLAG_A))
+			|| ((*head1)->id & FLAG_B)) && !((*head1)->id & FLAG_RR))
 	{
 		tmp = *head1;
 		*head1 = (*head1)->next;
