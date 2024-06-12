@@ -112,8 +112,6 @@ int	dupcheck(int ac, char **av)
 	return (1);
 }
 
-#include "../includes/push_swap.h"
-
 t_stack	*hairsplitter(int ac, char **str)
 {
 	t_stack	*a;

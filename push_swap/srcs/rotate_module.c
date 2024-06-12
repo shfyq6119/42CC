@@ -40,16 +40,18 @@ void	rot_preprocessor(t_meta *motha)
 void	rotate_module(t_meta *motha)
 {
 	int	sentry;
-
+	t_stack	*null;
+	
+	null = NULL;
 	sentry = sentinel(motha);
 	if ((sentry & FLAG_A) && (sentry & FLAG_B) && !(sentry & FLAG_RR))
 		rotate(&motha->head_a, &motha->head_b);
 	else
 	{
 		if ((sentry & FLAG_A) && !(sentry & FLAG_RR))
-			rotate(&(*motha).head_a, NULL);
+			rotate(&(*motha).head_a, &null);
 		else if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
-			rotate(&(*motha).head_b, NULL);
+			rotate(&(*motha).head_b, &null);
 	}
 }
 
@@ -64,9 +66,9 @@ void	rotate(t_stack **head1, t_stack **head2)
 		*head1 = (*head1)->next;
 		tmp->next = NULL;
 		ft_stk_add_last(head1, tmp);
-		if (!head2 && tmp->id & FLAG_A)
+		if (!*head2 && tmp->id & FLAG_A)
 			ft_putendl_fd("ra", 1);
-		else if (!head2 && tmp->id & FLAG_B)
+		else if (!*head2 && tmp->id & FLAG_B)
 			ft_putendl_fd("rb", 1);
 		deflag(tmp);
 	}

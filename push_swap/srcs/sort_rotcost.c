@@ -66,11 +66,14 @@ void	stackcheapest(t_meta *motha)
 	while (true)
 	{
 		sent = sentinel(motha);
+		/*printf("sent = %d\n", sent);
+		printf("sent & FLAG_RR = %d\n", (sent & FLAG_RR));
+			printf("sent & FLAG_RR = %d\n", sent & (FLAG_B | FLAG_RR));*/
 		if (!sent)
 			break;
-		if (sent & (FLAG_A | FLAG_B |FLAG_RR))
+		if (sent & (FLAG_RR))
 			revrot_module(motha);
-		if (sent & (FLAG_A | FLAG_B))
+		if ((sent & (FLAG_A | FLAG_B)) && !(sent & FLAG_RR))
 			rotate_module(motha);
 	}
 	while ((*motha).cost->pb != 0)
