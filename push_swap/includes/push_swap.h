@@ -126,7 +126,7 @@ int		find_nextnum(t_stack *head, long num);
 int		sortcheck(t_meta *motherstack);
 /***********************************stacksorts*********************************/
 void	rotate(t_stack **head1, t_stack **head2);
-void	revrot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2);
+void	revrot(t_stack **head);
 void	push_module(t_meta *motha);
 void	rotate_module(t_meta *motha);
 void	revrot_module(t_meta *motha);

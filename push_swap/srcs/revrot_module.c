@@ -13,48 +13,40 @@
 
 void	revrot_module(t_meta *motha)
 {
-	t_stack	*last_a;
-	t_stack	*last_b;
 	int		sentry;
 
-	last_a = ft_stklast((*motha).head_a);
-	last_b = ft_stklast((*motha).head_b);
 	sentry = sentinel(motha);
-	if ((sentry & (FLAG_A | FLAG_RR)) && (sentry & (FLAG_B | FLAG_RR)))
-		revrot(&motha->head_a, &motha->head_b, last_a, last_b);
+	if ((sentry & FLAG_RR) && (sentry & FLAG_A) && (sentry & FLAG_B))
+	{
+		revrot(&motha->head_a);
+		revrot(&motha->head_b);
+		ft_putendl_fd("rrr", 1);
+	}
 	else
 	{
-		if (sentry & (FLAG_A | FLAG_RR))
-			revrot(&motha->head_a, NULL, last_a, NULL);
-		else if (sentry & (FLAG_B | FLAG_RR))
-			revrot(&motha->head_b, NULL, last_b, NULL);
+		if ((sentry & FLAG_RR) && (sentry & FLAG_A))
+		{
+			revrot(&motha->head_a);
+			ft_putendl_fd("rra", 1);
+		}
+		if ((sentry & FLAG_RR) && (sentry & FLAG_B))
+		{
+			revrot(&motha->head_b);
+			ft_putendl_fd("rrb", 1);
+		}
 	}
 }
 
-void	revrot(t_stack **head1, t_stack **head2, t_stack *ptr1, t_stack *ptr2)
+void	revrot(t_stack **head)
 {
-	t_stack	*tmp;
-
-	if (head1 && *head1 && ((ptr1->id & FLAG_A) || (ptr1->id & FLAG_B))
-		&& (ptr1->id & FLAG_RR))
+	t_stack	*last;
+	
+	last = ft_stklast(*head);
+	if (*head && (last->id & FLAG_RR))
 	{
-		tmp = ft_stkpenultimate(*head1);
-		tmp->next = NULL;
-		ptr1->next = *head1;
-		*head1 = ptr1;
-		if (head1 && !head2 && ptr1->id & FLAG_A)
-			ft_putendl_fd("rra", 1);
-		else if (head1 && !head2 && ptr1->id & FLAG_B)
-			ft_putendl_fd("rrb", 1);
-		deflag(ptr1);
-	}
-	if (head2 && *head2 && (ptr2->id & FLAG_B) && (ptr2->id & FLAG_RR))
-	{
-		tmp = ft_stkpenultimate(*head2);
-		tmp->next = NULL;
-		ptr2->next = *head2;
-		*head2 = ptr2;
-		ft_putendl_fd("rrr", 1);
-		deflag(ptr2);
+		ft_stkpenultimate(*head)->next = NULL;
+		last->next = *head;
+		*head = last;
+		deflag(*head);
 	}
 }
