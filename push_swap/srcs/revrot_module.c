@@ -26,7 +26,7 @@ void	revrot_module(t_meta *motha)
 	{
 		if (sentry & (FLAG_A | FLAG_RR))
 			revrot(&motha->head_a, NULL, last_a, NULL);
-		else if (sentry & (FLAG_A | FLAG_RR))
+		else if (sentry & (FLAG_B | FLAG_RR))
 			revrot(&motha->head_b, NULL, last_b, NULL);
 	}
 }

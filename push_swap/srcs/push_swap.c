@@ -11,20 +11,28 @@
 /* ************************************************************************** */
 #include "../includes/push_swap.h"
 
+void	freethe(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
 void	ffs(t_meta *motha)
 {
 	void	*ptr;
 
-	if ((*motha).head_a)
+	while ((*motha).head_a)
 	{
-		while ((*motha).head_a)
-		{
-			ptr = (*motha).head_a;
-			(*motha).head_a = (*motha).head_a->next;
-			free(ptr);
-		}
-		if ((*motha).head_b == NULL)
-			exit(EXIT_SUCCESS);
+		ptr = (*motha).head_a;
+		(*motha).head_a = (*motha).head_a->next;
+		free(ptr);
 	}
 	while ((*motha).head_b)
 	{
@@ -40,6 +48,7 @@ void	ff_gg(t_meta *motha)
 	free((*motha).cost);
 	free((*motha).limits);
 	free((*motha).moves);
+	exit(EXIT_SUCCESS);
 }
 
 void	handle_error(void)
@@ -52,21 +61,21 @@ int	main(int ac, char **av)
 {
 	t_meta	heap;
 
+	if (ac < 2)
+		handle_error();
 	heap.head_a = stackparse(ac, av);
 	heap.head_b = NULL;
 	if (!sortcheck(&heap))
 	{
 		sortstack(&heap);
-		// t_stack *print = NULL;;
-		// int	i = 1;
-		// if (sortcheck(&heap))
-		// 	print = heap.head_a;
-		// while (print)
-		// {
-		// 	printf("a%d: %ld\n", i, print->nb);
-		// 	print = print->next;
-		// 	i++;
-		// }
+		t_stack *print = heap.head_a;
+		int i = 1;
+		while (print)
+		{
+			printf("a%d: %ld\n", i, print->nb);
+			print = print->next;
+			i++;
+		}
 		ff_gg(&heap);
 	}
 	ffs(&heap);
