@@ -40,45 +40,37 @@ void	rot_preprocessor(t_meta *motha)
 void	rotate_module(t_meta *motha)
 {
 	int	sentry;
-	t_stack	*null;
-	
-	null = NULL;
+
 	sentry = sentinel(motha);
 	if ((sentry & FLAG_A) && (sentry & FLAG_B) && !(sentry & FLAG_RR))
-		rotate(&motha->head_a, &motha->head_b);
+	{
+		rotate(&motha->head_a);
+		rotate(&motha->head_b);
+		ft_putendl_fd("rr", 1);
+	}		
 	else
 	{
 		if ((sentry & FLAG_A) && !(sentry & FLAG_RR))
-			rotate(&(*motha).head_a, &null);
+		{
+			rotate(&(*motha).head_a);
+			ft_putendl_fd("ra", 1);
+		}
 		else if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
-			rotate(&(*motha).head_b, &null);
+		{
+			rotate(&(*motha).head_b);
+			ft_putendl_fd("rb", 1);
+		}
 	}
 }
 
-void	rotate(t_stack **head1, t_stack **head2)
+void	rotate(t_stack **head)
 {
 	t_stack	*tmp;
 
-	if (head1 && *head1 && (((*head1)->id & (FLAG_A))
-		|| ((*head1)->id & FLAG_B)) && !((*head1)->id & FLAG_RR))
-	{
-		tmp = *head1;
-		*head1 = (*head1)->next;
-		tmp->next = NULL;
-		ft_stk_add_last(head1, tmp);
-		if (!*head2 && tmp->id & FLAG_A)
-			ft_putendl_fd("ra", 1);
-		else if (!*head2 && tmp->id & FLAG_B)
-			ft_putendl_fd("rb", 1);
-		deflag(tmp);
-	}
-	if (head2 && *head2 && ((*head2)->id & FLAG_B) && !((*head2)->id & FLAG_RR))
-	{
-		tmp = *head2;
-		*head2 = (*head2)->next;
-		tmp->next = NULL;
-		ft_stk_add_last(head2, tmp);
-		ft_putendl_fd("rr", 1);
-		deflag(tmp);
-	}
+	tmp = *head;
+	*head = (*head)->next;
+	tmp->next = NULL;
+	ft_stk_add_last(head, tmp);
+	ft_putendl_fd("rr", 1);
+	deflag(tmp);
 }
