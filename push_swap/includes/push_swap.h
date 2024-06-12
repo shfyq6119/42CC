@@ -6,7 +6,7 @@
 /*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 22:30:21 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/04/29 20:41:46 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:18:42 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PUSH_SWAP_H
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include "../includes/libft/libft.h"
+# include "./libft/libft.h"
 /*this pathing must always be from where the header file lives*/
 
 typedef	enum
@@ -89,11 +89,12 @@ typedef struct t_meta
 }	t_meta;
 
 /*******************************intake processing******************************/
-void		dupcheck(int ac, char **av);
-void		inting_check(int ac, char **av);
+int			dupcheck(int ac, char **av);
+int			inting_check(int ac, char **av);
 void		argcheck(int ac, char **av);
 void		handle_error(void);
 /*********************************stack parsing********************************/
+t_stack		*hairsplitter(int i, char **str);
 t_stack		*stackparse(int ac, char **av);
 t_stack		*ft_stack_new(int content);
 t_stack		*ft_stklast(t_stack *a);
@@ -119,6 +120,7 @@ void	rot_postprocessor(t_meta *motha);
 void	rotab_dupcheck(t_cmd *moves);
 void	stackcheapest(t_meta *motherstack);
 void	sortstack(t_meta *motherstack);
+int		sentinel(t_meta *motha);
 int		findex(t_stack *head, long num);
 int		find_nextnum(t_stack *head, long num);
 int		sortcheck(t_meta *motherstack);
@@ -140,6 +142,7 @@ void	restore_sorted(t_meta *motherstack);
 void	deflag(t_stack *node1);
 void	ff_gg(t_meta *motha);
 void	ffs(t_meta *motha);
+void	freethe(char **str_);
 void	finish(t_meta *motha);
 void	clean_costs(t_meta *motha);
 #endif

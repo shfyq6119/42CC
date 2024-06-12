@@ -14,20 +14,31 @@
 t_stack	*stackparse(int ac, char **av)
 {
 	t_stack	*a;
+	char	**str;
 	int		i;
 
 	i = 1;
-	if (ac <= 2)
-		handle_error();
-	inting_check(ac, av);
-	dupcheck(ac, av);
-	a = ft_stack_new(ft_atoi_lbrk(av[i]));
-	while (++i < ac)
-		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(av[i])));
+	if (ac == 2)
+	{
+		str = ft_split(av[i], ' ');
+		if (!str)
+			handle_error();
+		a = hairsplitter(i, str);
+		freethe(str);
+	}
+	else
+	{
+		if (!inting_check(ac, av) || !dupcheck(ac, av))
+			handle_error();
+		a = ft_stack_new(ft_atoi_lbrk(av[i]));
+		while (++i < ac)
+			ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(av[i])));
+	}
+
 	return (a);
 }
 
-void	inting_check(int count, char **arglist)
+int	inting_check(int count, char **arglist)
 {
 	int	i;
 	int	j;
@@ -47,11 +58,12 @@ void	inting_check(int count, char **arglist)
 				continue ;
 			}
 			if (!ft_isdigit(arglist[i][j]))
-				handle_error();
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
 int	ft_atoi_lbrk(char *str)
@@ -80,7 +92,7 @@ int	ft_atoi_lbrk(char *str)
 	return (pol * res);
 }
 
-void	dupcheck(int ac, char **av)
+int	dupcheck(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -92,9 +104,33 @@ void	dupcheck(int ac, char **av)
 		while (j < ac)
 		{
 			if (ft_atoi_lbrk(av[i]) == ft_atoi_lbrk(av[j]))
-				handle_error();
+				return(0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
+
+#include "../includes/push_swap.h"
+
+t_stack	*hairsplitter(int ac, char **str)
+{
+	t_stack	*a;
+	int		i;
+
+	a = NULL;
+	i = 0;
+	while (str[ac])
+		ac++;
+	if (!inting_check(ac, str) || !dupcheck(ac, str))
+	{
+		freethe(str);
+		handle_error();
+	}
+	a = ft_stack_new(ft_atoi_lbrk(str[i]));
+	while (++i < ac)
+			ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(str[i])));
+	return (a);
+}
+

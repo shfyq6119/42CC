@@ -29,6 +29,14 @@ void	sort4(t_meta *motha)
 		push(&(*motha).head_a, &(*motha).head_b);
 		sort3(motha);
 		restore_sorted(motha);
+		t_stack *print = (*motha).head_a;
+		int i = 1;
+		while (print)
+		{
+			printf("a%d: %ld\n", i, print->nb);
+			print = print->next;
+			i++;
+		}
 		ff_gg(motha);
 		exit(EXIT_SUCCESS);
 	}
@@ -51,7 +59,11 @@ void	sort3(t_meta *motha)
 			tinysortflag(motha, first, second, third);
 	}
 	if ((*motha).head_b == NULL)
+	{
 		ffs(motha);
+		exit(EXIT_SUCCESS);
+	}
+		
 }
 
 void	tinysortflag(t_meta *motha, int first, int second, int third)
