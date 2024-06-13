@@ -44,26 +44,26 @@ void	rotate_module(t_meta *motha)
 	sentry = sentinel(motha);
 	if ((sentry & FLAG_A) && (sentry & FLAG_B) && !(sentry & FLAG_RR))
 	{
-		rotate(&motha->head_a);
-		rotate(&motha->head_b);
-		ft_putendl_fd("rr", 1);
-	}		
+		rotate(&motha->head_a, 0);
+		rotate(&motha->head_b, 0);
+		write(1, "rr\n", 3);
+	}
 	else
 	{
 		if ((sentry & FLAG_A) && !(sentry & FLAG_RR))
 		{
-			rotate(&(*motha).head_a);
-			ft_putendl_fd("ra", 1);
+			rotate(&(*motha).head_a, 0);
+			write(1, "ra\n", 3);
 		}
 		else if ((sentry & FLAG_B) && !(sentry & FLAG_RR))
 		{
-			rotate(&(*motha).head_b);
-			ft_putendl_fd("rb", 1);
+			rotate(&(*motha).head_b, 0);
+			write(1, "rb\n", 3);
 		}
 	}
 }
 
-void	rotate(t_stack **head)
+void	rotate(t_stack **head, int state)
 {
 	t_stack	*tmp;
 
@@ -71,6 +71,7 @@ void	rotate(t_stack **head)
 	*head = (*head)->next;
 	tmp->next = NULL;
 	ft_stk_add_last(head, tmp);
-	ft_putendl_fd("rr", 1);
+	if (state == 1)
+		write(1, "ra\n", 3);
 	deflag(tmp);
 }
