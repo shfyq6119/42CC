@@ -34,7 +34,6 @@ t_stack	*stackparse(int ac, char **av)
 		while (++i < ac)
 			ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(av[i])));
 	}
-
 	return (a);
 }
 
@@ -104,7 +103,7 @@ int	dupcheck(int ac, char **av)
 		while (j < ac)
 		{
 			if (ft_atoi_lbrk(av[i]) == ft_atoi_lbrk(av[j]))
-				return(0);
+				return (0);
 			j++;
 		}
 		i++;
@@ -128,7 +127,6 @@ t_stack	*hairsplitter(int ac, char **str)
 	}
 	a = ft_stack_new(ft_atoi_lbrk(str[i]));
 	while (++i < ac)
-			ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(str[i])));
+		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(str[i])));
 	return (a);
 }
-

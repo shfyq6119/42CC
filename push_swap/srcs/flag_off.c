@@ -67,7 +67,8 @@ int	sentinel(t_meta *motha)
 		if ((ft_stklast((*motha).head_a)->id & FLAG_A)
 			&& (ft_stklast((*motha).head_a)->id & FLAG_RR))
 			sentry |= (FLAG_A | FLAG_RR);
-		else if (((*motha).head_a->id & FLAG_A) && !((*motha).head_a->id & FLAG_RR))
+		else if (((*motha).head_a->id & FLAG_A)
+			&& !((*motha).head_a->id & FLAG_RR))
 			sentry |= FLAG_A;
 	}
 	if ((*motha).head_b)
@@ -75,7 +76,8 @@ int	sentinel(t_meta *motha)
 		if ((ft_stklast((*motha).head_b)->id & FLAG_B)
 			&& (ft_stklast((*motha).head_b)->id & FLAG_RR))
 			sentry |= (FLAG_B | FLAG_RR);
-		else if (((*motha).head_b->id & FLAG_B) && !((*motha).head_b->id & FLAG_RR))
+		else if (((*motha).head_b->id & FLAG_B)
+			& !((*motha).head_b->id & FLAG_RR))
 			sentry |= FLAG_B;
 	}
 	return (sentry);

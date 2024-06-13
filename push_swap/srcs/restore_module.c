@@ -73,7 +73,7 @@ void	rot_postprocessor(t_meta *motha)
 	{
 		sent = sentinel(motha);
 		if (!sent)
-			break;
+			break ;
 		if ((sent & FLAG_A) && !(sent & FLAG_RR))
 			rotate_module(motha);
 		else if (sent & (FLAG_A | FLAG_RR))

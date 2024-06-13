@@ -40,7 +40,7 @@ void	first_push(t_stack **ptr1, t_stack **ptr2)
 	*ptr2 = *ptr1;
 	*ptr1 = (*ptr1)->next;
 	(*ptr2)->next = NULL;
-	ft_putendl_fd("pb", 1);
+	write(1, "pb\n", 3);
 }
 
 void	push(t_stack **ptr1, t_stack **ptr2)
@@ -52,9 +52,9 @@ void	push(t_stack **ptr1, t_stack **ptr2)
 	*ptr1 = (*ptr1)->next;
 	(*ptr2)->next = node;
 	if ((*ptr2)->id == B)
-		ft_putendl_fd("pb", 1);
+		write(1, "pb\n", 3);
 	else if ((*ptr2)->id == A)
-		ft_putendl_fd("pa", 1);
+		write(1, "pa\n", 3);
 }
 
 void	last_push(t_stack **ptr1, t_stack **ptr2)
@@ -65,6 +65,6 @@ void	last_push(t_stack **ptr1, t_stack **ptr2)
 	*ptr2 = (*ptr2)->next;
 	node->next = *ptr1;
 	*ptr1 = node;
-	ft_putendl_fd("pa", 1);
+	write(1, "pa\n", 3);
 	return ;
 }
