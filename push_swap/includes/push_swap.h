@@ -25,7 +25,6 @@
 # define FLAG_RR	0x10000
 # define INT_MAX	2147483647
 # define INT_MIN 	-2147483648
-//# define NULL		((void*)0)
 
 typedef enum e_id
 {
@@ -92,7 +91,6 @@ typedef struct t_meta
 /*******************************intake processing******************************/
 int			dupcheck(int ac, char **av);
 int			inting_check(int ac, char **av);
-void		argcheck(int ac, char **av);
 void		handle_error(void);
 /*********************************stack parsing********************************/
 t_stack		*hairsplitter(int i, char **str);
