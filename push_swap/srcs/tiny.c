@@ -94,6 +94,6 @@ void	swap(t_stack **header)
 		*header = (*header)->next;
 		tmp->next = (*header)->next;
 		(*header)->next = tmp;
+		ft_putendl_fd("sa", 1);
 	}
-	ft_putendl_fd("sa", 1);
 }

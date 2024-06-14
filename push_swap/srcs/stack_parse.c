@@ -23,12 +23,12 @@ t_stack	*stackparse(int ac, char **av)
 		str = ft_split(av[i], ' ');
 		if (!str)
 			handle_error();
-		a = hairsplitter(i, str);
+		a = hairsplitter(i - 1, str);
 		freethe(str);
 	}
 	else
 	{
-		if (!inting_check(ac, av) || !dupcheck(ac, av))
+		if (!inting_check(i, av) || !dupcheck(i, av))
 			handle_error();
 		a = ft_stack_new(ft_atoi_lbrk(av[i]));
 		while (++i < ac)
@@ -37,13 +37,13 @@ t_stack	*stackparse(int ac, char **av)
 	return (a);
 }
 
-int	inting_check(int count, char **arglist)
+int	inting_check(int start, char **arglist)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < count)
+	i = start;
+	while (arglist[i])
 	{
 		j = 0;
 		if (arglist[i][j] == 0)
@@ -72,8 +72,8 @@ int	ft_atoi_lbrk(char *str)
 
 	pol = 1;
 	res = 0;
-	while (*str == 9 || *str == 10 || *str == 11 || *str == 12 || *str == 13
-		|| *str == 32)
+	while ((*str == 9 || *str == 10 || *str == 11 || *str == 12 || *str == 13
+		|| *str == 32))
 		str++;
 	if (*str == 45 || *str == 43)
 	{
@@ -91,16 +91,16 @@ int	ft_atoi_lbrk(char *str)
 	return (pol * res);
 }
 
-int	dupcheck(int ac, char **av)
+int	dupcheck(int start, char **av)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < ac)
+	i = start;
+	while (av[i])
 	{
 		j = i + 1;
-		while (j < ac)
+		while (av[j])
 		{
 			if (ft_atoi_lbrk(av[i]) == ft_atoi_lbrk(av[j]))
 				return (0);
@@ -111,22 +111,22 @@ int	dupcheck(int ac, char **av)
 	return (1);
 }
 
-t_stack	*hairsplitter(int ac, char **str)
+t_stack	*hairsplitter(int start, char **str)
 {
 	t_stack	*a;
-	int		i;
+	int		ac;
 
 	a = NULL;
-	i = 0;
+	ac = start;
 	while (str[ac])
 		ac++;
-	if (!inting_check(ac, str) || !dupcheck(ac, str))
+	if (!inting_check(start, str) || !dupcheck(start, str))
 	{
 		freethe(str);
 		handle_error();
 	}
-	a = ft_stack_new(ft_atoi_lbrk(str[i]));
-	while (++i < ac)
-		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(str[i])));
+	a = ft_stack_new(ft_atoi_lbrk(str[start]));
+	while (++start < ac)
+		ft_stk_add_last(&a, ft_stack_new(ft_atoi_lbrk(str[start])));
 	return (a);
 }
