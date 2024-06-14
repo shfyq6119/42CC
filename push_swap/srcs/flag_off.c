@@ -77,7 +77,7 @@ int	sentinel(t_meta *motha)
 			&& (ft_stklast((*motha).head_b)->id & FLAG_RR))
 			sentry |= (FLAG_B | FLAG_RR);
 		else if (((*motha).head_b->id & FLAG_B)
-			& !((*motha).head_b->id & FLAG_RR))
+			&& !((*motha).head_b->id & FLAG_RR))
 			sentry |= FLAG_B;
 	}
 	return (sentry);

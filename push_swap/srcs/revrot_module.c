@@ -15,9 +15,7 @@ void	revrot_module(t_meta *motha)
 {
 	t_stack	*last_a;
 	t_stack	*last_b;
-	t_stack	*null;
 
-	null = NULL;
 	last_a = ft_stklast(motha->head_a);
 	last_b = ft_stklast(motha->head_b);
 	if ((last_a && (last_a->id & FLAG_RR))
@@ -42,5 +40,5 @@ void	revrot(t_stack **head, t_stack *tail, int flag)
 		ft_putendl_fd("rra", 1);
 	if (head && (flag & FLAG_B) && !(flag & FLAG_A) && (tail->id & FLAG_RR))
 		ft_putendl_fd("rrb", 1);
-	deflag(tail);
+	deflag(*head);
 }

@@ -20,17 +20,17 @@
 # include <unistd.h>
 # include "./libft/libft.h"
 
-# define FLAG_A 	(1 << 2)
-# define FLAG_B		(1 << 3)
-# define FLAG_RR	(1 << 16)
+# define FLAG_A 	0x0004
+# define FLAG_B		0x0008
+# define FLAG_RR	0x10000
 # define INT_MAX	2147483647
 # define INT_MIN 	-2147483648
-# define NULL		((void*)0)
+//# define NULL		((void*)0)
 
 typedef enum e_id
 {
-	A = 1 << 0,
-	B = 1 << 1
+	A = 0x0001,
+	B = 0x0002
 }	t_id;
 
 typedef struct t_limits
