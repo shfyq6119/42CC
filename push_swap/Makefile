@@ -53,7 +53,7 @@ $(NAME): $(OBJ)
 
 clean:
 	make clean -C $(LIBFT)
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
 
 fclean: clean
 	make fclean -C $(LIBFT)
