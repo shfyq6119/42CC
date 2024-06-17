@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"push_swap.h": "c",
+		"locale": "c",
+		"complex": "c",
+		"libft.h": "c"
+	}
+}

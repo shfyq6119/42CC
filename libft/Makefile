@@ -46,8 +46,13 @@ SRCS	=	ft_atoi.c \
 			ft_substr.c \
 			ft_tolower.c \
 			ft_toupper.c \
-
-BONUS_LST	=	ft_lstadd_back_bonus.c \
+			ft_printf.c \
+			ft_putchar_n.c \
+			ft_putstr_n.c \
+			ft_putnbr_n.c \
+			ft_putaddr_n.c \
+			ft_puthex_n.c \
+			ft_lstadd_back_bonus.c \
 			ft_lstadd_front_bonus.c \
 			ft_lstclear_bonus.c \
 			ft_lstdelone_bonus.c \
@@ -60,7 +65,6 @@ BONUS_LST	=	ft_lstadd_back_bonus.c \
 
 OBJECTS		= $(SRCS:%.c=%.o)
 
-BONUS		= $(BONUS_LST:%.c=%.o)
 
 FLAGS		= -Wall -Wextra -Werror
 
@@ -70,12 +74,8 @@ $(NAME)		:	$(OBJECTS)
 
 all			:	$(NAME)
 
-bonus		:	$(NAME)
-				gcc $(FLAGS) -c $(BONUS_LST) -I./
-				ar rc $(NAME) $(BONUS)
-
 clean		:
-				rm -f $(OBJECTS) $(BONUS)
+				rm -f $(OBJECTS)
 
 fclean		:	clean
 				rm -f $(NAME)
