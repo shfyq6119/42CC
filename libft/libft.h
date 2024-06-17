@@ -17,6 +17,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <stdarg.h>
+
+# define HEXUP "0123456789ABCDEF"
+# define HEXLOW "0123456789abcdef"
 
 typedef struct s_list
 {
@@ -67,5 +71,11 @@ t_list		*ft_lstlast(t_list *node_zero);
 t_list		*ft_lstmap(t_list *list, void *(*fn)(void *), void (*del)(void *));
 t_list		*ft_lstnew(void *content);
 int			ft_lstsize(t_list *ls_nodes);
+int         ft_printf(const char *format, ...);
+int         ft_putchar_n(char c);
+int          ft_putstr_n(char *s);
+int          ft_putnbr_n(long i);
+int          ft_putaddr_n(unsigned long p);
+int          ft_puthex_n(unsigned long h, char *hexcase);
 
 #endif
