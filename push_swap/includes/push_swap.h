@@ -45,7 +45,6 @@ typedef struct t_cmd
 	int				count;
 	int				pa;
 	int				pb;
-	int				sa;
 	int				sb;
 	int				ss;
 	int				ra;
@@ -61,7 +60,6 @@ typedef struct t_cost
 	int				tally;
 	int				pa;
 	int				pb;
-	int				sa;
 	int				sb;
 	int				ss;
 	int				ra;
