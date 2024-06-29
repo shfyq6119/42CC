@@ -12,7 +12,7 @@
 
 NAME	=	fractol
 CC		=	cc
-CFLAGS	=	-g -fsanitize=address -Wall -Wextra -Werror -Iminilibx
+CFLAGS	=	-g -Wall -Wextra -Werror -Iminilibx
 
 SRCDIR	=	./srcs
 SRC 	=	aux_utils.c \
@@ -27,17 +27,16 @@ OBJDIR = objects
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCPATH))
 
 FRACTOL	=	./includes
-LIBMLX	=	./includes/minilibx_macos
+LIBMLX	=	./includes/minilibx-linux
 LIBFT	=	./includes/libft
-#MLX		=	-L$(LIBMLX)/ -lmlx -lXext -lX11 -lm -lz
-MLX		=	-L$(LIBMLX)/ -lmlx -framework OpenGL -framework AppKit
+MLX		=	-L$(LIBMLX)/ -lmlx -lXext -lX11 -lm -lz
 LFT		=	-L$(LIBFT)/ -lft
 
 INC		=	-I$(FRACTOL) -I$(LIBFT) -I$(LIBMLX)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
+$(NAME): $(OBJS) $(FRACTOL)
 	make -C $(LIBFT)
 	make -C $(LIBMLX)
 	$(CC) $(OBJS) $(CFLAGS) $(LFT) $(MLX) -o $(NAME)
@@ -53,7 +52,7 @@ clean:
 	make -C $(LIBMLX) clean
 	rm -rf $(OBJDIR)
 
-fclean:
+fclean: clean
 	make -C $(LIBFT) fclean
 	rm -rf $(OBJDIR)
 	rm -f $(NAME)

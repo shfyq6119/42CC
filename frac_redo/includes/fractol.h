@@ -14,10 +14,10 @@
 # define FRACTOL_H
 
 # include "./libft/libft.h"
-# include "./minilibx_macos/mlx.h"
+# include "./minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdio.h>
-//# include <X11/keysym.h>
+# include <X11/keysym.h>
 
 # define WIDTH 400
 # define HEIGHT 400
@@ -94,7 +94,7 @@ void			zoom(t_fractol *f, t_cxy coords, double dir);
 /* ******************************* arg_proc ********************************* */
 void			arg_handler(t_fractol *frac, int ac, char **av);
 void			frac_parse(t_fractol *frac, char *str, double c, double i);
-void			suggestions(void);
+void			suggestions(int *ac, char **str);
 /* ****************************** draw_image ******************************** */
 void			draw_fractal(t_fractol *frac, t_func init, int *i);
 void			frac_regen(t_fractol *f);
@@ -104,4 +104,5 @@ int				iter_frac(t_complex *cplx, t_fractol *frac, int *i);
 int				itercolour(t_fractol *frac, int iteration);
 /* ****************************** close_shop ******************************** */
 int				close_shop(t_fractol *f);
+
 #endif

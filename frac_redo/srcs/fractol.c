@@ -24,6 +24,12 @@ int	close_shop(t_fractol *f)
 		mlx_destroy_window(f->mlx, f->win);
 		f->win = NULL;
 	}
+	if (f->mlx)
+	{
+		mlx_destroy_display(f->mlx);
+		free(f->mlx);
+		f->mlx = NULL;
+	}
 	exit(0);
 }
 
@@ -33,8 +39,8 @@ void	start_fractal(t_fractol *f, t_func init)
 
 	i = 0;
 	f->old = NULL;
-	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
-	f->img_data = mlx_get_data_addr(f->img, &f->bpp, &f->linesize, &f->endian);
+	f->img = NULL;
+	frac_regen(f);
 	draw_fractal(f, init, &i);
 	mlx_hook(f->win, 2, 1L << 0, key_press, f);
 	mlx_hook(f->win, 3, 1L << 1, key_release, f);
@@ -48,17 +54,12 @@ void	frac_parse(t_fractol *frac, char *str, double comp, double img)
 	frac->zoom = 1.0;
 	frac->off_x = -0.5;
 	frac->off_y = 0.0;
-	frac->max_iter = 200;
+	frac->max_iter = 500;
 	if (!ft_memcmp(str, "julia", 5))
 	{
 		frac->type = 1;
 		frac->c_real = comp;
 		frac->c_img = img;
-		if (comp == 0 && img == 0)
-		{
-			frac->c_real = -0.7;
-			frac->c_img = 0.27015;
-		}
 	}
 	else if (!ft_memcmp(str, "mandelbrot", 10))
 	{
@@ -74,27 +75,22 @@ void	arg_handler(t_fractol *frac, int ac, char **av)
 
 	str = NULL;
 	if (ac == 2)
-	{
 		str = ft_split(av[1], ' ');
-		if (!ft_memcmp(*str, "mandelbrot", 10) || !ft_memcmp(*str, "julia", 5))
-		{
-			if (str[1] && str[2])
-				frac_parse(frac, *str, ft_atold(str[1]), ft_atold(str[2]));
-			else
-				frac_parse(frac, *str, 0, 0);
-		}
-		else
-			suggestions();
-		ft_free((void **)str);
-	}
 	else if (ac == 4)
+		str = &av[1];
+	if (str && *str && !ft_strncmp(str[0], "mandelbrot", 11))
+		frac_parse(frac, *str, 0, 0);
+	else if (str && *str && !ft_strncmp(str[0], "julia", 6))
 	{
-		if (!ft_memcmp(av[1], "mandelbrot", 10)
-			|| !ft_memcmp(av[1], "julia", 5))
-			frac_parse(frac, av[1], ft_atold(av[2]), ft_atold(av[3]));
-		else
-			suggestions();
+		if (!ft_isdouble(str[1]) || !ft_isdouble(str[2]))
+			suggestions(&ac, str);
+		if (ft_isdouble(str[1]) && ft_isdouble(str[2]))
+			frac_parse(frac, *str, ft_atod(str[1]), ft_atod(str[2]));
 	}
+	else
+		suggestions(&ac, str);
+	if (str != &av[1])
+		ft_free((void **)str);
 }
 
 int	main(int ac, char **av)
@@ -103,7 +99,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1 || ac == 3 || ac > 4)
 	{
-		suggestions();
+		suggestions(NULL, NULL);
 		return (1);
 	}
 	arg_handler(&fractol, ac, av);
@@ -118,7 +114,4 @@ int	main(int ac, char **av)
 		start_fractal(&fractol, julia);
 	else if (fractol.type == 2)
 		start_fractal(&fractol, mndlbrt);
-	// free(fractol.img_data);
-	// mlx_destroy_image(fractol.mlx, fractol.img);
-	// mlx_destroy_window(fractol.mlx, fractol.win);
 }

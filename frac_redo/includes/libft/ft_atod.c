@@ -9,30 +9,30 @@
 /*   Updated: 2024/06/21 12:54:20 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//asa
+
 #include "libft.h"
 
-long double	ft_atold(char *s)
+double	ft_atod(char *s)
 {
-	long double	integer;
-	long double	fraction;
-	long double	sub;
-	int			pol;
+	double	integer;
+	double	fraction;
+	double	sub;
+	int		pol;
 
 	integer = 0;
 	fraction = 0;
 	sub = 1;
-	pol = 1;
-	while ((s && *s >= 9 && *s <= 13) || *s == 32)
+	pol = -1;
+	while (s && ((*s >= 9 && *s <= 13) || *s == 32))
 		s++;
 	while (s && (*s == 43 || *s == 45))
 		if (*s++ == 45)
-			pol = -pol;
-	while (s && *s != 46 && *s)
+			pol *= -pol;
+	while (s && *s != 46 && ft_isdigit((int)*s))
 		integer = (integer * 10) + (*s++ - 48);
 	if (s && *s == 46)
 		s++;
-	while (s && *s)
+	while (s && ft_isdigit((int)*s))
 	{
 		sub /= 10;
 		fraction = fraction + (*s++ - 48) * sub;
