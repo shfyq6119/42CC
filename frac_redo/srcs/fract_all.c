@@ -73,17 +73,18 @@ void	mndlbrt(t_complex *cplx, t_cxy *coords, t_fractol *frac)
 	cplx->zy = 0;
 }
 
-void	suggestions(void)
+void	suggestions(int *ac, char **str)
 {
+	if (ac && *ac == 2 && str)
+		ft_free((void **)str);
 	ft_printf("\nUsage: ./fractol <type> [real] [imaginary], OR '' ''\n");
-	ft_printf("E.g.: ./fractol ''<type>''  ''[real]'' ''[imaginary]''\n\n");
+	ft_printf("E.g.: ./fractol ''<type> [real] [imaginary]''\n\n");
 	ft_printf("fracs available: julia, mandelbrot\n");
-	ft_printf("IF ./fractol <julia>; No. 1 will be assumed.\n");
+	ft_printf("IF ./fractol <mandelbrot>; no numbers will be passed in.\n");
 	ft_printf("1.	Classic Julia Set: Real: -0.7 Img: 0.27015,\n");
 	ft_printf("2.	Douady's Rabbit: Real: -0.123 Img: 0.745\n");
 	ft_printf("3.	San Marco Dragon: Real: -0.75 Img: 0.11\n");
 	ft_printf("4.	Siegel Disk: Real: -0.391 Img: -0.587\n");
-	ft_printf("5.	Swirl Real: 0.355 Img: 0.355\n");
-	ft_printf("6.	Spiral: Real: -0.4 Img: 0.6\n");
+	ft_printf("5.	Spiral: Real: -0.4 Img: 0.6\n");
 	exit(EXIT_SUCCESS);
 }

@@ -37,41 +37,40 @@ int	key_release(int key, t_fractol *frac)
 	return (0);
 }
 
-//void	update_key(int key, t_fractol *frac, int state)
-//{
-//	if (key == XK_Up)
-//		frac->key.up = state;
-//	else if (key == XK_Down)
-//		frac->key.down = state;
-//	else if (key == XK_Right)
-//		frac->key.right = state;
-//	else if (key == XK_Left)
-//		frac->key.left = state;
-//	else if (key == XK_plus)
-//		frac->key.zoom_in = state;
-//	else if (key == XK_minus)
-//		frac->key.zoom_out = state;
-//	else if (key == XK_Escape)
-//		frac->key.esc = state;
-//}
-void    update_key(int key, t_fractol *frac, int state)
+void	update_key(int key, t_fractol *frac, int state)
 {
-    if (key == 126)
-        frac->key.up = state;
-    else if (key == 125)
-        frac->key.down = state;
-    else if (key == 124)
-        frac->key.right = state;
-    else if (key == 123)
-        frac->key.left = state;
-    else if (key == 24)
-        frac->key.zoom_in = state;
-    else if (key == 27)
-        frac->key.zoom_out = state;
-    else if (key == 53)
-        frac->key.esc = state;
+	if (key == XK_Up)
+		frac->key.up = state;
+	else if (key == XK_Down)
+		frac->key.down = state;
+	else if (key == XK_Right)
+		frac->key.right = state;
+	else if (key == XK_Left)
+		frac->key.left = state;
+	else if (key == XK_plus || key == XK_equal)
+		frac->key.zoom_in = state;
+	else if (key == XK_minus)
+		frac->key.zoom_out = state;
+	else if (key == XK_Escape)
+		frac->key.esc = state;
 }
-
+/*void	update_key(int key, t_fractol *frac, int state)
+{
+	if (key == 126)
+		frac->key.up = state;
+	else if (key == 125)
+		frac->key.down = state;
+	else if (key == 124)
+		frac->key.right = state;
+	else if (key == 123)
+		frac->key.left = state;
+	else if (key == 24)
+		frac->key.zoom_in = state;
+	else if (key == 27)
+		frac->key.zoom_out = state;
+	else if (key == 53)
+		frac->key.esc = state;
+}*/
 
 void	process_key(t_fractol *f)
 {

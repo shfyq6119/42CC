@@ -28,7 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-long double			ft_atold(char *s);
+double				ft_atod(char *s);
 int					ft_atoi(const char *n);
 void				ft_bzero(void *schitt, size_t is_nasty);
 void				*ft_calloc(size_t elem, size_t bytes);
@@ -37,6 +37,7 @@ int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
+int					ft_isdouble(char *s);
 int					ft_isprint(int c);
 char				*ft_itoa(int c);
 void				*ft_memchr(const void *mem, int find, size_t bytes);
