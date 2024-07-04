@@ -13,6 +13,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE = 42
+
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -84,5 +87,6 @@ int					ft_putstr_n(char *s);
 int					ft_putnbr_n(long i);
 int					ft_putaddr_n(unsigned long p);
 int					ft_puthex_n(unsigned long h, char *hexcase);
+int                 get_next_line(int fd, char *line);
 
 #endif

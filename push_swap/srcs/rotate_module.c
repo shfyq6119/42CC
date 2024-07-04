@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_module.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mm-isa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mm-isa <mm-isa@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:46:39 by mm-isa            #+#    #+#             */
-/*   Updated: 2024/06/08 16:18:14 by mm-isa           ###   ########.fr       */
+/*   Updated: 2024/06/21 20:38:23 by mm-isa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 void	rot_preprocessor(t_meta *motha)

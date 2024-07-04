@@ -11,15 +11,20 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_bzero(void *schitt, size_t is_nasty)
+char    *ft_bzero(int fd, void *buf, size_t bufsize)
 {
-	unsigned char	*schiette;
+    unsigned char    *buffer;
 
-	schiette = schitt;
-	while (is_nasty)
-	{
-		*schiette = 0;
-		is_nasty--;
-		schiette++;
-	}
+    buffer = buf;
+    if (fd >= 0 && fd <= FOPEN_MAX)
+    {
+        while (bufsize)
+        {
+            *buffer = 0;
+            bufsize--;
+            buffer++;
+        }
+        return (NULL);
+    }
+    return (NULL);
 }
