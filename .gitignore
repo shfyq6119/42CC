@@ -3,3 +3,7 @@
 *.jpeg
 
 *.jpg
+
+minilibx_macos/
+
+minilibx-linux/
