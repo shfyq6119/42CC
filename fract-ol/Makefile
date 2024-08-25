@@ -30,7 +30,7 @@ FRACTOL	=	./includes
 LIBMLX	=	./includes/minilibx-linux
 LIBFT	=	./includes/libft
 MLX		=	-L$(LIBMLX)/ -lmlx -lXext -lX11 -lm -lz
-#MLX		=	-L$(LIMBLX)/ -lmlx -framework OpenGL -framework AppKit
+#MacBook_MLX		=	-L$(LIMBLX)/ -lmlx -framework OpenGL -framework AppKit
 LFT		=	-L$(LIBFT)/ -lft
 
 INC		=	-I$(FRACTOL) -I$(LIBFT) -I$(LIBMLX)
