@@ -5,3 +5,5 @@
 *.jpg
 
 .DS_Store
+
+.env
